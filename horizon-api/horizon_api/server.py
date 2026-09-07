@@ -21,12 +21,12 @@ from . import stub as _stub
 
 app = FastAPI(title="HORIZON inference API", version=__version__)
 
-_origins = os.environ.get(
-    "HORIZON_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"
-).split(",")
+_origins = os.environ.get("HORIZON_CORS_ORIGINS", "").split(",")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip() for o in _origins if o.strip()],
+    # any localhost port in dev (vite hops ports); set HORIZON_CORS_ORIGINS in prod
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
