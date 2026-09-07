@@ -225,15 +225,20 @@ computeAlert(p_frac, threshold, firstAttackWindow):
     "HORIZON":           { "macro_f1": 0.71, "precision": 0.69, "recall": 0.74, "fpr": 0.004 },
     "direct_classifier": { "macro_f1": 0.70, "precision": 0.68, "recall": 0.73, "fpr": 0.005 },
     "logreg":            { "macro_f1": 0.63, "precision": 0.60, "recall": 0.61, "fpr": 0.011 },
-    "per_class_f1": { "Infiltration": 0.55, "Bot": 0.61, "PortScan": 0.88, "DoS": 0.91, "DDoS": 0.93, "BruteForce": 0.80, "WebAttack": 0.49 }
+    "per_class_f1": { "Infiltration": 0.55, "Bot": 0.61, "PortScan": 0.88, "DoS": 0.91, "DDoS": 0.93 },
+    "per_class_lead_windows": { "PortScan": 6.2, "DDoS": 4.1, "Infiltration": 0.0, "Bot": 0.0 }
   },
   "calibration": {
     "platt_slope": 0.94,
+    "platt": { "a": 0.70, "b": -0.84 },
     "reliability": [ { "p_pred": 0.1, "p_obs": 0.08 }, { "p_pred": 0.5, "p_obs": 0.47 }, { "p_pred": 0.9, "p_obs": 0.86 } ]
   },
-  "divergence_auc": 0.71
+  "divergence_auc": 0.71,
+  "surprise_auc": 0.79
 }
 ```
+
+Fields the eval harness fills (`notebooks/horizon_train.ipynb` cell "Evaluation harness"): `lead_time_vs_fpr` (HORIZON rollout / direct readout / logistic regression on shared axes), `standard.per_class_f1` + `per_class_lead_windows` (lead is ~0 for payload-drop classes by design), `generalisation.held_out_capture` (in vs held-out-weekday F1), `rollout_error_growth`, `surprise_auc`, `divergence_auc`, `calibration.platt`. Empty / `null` until a Kaggle run writes them; the panel degrades to what is present and keeps the `MOCK` badge while `status == "MOCK"`.
 
 `status` flips from `"MOCK"` to an ISO timestamp when P2 wires real numbers. The frontend shows a `MOCK` badge while `status == "MOCK"` (frontend.md "nothing fake").
 
@@ -333,7 +338,7 @@ The model input vector is these 10 **+ `intervention`** (control channel, 0 exce
 
 All resolved (2026-09):
 
-- `implementation.md`, `technical.md`, `HORIZON_Dev_Doc_v4.md`, `idea.md`, `pitch.md`, `frontend.md` updated: dataset is **CIC-IDS2017 GeneratedLabelledFlows** (`chethuhn/network-intrusion-dataset`), not `cic-collection.parquet`; interface is React + FastAPI, not Streamlit.
+- `implementation.md`, `technical.md`, `HORIZON_Dev_Doc_v4.md`, `idea.md`, `pitch.md`, `frontend.md` updated: dataset is **CIC-IDS2017 GeneratedLabelledFlows** (Kaggle `pshikk/cicids2017-untampered`, backup `rayenbal/cicids2017` — the variant that keeps IPs + timestamp), not `cic-collection.parquet`; interface is React + FastAPI, not Streamlit.
 - Captures are 5 weekday sessions (8 CSV files; Thu/Fri split across files). Held-out = one weekday (`ids2017-friday` by default), a temporal + attack-mix shift, not a cross-campaign one.
 - `implementation.md` `forecast.json` block replaced by a pointer here.
 - Backend that serves these shapes: `docs/api-endpoints.md`, `horizon-api/`.

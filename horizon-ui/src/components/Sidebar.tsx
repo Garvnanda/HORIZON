@@ -2,7 +2,9 @@ import { useStore } from '@/store'
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -12,8 +14,11 @@ import { cn } from 'cn'
 const SCENARIO_LABEL: Record<string, string> = {
   infiltration: 'Infiltration kill chain',
   botnet: 'Botnet C2 beacon',
+  portscan: 'Port scan → DDoS',
   benign: 'Benign host (control)',
 }
+
+const weekday = (capture: string) => capture.replace(/^ids2017-/, '')
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -62,16 +67,28 @@ export function Sidebar() {
           }}
         >
           <SelectTrigger className="w-full text-[12px]">
-            <SelectValue />
+            <SelectValue placeholder="pick a host…" />
           </SelectTrigger>
           <SelectContent>
-            {s.hosts.map((h) => (
-              <SelectItem key={`${h.capture}|${h.host}`} value={`${h.capture}|${h.host}`}>
-                {h.host} · {SCENARIO_LABEL[h.scenario] ?? h.scenario}
-              </SelectItem>
+            {[...new Set(s.hosts.map((h) => h.capture))].sort().map((cap) => (
+              <SelectGroup key={cap}>
+                <SelectLabel>{weekday(cap)}</SelectLabel>
+                {s.hosts
+                  .filter((h) => h.capture === cap)
+                  .sort((a, b) => Number(b.scenario !== 'adhoc') - Number(a.scenario !== 'adhoc'))
+                  .map((h) => (
+                    <SelectItem key={`${h.capture}|${h.host}`} value={`${h.capture}|${h.host}`}>
+                      {h.host}
+                      {h.scenario !== 'adhoc' && ` · ${SCENARIO_LABEL[h.scenario] ?? h.scenario}`}
+                    </SelectItem>
+                  ))}
+              </SelectGroup>
             ))}
           </SelectContent>
         </Select>
+        <p className="text-[9px] leading-snug text-[var(--dim)]">
+          Any host in the 5 weekday captures. Type an IP to jump to it. Full list: docs/available-hosts.md
+        </p>
       </Field>
 
       {(s.current?.available_t.length ?? 0) > 1 && (
@@ -140,8 +157,8 @@ export function Sidebar() {
       </Field>
 
       <div className="mt-auto space-y-1 border-t pt-3 text-[8.5px] font-mono text-[var(--dim)]">
-        <div>TRAIN · CIC-IDS2017 (8 capture days)</div>
-        <div>CROSS-DOMAIN · held-out capture day</div>
+        <div>TRAIN · CIC-IDS2017 (5 weekday captures)</div>
+        <div>CROSS-DOMAIN · held-out weekday</div>
         <div>OFFLINE · weights local, no cloud calls</div>
       </div>
     </aside>

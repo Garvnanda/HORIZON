@@ -114,6 +114,13 @@
    "DDoS": 0.93,
    "BruteForce": 0.8,
    "WebAttack": 0.49
+  },
+  "per_class_lead_windows": {
+   "PortScan": 6.2,
+   "DDoS": 4.1,
+   "DoS": 3.4,
+   "Infiltration": 0.0,
+   "Bot": 0.0
   }
  },
  "calibration": {
@@ -141,5 +148,6 @@
    }
   ]
  },
- "divergence_auc": 0.71
+ "divergence_auc": 0.71,
+ "surprise_auc": 0.79
 }

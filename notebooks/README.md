@@ -14,7 +14,12 @@ artifacts/
   model_heldout_<class>.pt   optional   held-out-class surprise overlay
 ```
 
-Dataset: **CIC-IDS2017 GeneratedLabelledFlows** — `chethuhn/network-intrusion-dataset` on Kaggle.
+Dataset: **CIC-IDS2017 GeneratedLabelledFlows** — Kaggle `pshikk/cicids2017-untampered`
+(backup `rayenbal/cicids2017`). Must be the variant that keeps `Source IP` /
+`Destination IP` / `Timestamp` / `Flow ID`. The common uploads
+(`chethuhn/network-intrusion-dataset`, `kk0105/cicids2017`, and most others) are the
+MachineLearningCVE variant with those columns stripped — the notebook's Gate 0
+stops on them.
 
 ---
 
@@ -32,8 +37,8 @@ If your repo URL differs, edit `REPO_URL` in the first config cell.
 
 1. kaggle.com → **Create → New Notebook**.
 2. **File → Import Notebook** → upload `horizon_train.ipynb` (or paste from GitHub).
-3. Right sidebar → **Add Input** → search `chethuhn/network-intrusion-dataset` → **Add**.
-   It mounts at `/kaggle/input/network-intrusion-dataset/`.
+3. Right sidebar → **Add Input** → search `pshikk/cicids2017-untampered` → **Add**.
+   It mounts at `/kaggle/input/cicids2017-untampered/`.
 4. Right sidebar → **Settings → Accelerator → GPU T4** (optional; a `QUICK` run works on CPU).
 5. **Run All**.
 6. When it finishes: **Output** tab → download `artifacts/` (and `horizon_artifacts.zip`).
@@ -61,8 +66,9 @@ Kaggle notebooks have internet **off** by default — turn it **on**
 | knob | default | notes |
 | --- | --- | --- |
 | `QUICK` | `False` | `True` samples 15% of flows — fast smoke run, weak model |
-| `EPOCHS` | `15` | `40` for a real run |
-| `HELDOUT_CAPTURE` | `ids2017-friday` | weekday held out of training for the domain-shift test |
+| `EPOCHS` | `40` | `15` for a fast smoke run |
+| `HELDOUT_CAPTURE` | `ids2017-wednesday` | weekday held out of training (NOT friday — friday holds all the Bot/PortScan/DDoS) |
+| `HELDOUT_CLASS` | `Bot` | class removed in the optional held-out-class run |
 | `LABEL_MIN_MALICIOUS` | `1` | malicious flows before a window counts as an attack window |
 | `WARMUP_WINDOWS` | `5` | first N windows/host skipped when fitting the scaler |
 | `RUN_HELDOUT_CLASS` | `False` | `True` adds a second full training run with one class removed |

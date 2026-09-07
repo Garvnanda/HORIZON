@@ -1,6 +1,6 @@
 # technical.md — HORIZON technical specification
 
-SIH 2026 · PS 26153. Dataset: **CIC-IDS2017 GeneratedLabelledFlows** (Kaggle: `chethuhn/network-intrusion-dataset`) — 8 CICFlowMeter CSVs, one per capture session, spanning five weekdays (Mon–Fri) of a single testbed campaign. Compute: Colab / Kaggle free. Team: 3.
+SIH 2026 · PS 26153. Dataset: **CIC-IDS2017 GeneratedLabelledFlows** (Kaggle: `pshikk/cicids2017-untampered`, backup `rayenbal/cicids2017`) — 8 CICFlowMeter CSVs, one per capture session, spanning five weekdays (Mon–Fri) of a single testbed campaign. **Must be the "untampered" / GeneratedLabelledFlows variant that keeps `Flow ID`, `Source IP`, `Destination IP`, `Timestamp`.** `chethuhn/network-intrusion-dataset`, `kk0105/cicids2017` and most other Kaggle uploads are the MachineLearningCVE variant (78 features + Label, IPs and timestamp stripped) and fail Gate 0. Compute: Colab / Kaggle free. Team: 3.
 
 This is the reference spec. `implementation.md` says who builds what and when. `pitch.md` explains why. `api-contract.md` freezes the model→frontend output; `api-endpoints.md` documents the backend that serves it.
 
@@ -207,9 +207,16 @@ def rollout(model, x_hist, K=20, n_samples=50, intervention_at=None):
 
 ### 5.1 Lead time
 
-`lead_time = (first window index where alert fires) − (first true attack window index)`, in windows. Positive = early warning.
+`lead_time = (first true attack window index) − (first window index where alert fires)`, in windows. Positive = early warning.
 
 **Never report a single number.** The threshold determines it. Report as a curve against false-alarm rate (§6.1).
+
+**Where lead time actually exists (measured, 2026-09).** Lead time requires the attack to have a build-up phase visible in the 10 features.
+
+- **Multi-stage campaigns** (`172.16.0.1`: port scan escalating to DDoS): real lead time. The scan ramps the distinct-port and fail-ratio features over tens of windows; the forecast climbs `0.05 → 0.35 → 0.70` before the attack peaks. This is the headline demo host.
+- **Payload-drop attacks** (Infiltration on `192.168.10.8`, Bot on `192.168.10.15`): the victim host is behaviourally silent until the payload fires. There is no precursor in the features, so the model detects **at onset**, not before, with a calibrated forward probability. State this plainly. For these hosts the value is the calibrated trajectory + surprise + counterfactual, not a warning-time number.
+
+Do not average the two together into one lead-time figure - report per-class (§6.6).
 
 ### 5.2 Surprise
 
@@ -226,7 +233,9 @@ Roll out three times from the same history (the contract fixes these keys: `do_n
 - **Isolate at step 1** — `intervention = 1` from step 1, and `apply_intervention` forces `n_distinct_dst_ip`, `n_distinct_dst_port`, `bytes_out`, `external_ratio` toward their per-host minima.
 - **Rate-limit at step 1** — `intervention = 1`, milder clamp on `n_flows` and `bytes_out` (halfway to the per-host floor).
 
-Report all curves. **State the caveat in the doc, the demo, and the pitch:** the model has never seen real intervention data, so this is a structured what-if grounded in learned dynamics, not a validated causal estimate. `apply_intervention` currently clamps toward per-host minima observed in the 20-window history; tuning it against held-out post-isolation behaviour is still open.
+Report all curves. **State the caveat in the doc, the demo, and the pitch:** the model has never seen real intervention data, so this is a structured what-if grounded in learned dynamics, not a validated causal estimate.
+
+`apply_intervention` clamps the fed-back state toward a quiet baseline: `min(0, per-host history minimum)` in standardised space (0 == the training mean == roughly benign). The **`intervention` control channel is left at 0** during the counterfactual rollout after all - the model never saw it non-zero in training, so driving it is out-of-distribution noise; the clamp on the observable features is the mechanism the model actually understands. Tuning the clamp against real post-isolation behaviour is still open.
 
 ---
 

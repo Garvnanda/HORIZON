@@ -251,6 +251,9 @@ Anomaly detection tells you something is odd *now*. We forecast several minutes 
 **"How do we know it is detecting early rather than just detecting late and you calling it early?"**
 Our warning-time-versus-false-alarm curve, with the direct classifier baseline plotted on the same axes. It shows the earliness is real and not bought by lowering the threshold.
 
+**"Does the early warning hold for every attack?"**
+No, and we are precise about this. Lead time needs the attack to build up in the observable features. For a multi-stage campaign - a scan escalating to denial of service - the forecast climbs from 5% to 70% before it peaks; that is real warning time. For a payload-drop attack like the infiltration, the victim machine looks completely normal until the payload fires, so there is no precursor to forecast from - we detect it at onset with a calibrated probability, and the value there is the predicted trajectory, the surprise signal, and the counterfactual. We report lead time per attack class, never as one blended number.
+
 **"Is it not just an LSTM classifier with extra steps?"**
 The training objective is different in a way that matters: we train on next-state prediction with no labels, so the model learns normal dynamics from the 99% benign traffic that a classifier learns nothing from. That gives us three capabilities a classifier structurally cannot have — the forward simulation, the surprise signal, and counterfactuals.
 

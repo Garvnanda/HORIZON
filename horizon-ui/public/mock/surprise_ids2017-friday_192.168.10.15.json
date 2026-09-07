@@ -1,6 +1,6 @@
 {
  "schema_version": "v4.0",
- "host": "192.168.10.50",
+ "host": "192.168.10.15",
  "capture": "ids2017-friday",
  "window_seconds": 60,
  "series": [

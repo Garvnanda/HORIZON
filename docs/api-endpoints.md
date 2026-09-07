@@ -51,6 +51,7 @@ The notebook (built last) writes:
 | `metrics.json` | eval harness (P2) | `GET /api/metrics` (optional; falls back to mock) |
 | `model_heldout_<class>.pt` | held-out-class experiment | `GET /api/surprise` overlay (optional) |
 | `scenarios.json` | notebook (optional) | demo ground-truth overrides |
+| `platt.json` | notebook calibration (optional) | rescales the readout `sigmoid(a*logit+b)` — the raw BCE readout is overconfident |
 | `network_<capture>.json` | notebook topology cell | `GET /api/network` (optional; falls back to nodes-only) |
 | `flows_<capture>_<host>.json` | notebook flow-sample cell | `GET /api/flows` (optional; demo hosts only) |
 

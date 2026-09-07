@@ -159,7 +159,7 @@ def counterfactual(p_frac, r, factor):
 # ---------------------------------------------------------------- scenarios
 SCENARIOS = {
     "infiltration": {
-        "host": "192.168.10.15", "capture": "ids2017-thursday",
+        "host": "192.168.10.8", "capture": "ids2017-thursday",
         "true_class": "Infiltration", "n_windows": 180,
         "base_ts": datetime(2017, 7, 6, 13, 0, tzinfo=timezone.utc),
         "hist_kinds": ["benign"] * 17 + ["download"] * 3,
@@ -175,7 +175,7 @@ SCENARIOS = {
         "timesteps": [40, 52],
     },
     "botnet": {
-        "host": "192.168.10.50", "capture": "ids2017-friday",
+        "host": "192.168.10.15", "capture": "ids2017-friday",
         "true_class": "Bot", "n_windows": 210,
         "base_ts": datetime(2017, 7, 7, 10, 0, tzinfo=timezone.utc),
         "hist_kinds": ["benign"] * 20,
@@ -190,8 +190,26 @@ SCENARIOS = {
         "held_out": "Botnet",
         "timesteps": [30],
     },
+    "portscan": {
+        # the campaign: 172.16.0.1 scans the subnet, then escalates to DDoS.
+        # this is the one with real lead time - the model catches the escalation.
+        "host": "172.16.0.1", "capture": "ids2017-friday",
+        "true_class": "PortScan", "n_windows": 260,
+        "base_ts": datetime(2017, 7, 7, 13, 0, tzinfo=timezone.utc),
+        "hist_kinds": ["benign"] * 11 + ["scan"] * 9,
+        "future_kinds": ["scan"] * 20,
+        "curve": dict(mid=7, steep=0.5, lo=0.07, hi=0.83),
+        "quiet_frac": 0.12,
+        "first_attack_window": 12,
+        "mitre": ("Reconnaissance", "Command & Control", 8),
+        "feature_surprise": {"n_distinct_dst_port": 2.6, "n_distinct_dst_ip": 2.1,
+                             "fail_ratio": 1.9, "n_flows": 1.6, "new_peer_rate": 1.4},
+        "attn_peak": 15,
+        "held_out": None,
+        "timesteps": [30],
+    },
     "benign": {
-        "host": "192.168.10.8", "capture": "ids2017-monday",
+        "host": "192.168.10.9", "capture": "ids2017-monday",
         "true_class": "benign", "n_windows": 300,
         "base_ts": datetime(2017, 7, 3, 9, 0, tzinfo=timezone.utc),
         "hist_kinds": ["benign"] * 20,
@@ -430,6 +448,8 @@ def build_metrics():
             "logreg": {"macro_f1": 0.63, "precision": 0.60, "recall": 0.61, "fpr": 0.011},
             "per_class_f1": {"Infiltration": 0.55, "Bot": 0.61, "PortScan": 0.88, "DoS": 0.91,
                              "DDoS": 0.93, "BruteForce": 0.80, "WebAttack": 0.49},
+            "per_class_lead_windows": {"PortScan": 6.2, "DDoS": 4.1, "DoS": 3.4,
+                                       "Infiltration": 0.0, "Bot": 0.0},
         },
         "calibration": {
             "platt_slope": 0.94,
@@ -438,6 +458,7 @@ def build_metrics():
                             {"p_pred": 0.9, "p_obs": 0.86}],
         },
         "divergence_auc": 0.71,
+        "surprise_auc": 0.79,
     }
 
 
@@ -458,12 +479,13 @@ NET_HOSTS = [
     ("192.168.10.25", "workstation", 1200),
     ("192.168.10.50", "workstation", 1400),
     ("192.168.10.51", "workstation", 700),
+    ("172.16.0.1", "external", 4200),       # the attacker machine (NAT side of Kali)
     ("ext:internet", "external", 6000),
 ]
 NET_KIND = {h: k for h, k, _ in NET_HOSTS}
 
 # lateral path a compromised workstation walks in the infiltration scenario
-INFIL_PATH = ["192.168.10.15", "192.168.10.5", "192.168.10.16", "192.168.10.3"]
+INFIL_PATH = ["192.168.10.8", "192.168.10.5", "192.168.10.16", "192.168.10.3"]
 
 
 def build_network(name, spec):
@@ -486,7 +508,7 @@ def build_network(name, spec):
         edges.append({"src": a, "dst": b, "flows": int(flows), "internal": not b.startswith("ext"), **extra})
 
     for h, kind, _ in NET_HOSTS:
-        if h in ("192.168.10.1", "ext:internet"):
+        if h in ("192.168.10.1", "ext:internet", "172.16.0.1"):
             continue
         edge(h, "192.168.10.1", r.uniform(120, 400))                 # everyone -> gateway
         if kind == "workstation":
@@ -505,6 +527,12 @@ def build_network(name, spec):
             edge(demo, tgt, r.uniform(8, 30), attack=True, stage=3)           # internal scan fan
     elif name == "botnet":
         edge(demo, "ext:internet", r.uniform(15, 40), attack=True, stage=1)   # c2 beacon
+    elif name == "portscan":
+        # the scanner sweeps the subnet, then hammers the web server (DDoS)
+        for i, tgt in enumerate(("192.168.10.9", "192.168.10.12", "192.168.10.17",
+                                 "192.168.10.25", "192.168.10.19", "192.168.10.16")):
+            edge(demo, tgt, r.uniform(10, 40), attack=True, stage=1 if i < 3 else 2)
+        edge(demo, "192.168.10.5", r.uniform(120, 300), attack=True, stage=3)  # DDoS the web host
     # benign: no attack edges
 
     return {
@@ -554,6 +582,11 @@ def build_flows(name, spec):
         elif name == "botnet":
             add(w, "ext:internet", 8080, r.uniform(400, 1400), r.uniform(300, 1100),
                 "Bot", False)
+        elif name == "portscan":
+            for _ in range(r.randint(10, 28)):
+                tgt = f"192.168.10.{r.randint(2, 60)}"
+                add(w, tgt, r.randint(1, 9999), r.uniform(40, 260), r.uniform(0, 80),
+                    "DDoS" if w > faw + 8 and r.random() < 0.5 else "PortScan", True)
 
     return {
         "schema_version": "v4.0",

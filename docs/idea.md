@@ -51,7 +51,7 @@ The output is not a number. It is a **spread of possible futures** — a forecas
 
 ## What this makes possible that detection cannot
 
-**Early warning with a real time budget.** The alert fires when the *forecast* crosses the threshold, not when the attack lands. Warning time is a number we measure and report.
+**Early warning with a real time budget.** The alert fires when the *forecast* crosses the threshold, not when the attack lands. Warning time is a number we measure and report per attack class. Where the attack builds up in the traffic - a scan escalating to denial of service - the forecast climbs well before the peak. Where the attack drops with no precursor - a malicious download that sits quiet until it fires - the model detects at onset with a calibrated probability rather than a warning-time claim, and the trajectory, surprise, and counterfactual carry the value there.
 
 **Detection of unseen attack types.** The model learns normal behaviour, not a catalogue of attacks. When reality diverges from what the model predicted, that divergence — surprise — flags behaviour the model of normality cannot account for, whether or not it has ever been labelled. We test this directly by removing an attack type entirely from training and checking whether it still gets caught.
 

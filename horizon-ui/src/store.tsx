@@ -61,9 +61,9 @@ const Ctx = createContext<StoreValue | null>(null)
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [hosts, setHosts] = useState<HostEntry[]>([])
   const [metrics, setMetrics] = useState<MetricsDoc>()
-  const [capture, setCapture] = useState('ids2017-thursday')
-  const [host, setHost] = useState('192.168.10.15')
-  const [t, setT] = useState(40)
+  const [capture, setCapture] = useState('ids2017-friday')
+  const [host, setHost] = useState('172.16.0.1')
+  const [t, setT] = useState(30)
   const [threshold, setThreshold] = useState(0.3)
   const [nSamples, setNSamples] = useState(50)
   const [demoMode, setDemoMode] = useState(true)
@@ -80,8 +80,24 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [selectedNode, setSelectedNode] = useState<string | null>(null)
 
   useEffect(() => {
-    getHosts().then((d) => setHosts(d.hosts)).catch(console.error)
+    getHosts()
+      .then((d) => {
+        setHosts(d.hosts)
+        // snap to a real host if the compiled-in default is absent in this backend
+        const present = d.hosts.some((h) => h.host === host && h.capture === capture)
+        if (!present && d.hosts.length) {
+          const known = ['portscan', 'infiltration', 'botnet']
+          const pick =
+            known.map((s) => d.hosts.find((h) => h.scenario === s)).find(Boolean) ?? d.hosts[0]
+          setCapture(pick.capture)
+          setHost(pick.host)
+          // land on the last available frame (past onset for the attack scenarios)
+          setT(pick.available_t[pick.available_t.length - 1] ?? pick.available_t[0] ?? 30)
+        }
+      })
+      .catch(console.error)
     getMetrics().then(setMetrics).catch(console.error)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

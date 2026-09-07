@@ -1,6 +1,6 @@
 {
  "schema_version": "v4.0",
- "host": "192.168.10.8",
+ "host": "192.168.10.9",
  "capture": "ids2017-monday",
  "demo_mode": true,
  "window_seconds": 60,
@@ -2338,7 +2338,7 @@
    "fired_at_step": null,
    "tier": "monitor",
    "lead_time_windows": null,
-   "recommended_command": "# monitor only\nlog --level INFO --src 192.168.10.8"
+   "recommended_command": "# monitor only\nlog --level INFO --src 192.168.10.9"
   }
  }
 }

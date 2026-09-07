@@ -179,29 +179,29 @@ Polish the demo. **Record the 2-minute video** — script it around one host: hi
 
 ## What is left
 
-Everything that needs real data. The scaffolding (contract, mocks, frontend, backend, notebook) is done; none of it has touched a trained model yet.
+The scaffolding is done and the model has trained on real data twice.
 
-**Blocking — do first, in order:**
+**Done (2026-09):** contract, mocks, frontend (v2), backend (stub + live), notebook. Two Kaggle runs. **Gate 0 passed** (after switching to `pshikk/cicids2017-untampered`). **Persistence gate passed 10/10**, strong margins. Platt calibration honest. `feature_surprise` sane and points at the right features. Onset detection clean on all four demo scenarios. **Lead time confirmed on the `172.16.0.1` scan→DDoS campaign**; payload-drop attacks (infiltration, botnet) detect at onset with no precursor - documented as a dataset limit, not a bug (see `technical.md` §5.1).
 
-1. **Push the repo**, then **run `notebooks/horizon_train.ipynb`** on Kaggle or Colab.
-2. **Gate 0** — confirm the CSVs have IPs + timestamp (`GeneratedLabelledFlows`, not `MachineLearningCVE`). If not, branch B is a coding change.
-3. **Persistence gate (Gate 2)** — the trained model must beat `ŝ_{t+1} = s_t` per feature. Bump `EPOCHS` to 40, `QUICK=False`. If it still fails, investigate (scaler leakage, non-contiguous sequences, LR) before anything else.
-4. **Drop artifacts into `horizon-api/artifacts/`**, run backend + frontend live, sanity-check the 3 demo hosts and one arbitrary host.
+**Blocking — do first:**
 
-**Eval harness (P2, submission-grade):** the notebook writes `metrics.json` with the persistence table and calibration only. Still to build, ideally as a `metrics.py` run from the notebook or a second notebook:
+1. **Push `horizon-api/model.py`** (the `logvar_min = -3` change is not in the runs yet) and re-run the notebook once more with all current fixes.
+2. **Drop artifacts into `horizon-api/artifacts/`** (not `horizon_artifacts/`), run backend + frontend live, sanity-check the four demo hosts and one arbitrary host.
+
+**Eval harness (P2, submission-grade) — the biggest remaining gap.** The notebook writes `metrics.json` with the persistence table + calibration reliability only; every other field is empty and the frontend shows the MOCK bundle. Build as a `metrics.py` cell / second notebook:
 - lead-time-vs-FPR curve (HORIZON / direct classifier / logistic regression, shared axes) — **never cut**
-- held-out-weekday macro-F1 and lead-time drop
+- held-out-weekday (`ids2017-wednesday`) macro-F1 and lead-time drop
 - rollout error growth at steps 1 / 5 / 10 / 20
 - per-class F1 and **per-class lead time**
 - surprise AUC standalone and on held-out classes; divergence AUC
 - calibration reliability + Platt slope
 - logistic-regression and direct-multi-horizon-classifier baselines
 
-**Model refinements (P3, agreed, not applied):**
+**Model refinements (P3):**
+- `p_frac` is still fairly binary within a rollout even after Platt - samples agree too much; more mixture spread or a temperature on sampling
 - multi-step scheduled-sampling unroll (the notebook does a 1-step version)
-- strengthen the persistence gate with pre-transition windows + class-conditional mean (see `technical.md` §3.1)
-- MDN discretised fallback if training goes unstable twice
-- tune `apply_intervention` clamp targets
+- MDN discretised fallback if training goes unstable
+- verify `apply_intervention` on the campaign host - counterfactual quality untested there
 
 **Held-out-class experiment (P3, the headline):** `RUN_HELDOUT_CLASS=True` in the notebook does one class. Run it for a second class, wire both `model_heldout_*.pt` into the backend, report surprise AUC.
 

@@ -1,7 +1,7 @@
 {
  "schema_version": "v4.0",
  "capture": "ids2017-thursday",
- "host": "192.168.10.15",
+ "host": "192.168.10.8",
  "flows": [
   {
    "window_idx": 0,
