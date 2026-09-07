@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────────────────
+   HORIZON / SENTINEL-WM palette — amber/bronze on near-black.
+   Single committed dark look; no light mode for the demo.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --bg: #06070a;
+  --surface: #0e0b08cc;
+  --surface-solid: #12100c;
+  --border: #bc82241f;
+  --border-lit: #daa52059;
+
+  --amber: #daa520;
+  --amber-hot: #f0b93a;
+  --bronze: #cd7f32;
+  --cream: #eeddc8;
+  --cream-dim: #eeddc873;
+  --dim: #eeddc842;
+
+  --threat: #c8422e;
+  --safe: #4e9964;
+  --info: #5a8fc4;
+
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "SF Mono", "Fira Mono", ui-monospace, Menlo, monospace;
+
+  /* shadcn tokens mapped onto the palette */
+  --radius: 0.75rem;
+  --background: var(--bg);
+  --foreground: var(--cream);
+  --card: var(--surface-solid);
+  --card-foreground: var(--cream);
+  --popover: var(--surface-solid);
+  --popover-foreground: var(--cream);
+  --primary: var(--amber);
+  --primary-foreground: #0e0b08;
+  --secondary: #1c1712;
+  --secondary-foreground: var(--cream);
+  --muted: #1c1712;
+  --muted-foreground: var(--cream-dim);
+  --accent: #241a0c;
+  --accent-foreground: var(--amber-hot);
+  --destructive: var(--threat);
+  --destructive-foreground: #f6e9d8;
+  --border-token: var(--border);
+  --input: #2a2118;
+  --ring: var(--amber);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border-token);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-amber: var(--amber);
+  --color-amber-hot: var(--amber-hot);
+  --color-bronze: var(--bronze);
+  --color-cream: var(--cream);
+  --color-cream-dim: var(--cream-dim);
+  --color-threat: var(--threat);
+  --color-safe: var(--safe);
+  --color-info: var(--info);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+* {
+  border-color: var(--border-token);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes pip {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
