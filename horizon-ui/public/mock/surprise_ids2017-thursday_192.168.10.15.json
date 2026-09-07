@@ -1,0 +1,1574 @@
+{
+ "schema_version": "v4.0",
+ "host": "192.168.10.15",
+ "capture": "ids2017-thursday",
+ "window_seconds": 60,
+ "series": [
+  {
+   "window_idx": 0,
+   "ts": "2017-07-06T13:00:00Z",
+   "surprise": 0.26,
+   "label": "benign"
+  },
+  {
+   "window_idx": 1,
+   "ts": "2017-07-06T13:01:00Z",
+   "surprise": 0.22,
+   "label": "benign"
+  },
+  {
+   "window_idx": 2,
+   "ts": "2017-07-06T13:02:00Z",
+   "surprise": 0.33,
+   "label": "benign"
+  },
+  {
+   "window_idx": 3,
+   "ts": "2017-07-06T13:03:00Z",
+   "surprise": 0.39,
+   "label": "benign"
+  },
+  {
+   "window_idx": 4,
+   "ts": "2017-07-06T13:04:00Z",
+   "surprise": 0.26,
+   "label": "benign"
+  },
+  {
+   "window_idx": 5,
+   "ts": "2017-07-06T13:05:00Z",
+   "surprise": 0.41,
+   "label": "benign"
+  },
+  {
+   "window_idx": 6,
+   "ts": "2017-07-06T13:06:00Z",
+   "surprise": 0.49,
+   "label": "benign"
+  },
+  {
+   "window_idx": 7,
+   "ts": "2017-07-06T13:07:00Z",
+   "surprise": 0.37,
+   "label": "benign"
+  },
+  {
+   "window_idx": 8,
+   "ts": "2017-07-06T13:08:00Z",
+   "surprise": 0.35,
+   "label": "benign"
+  },
+  {
+   "window_idx": 9,
+   "ts": "2017-07-06T13:09:00Z",
+   "surprise": 0.19,
+   "label": "benign"
+  },
+  {
+   "window_idx": 10,
+   "ts": "2017-07-06T13:10:00Z",
+   "surprise": 0.33,
+   "label": "benign"
+  },
+  {
+   "window_idx": 11,
+   "ts": "2017-07-06T13:11:00Z",
+   "surprise": 0.39,
+   "label": "benign"
+  },
+  {
+   "window_idx": 12,
+   "ts": "2017-07-06T13:12:00Z",
+   "surprise": 0.18,
+   "label": "benign"
+  },
+  {
+   "window_idx": 13,
+   "ts": "2017-07-06T13:13:00Z",
+   "surprise": 0.32,
+   "label": "benign"
+  },
+  {
+   "window_idx": 14,
+   "ts": "2017-07-06T13:14:00Z",
+   "surprise": 0.45,
+   "label": "benign"
+  },
+  {
+   "window_idx": 15,
+   "ts": "2017-07-06T13:15:00Z",
+   "surprise": 0.26,
+   "label": "benign"
+  },
+  {
+   "window_idx": 16,
+   "ts": "2017-07-06T13:16:00Z",
+   "surprise": 0.51,
+   "label": "benign"
+  },
+  {
+   "window_idx": 17,
+   "ts": "2017-07-06T13:17:00Z",
+   "surprise": 0.16,
+   "label": "benign"
+  },
+  {
+   "window_idx": 18,
+   "ts": "2017-07-06T13:18:00Z",
+   "surprise": 0.28,
+   "label": "benign"
+  },
+  {
+   "window_idx": 19,
+   "ts": "2017-07-06T13:19:00Z",
+   "surprise": 0.48,
+   "label": "benign"
+  },
+  {
+   "window_idx": 20,
+   "ts": "2017-07-06T13:20:00Z",
+   "surprise": 0.35,
+   "label": "benign"
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-06T13:21:00Z",
+   "surprise": 0.53,
+   "label": "benign"
+  },
+  {
+   "window_idx": 22,
+   "ts": "2017-07-06T13:22:00Z",
+   "surprise": 0.49,
+   "label": "benign"
+  },
+  {
+   "window_idx": 23,
+   "ts": "2017-07-06T13:23:00Z",
+   "surprise": 0.27,
+   "label": "benign"
+  },
+  {
+   "window_idx": 24,
+   "ts": "2017-07-06T13:24:00Z",
+   "surprise": 0.17,
+   "label": "benign"
+  },
+  {
+   "window_idx": 25,
+   "ts": "2017-07-06T13:25:00Z",
+   "surprise": 0.37,
+   "label": "benign"
+  },
+  {
+   "window_idx": 26,
+   "ts": "2017-07-06T13:26:00Z",
+   "surprise": 0.38,
+   "label": "benign"
+  },
+  {
+   "window_idx": 27,
+   "ts": "2017-07-06T13:27:00Z",
+   "surprise": 0.54,
+   "label": "benign"
+  },
+  {
+   "window_idx": 28,
+   "ts": "2017-07-06T13:28:00Z",
+   "surprise": 0.49,
+   "label": "benign"
+  },
+  {
+   "window_idx": 29,
+   "ts": "2017-07-06T13:29:00Z",
+   "surprise": 0.43,
+   "label": "benign"
+  },
+  {
+   "window_idx": 30,
+   "ts": "2017-07-06T13:30:00Z",
+   "surprise": 0.29,
+   "label": "benign"
+  },
+  {
+   "window_idx": 31,
+   "ts": "2017-07-06T13:31:00Z",
+   "surprise": 0.39,
+   "label": "benign"
+  },
+  {
+   "window_idx": 32,
+   "ts": "2017-07-06T13:32:00Z",
+   "surprise": 0.36,
+   "label": "benign"
+  },
+  {
+   "window_idx": 33,
+   "ts": "2017-07-06T13:33:00Z",
+   "surprise": 0.17,
+   "label": "benign"
+  },
+  {
+   "window_idx": 34,
+   "ts": "2017-07-06T13:34:00Z",
+   "surprise": 0.45,
+   "label": "benign"
+  },
+  {
+   "window_idx": 35,
+   "ts": "2017-07-06T13:35:00Z",
+   "surprise": 0.43,
+   "label": "benign"
+  },
+  {
+   "window_idx": 36,
+   "ts": "2017-07-06T13:36:00Z",
+   "surprise": 0.24,
+   "label": "benign"
+  },
+  {
+   "window_idx": 37,
+   "ts": "2017-07-06T13:37:00Z",
+   "surprise": 0.49,
+   "label": "benign"
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-06T13:38:00Z",
+   "surprise": 0.53,
+   "label": "benign"
+  },
+  {
+   "window_idx": 39,
+   "ts": "2017-07-06T13:39:00Z",
+   "surprise": 0.29,
+   "label": "benign"
+  },
+  {
+   "window_idx": 40,
+   "ts": "2017-07-06T13:40:00Z",
+   "surprise": 0.23,
+   "label": "benign"
+  },
+  {
+   "window_idx": 41,
+   "ts": "2017-07-06T13:41:00Z",
+   "surprise": 0.47,
+   "label": "benign"
+  },
+  {
+   "window_idx": 42,
+   "ts": "2017-07-06T13:42:00Z",
+   "surprise": 0.16,
+   "label": "benign"
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-06T13:43:00Z",
+   "surprise": 0.24,
+   "label": "benign"
+  },
+  {
+   "window_idx": 44,
+   "ts": "2017-07-06T13:44:00Z",
+   "surprise": 0.43,
+   "label": "benign"
+  },
+  {
+   "window_idx": 45,
+   "ts": "2017-07-06T13:45:00Z",
+   "surprise": 0.2,
+   "label": "benign"
+  },
+  {
+   "window_idx": 46,
+   "ts": "2017-07-06T13:46:00Z",
+   "surprise": 0.49,
+   "label": "benign"
+  },
+  {
+   "window_idx": 47,
+   "ts": "2017-07-06T13:47:00Z",
+   "surprise": 0.26,
+   "label": "benign"
+  },
+  {
+   "window_idx": 48,
+   "ts": "2017-07-06T13:48:00Z",
+   "surprise": 0.19,
+   "label": "benign"
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-06T13:49:00Z",
+   "surprise": 0.19,
+   "label": "benign"
+  },
+  {
+   "window_idx": 50,
+   "ts": "2017-07-06T13:50:00Z",
+   "surprise": 0.44,
+   "label": "benign"
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-06T13:51:00Z",
+   "surprise": 0.25,
+   "label": "benign"
+  },
+  {
+   "window_idx": 52,
+   "ts": "2017-07-06T13:52:00Z",
+   "surprise": 0.21,
+   "label": "benign"
+  },
+  {
+   "window_idx": 53,
+   "ts": "2017-07-06T13:53:00Z",
+   "surprise": 0.24,
+   "label": "benign"
+  },
+  {
+   "window_idx": 54,
+   "ts": "2017-07-06T13:54:00Z",
+   "surprise": 0.49,
+   "label": "benign"
+  },
+  {
+   "window_idx": 55,
+   "ts": "2017-07-06T13:55:00Z",
+   "surprise": 0.48,
+   "label": "benign"
+  },
+  {
+   "window_idx": 56,
+   "ts": "2017-07-06T13:56:00Z",
+   "surprise": 0.42,
+   "label": "benign"
+  },
+  {
+   "window_idx": 57,
+   "ts": "2017-07-06T13:57:00Z",
+   "surprise": 0.41,
+   "label": "benign"
+  },
+  {
+   "window_idx": 58,
+   "ts": "2017-07-06T13:58:00Z",
+   "surprise": 0.28,
+   "label": "benign"
+  },
+  {
+   "window_idx": 59,
+   "ts": "2017-07-06T13:59:00Z",
+   "surprise": 0.38,
+   "label": "benign"
+  },
+  {
+   "window_idx": 60,
+   "ts": "2017-07-06T14:00:00Z",
+   "surprise": 0.46,
+   "label": "benign"
+  },
+  {
+   "window_idx": 61,
+   "ts": "2017-07-06T14:01:00Z",
+   "surprise": 0.34,
+   "label": "benign"
+  },
+  {
+   "window_idx": 62,
+   "ts": "2017-07-06T14:02:00Z",
+   "surprise": 0.53,
+   "label": "benign"
+  },
+  {
+   "window_idx": 63,
+   "ts": "2017-07-06T14:03:00Z",
+   "surprise": 2.36,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 64,
+   "ts": "2017-07-06T14:04:00Z",
+   "surprise": 2.22,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 65,
+   "ts": "2017-07-06T14:05:00Z",
+   "surprise": 2.33,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 66,
+   "ts": "2017-07-06T14:06:00Z",
+   "surprise": 2.75,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 67,
+   "ts": "2017-07-06T14:07:00Z",
+   "surprise": 2.58,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 68,
+   "ts": "2017-07-06T14:08:00Z",
+   "surprise": 2.04,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-06T14:09:00Z",
+   "surprise": 2.63,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 70,
+   "ts": "2017-07-06T14:10:00Z",
+   "surprise": 2.26,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 71,
+   "ts": "2017-07-06T14:11:00Z",
+   "surprise": 2.69,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 72,
+   "ts": "2017-07-06T14:12:00Z",
+   "surprise": 2.75,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-06T14:13:00Z",
+   "surprise": 2.31,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 74,
+   "ts": "2017-07-06T14:14:00Z",
+   "surprise": 2.33,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 75,
+   "ts": "2017-07-06T14:15:00Z",
+   "surprise": 2.33,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 76,
+   "ts": "2017-07-06T14:16:00Z",
+   "surprise": 2.0,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-06T14:17:00Z",
+   "surprise": 2.27,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 78,
+   "ts": "2017-07-06T14:18:00Z",
+   "surprise": 2.42,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 79,
+   "ts": "2017-07-06T14:19:00Z",
+   "surprise": 2.64,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 80,
+   "ts": "2017-07-06T14:20:00Z",
+   "surprise": 2.29,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 81,
+   "ts": "2017-07-06T14:21:00Z",
+   "surprise": 2.18,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 82,
+   "ts": "2017-07-06T14:22:00Z",
+   "surprise": 2.69,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 83,
+   "ts": "2017-07-06T14:23:00Z",
+   "surprise": 2.58,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 84,
+   "ts": "2017-07-06T14:24:00Z",
+   "surprise": 2.43,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 85,
+   "ts": "2017-07-06T14:25:00Z",
+   "surprise": 2.75,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 86,
+   "ts": "2017-07-06T14:26:00Z",
+   "surprise": 2.03,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 87,
+   "ts": "2017-07-06T14:27:00Z",
+   "surprise": 2.29,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 88,
+   "ts": "2017-07-06T14:28:00Z",
+   "surprise": 2.58,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 89,
+   "ts": "2017-07-06T14:29:00Z",
+   "surprise": 2.55,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 90,
+   "ts": "2017-07-06T14:30:00Z",
+   "surprise": 2.76,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 91,
+   "ts": "2017-07-06T14:31:00Z",
+   "surprise": 2.37,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 92,
+   "ts": "2017-07-06T14:32:00Z",
+   "surprise": 2.51,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 93,
+   "ts": "2017-07-06T14:33:00Z",
+   "surprise": 2.17,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 94,
+   "ts": "2017-07-06T14:34:00Z",
+   "surprise": 2.73,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 95,
+   "ts": "2017-07-06T14:35:00Z",
+   "surprise": 2.17,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 96,
+   "ts": "2017-07-06T14:36:00Z",
+   "surprise": 2.52,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 97,
+   "ts": "2017-07-06T14:37:00Z",
+   "surprise": 2.21,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 98,
+   "ts": "2017-07-06T14:38:00Z",
+   "surprise": 2.13,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 99,
+   "ts": "2017-07-06T14:39:00Z",
+   "surprise": 2.15,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 100,
+   "ts": "2017-07-06T14:40:00Z",
+   "surprise": 2.12,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 101,
+   "ts": "2017-07-06T14:41:00Z",
+   "surprise": 2.07,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 102,
+   "ts": "2017-07-06T14:42:00Z",
+   "surprise": 2.69,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 103,
+   "ts": "2017-07-06T14:43:00Z",
+   "surprise": 2.59,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 104,
+   "ts": "2017-07-06T14:44:00Z",
+   "surprise": 2.67,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 105,
+   "ts": "2017-07-06T14:45:00Z",
+   "surprise": 2.7,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 106,
+   "ts": "2017-07-06T14:46:00Z",
+   "surprise": 2.49,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 107,
+   "ts": "2017-07-06T14:47:00Z",
+   "surprise": 2.68,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 108,
+   "ts": "2017-07-06T14:48:00Z",
+   "surprise": 2.54,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 109,
+   "ts": "2017-07-06T14:49:00Z",
+   "surprise": 2.58,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 110,
+   "ts": "2017-07-06T14:50:00Z",
+   "surprise": 2.43,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 111,
+   "ts": "2017-07-06T14:51:00Z",
+   "surprise": 2.2,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 112,
+   "ts": "2017-07-06T14:52:00Z",
+   "surprise": 2.02,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 113,
+   "ts": "2017-07-06T14:53:00Z",
+   "surprise": 2.58,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 114,
+   "ts": "2017-07-06T14:54:00Z",
+   "surprise": 2.64,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 115,
+   "ts": "2017-07-06T14:55:00Z",
+   "surprise": 2.24,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 116,
+   "ts": "2017-07-06T14:56:00Z",
+   "surprise": 2.21,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 117,
+   "ts": "2017-07-06T14:57:00Z",
+   "surprise": 2.34,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 118,
+   "ts": "2017-07-06T14:58:00Z",
+   "surprise": 2.12,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 119,
+   "ts": "2017-07-06T14:59:00Z",
+   "surprise": 2.24,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 120,
+   "ts": "2017-07-06T15:00:00Z",
+   "surprise": 2.37,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 121,
+   "ts": "2017-07-06T15:01:00Z",
+   "surprise": 2.28,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 122,
+   "ts": "2017-07-06T15:02:00Z",
+   "surprise": 2.72,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 123,
+   "ts": "2017-07-06T15:03:00Z",
+   "surprise": 2.13,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 124,
+   "ts": "2017-07-06T15:04:00Z",
+   "surprise": 2.44,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 125,
+   "ts": "2017-07-06T15:05:00Z",
+   "surprise": 2.44,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 126,
+   "ts": "2017-07-06T15:06:00Z",
+   "surprise": 2.16,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 127,
+   "ts": "2017-07-06T15:07:00Z",
+   "surprise": 2.61,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 128,
+   "ts": "2017-07-06T15:08:00Z",
+   "surprise": 2.01,
+   "label": "Infiltration"
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-06T15:09:00Z",
+   "surprise": 2.18,
+   "label": "Infiltration"
+  }
+ ],
+ "held_out_class": {
+  "removed_class": "PortScan",
+  "series": [
+   {
+    "window_idx": 0,
+    "ts": "2017-07-06T13:00:00Z",
+    "surprise": 0.32,
+    "label": "benign"
+   },
+   {
+    "window_idx": 1,
+    "ts": "2017-07-06T13:01:00Z",
+    "surprise": 0.28,
+    "label": "benign"
+   },
+   {
+    "window_idx": 2,
+    "ts": "2017-07-06T13:02:00Z",
+    "surprise": 0.28,
+    "label": "benign"
+   },
+   {
+    "window_idx": 3,
+    "ts": "2017-07-06T13:03:00Z",
+    "surprise": 0.25,
+    "label": "benign"
+   },
+   {
+    "window_idx": 4,
+    "ts": "2017-07-06T13:04:00Z",
+    "surprise": 0.32,
+    "label": "benign"
+   },
+   {
+    "window_idx": 5,
+    "ts": "2017-07-06T13:05:00Z",
+    "surprise": 0.31,
+    "label": "benign"
+   },
+   {
+    "window_idx": 6,
+    "ts": "2017-07-06T13:06:00Z",
+    "surprise": 0.25,
+    "label": "benign"
+   },
+   {
+    "window_idx": 7,
+    "ts": "2017-07-06T13:07:00Z",
+    "surprise": 0.27,
+    "label": "benign"
+   },
+   {
+    "window_idx": 8,
+    "ts": "2017-07-06T13:08:00Z",
+    "surprise": 0.51,
+    "label": "benign"
+   },
+   {
+    "window_idx": 9,
+    "ts": "2017-07-06T13:09:00Z",
+    "surprise": 0.35,
+    "label": "benign"
+   },
+   {
+    "window_idx": 10,
+    "ts": "2017-07-06T13:10:00Z",
+    "surprise": 0.23,
+    "label": "benign"
+   },
+   {
+    "window_idx": 11,
+    "ts": "2017-07-06T13:11:00Z",
+    "surprise": 0.48,
+    "label": "benign"
+   },
+   {
+    "window_idx": 12,
+    "ts": "2017-07-06T13:12:00Z",
+    "surprise": 0.2,
+    "label": "benign"
+   },
+   {
+    "window_idx": 13,
+    "ts": "2017-07-06T13:13:00Z",
+    "surprise": 0.3,
+    "label": "benign"
+   },
+   {
+    "window_idx": 14,
+    "ts": "2017-07-06T13:14:00Z",
+    "surprise": 0.34,
+    "label": "benign"
+   },
+   {
+    "window_idx": 15,
+    "ts": "2017-07-06T13:15:00Z",
+    "surprise": 0.26,
+    "label": "benign"
+   },
+   {
+    "window_idx": 16,
+    "ts": "2017-07-06T13:16:00Z",
+    "surprise": 0.35,
+    "label": "benign"
+   },
+   {
+    "window_idx": 17,
+    "ts": "2017-07-06T13:17:00Z",
+    "surprise": 0.45,
+    "label": "benign"
+   },
+   {
+    "window_idx": 18,
+    "ts": "2017-07-06T13:18:00Z",
+    "surprise": 0.37,
+    "label": "benign"
+   },
+   {
+    "window_idx": 19,
+    "ts": "2017-07-06T13:19:00Z",
+    "surprise": 0.45,
+    "label": "benign"
+   },
+   {
+    "window_idx": 20,
+    "ts": "2017-07-06T13:20:00Z",
+    "surprise": 0.26,
+    "label": "benign"
+   },
+   {
+    "window_idx": 21,
+    "ts": "2017-07-06T13:21:00Z",
+    "surprise": 0.35,
+    "label": "benign"
+   },
+   {
+    "window_idx": 22,
+    "ts": "2017-07-06T13:22:00Z",
+    "surprise": 0.53,
+    "label": "benign"
+   },
+   {
+    "window_idx": 23,
+    "ts": "2017-07-06T13:23:00Z",
+    "surprise": 0.51,
+    "label": "benign"
+   },
+   {
+    "window_idx": 24,
+    "ts": "2017-07-06T13:24:00Z",
+    "surprise": 0.17,
+    "label": "benign"
+   },
+   {
+    "window_idx": 25,
+    "ts": "2017-07-06T13:25:00Z",
+    "surprise": 0.31,
+    "label": "benign"
+   },
+   {
+    "window_idx": 26,
+    "ts": "2017-07-06T13:26:00Z",
+    "surprise": 0.25,
+    "label": "benign"
+   },
+   {
+    "window_idx": 27,
+    "ts": "2017-07-06T13:27:00Z",
+    "surprise": 0.49,
+    "label": "benign"
+   },
+   {
+    "window_idx": 28,
+    "ts": "2017-07-06T13:28:00Z",
+    "surprise": 0.54,
+    "label": "benign"
+   },
+   {
+    "window_idx": 29,
+    "ts": "2017-07-06T13:29:00Z",
+    "surprise": 0.24,
+    "label": "benign"
+   },
+   {
+    "window_idx": 30,
+    "ts": "2017-07-06T13:30:00Z",
+    "surprise": 0.53,
+    "label": "benign"
+   },
+   {
+    "window_idx": 31,
+    "ts": "2017-07-06T13:31:00Z",
+    "surprise": 0.44,
+    "label": "benign"
+   },
+   {
+    "window_idx": 32,
+    "ts": "2017-07-06T13:32:00Z",
+    "surprise": 0.31,
+    "label": "benign"
+   },
+   {
+    "window_idx": 33,
+    "ts": "2017-07-06T13:33:00Z",
+    "surprise": 0.19,
+    "label": "benign"
+   },
+   {
+    "window_idx": 34,
+    "ts": "2017-07-06T13:34:00Z",
+    "surprise": 0.54,
+    "label": "benign"
+   },
+   {
+    "window_idx": 35,
+    "ts": "2017-07-06T13:35:00Z",
+    "surprise": 0.5,
+    "label": "benign"
+   },
+   {
+    "window_idx": 36,
+    "ts": "2017-07-06T13:36:00Z",
+    "surprise": 0.47,
+    "label": "benign"
+   },
+   {
+    "window_idx": 37,
+    "ts": "2017-07-06T13:37:00Z",
+    "surprise": 0.46,
+    "label": "benign"
+   },
+   {
+    "window_idx": 38,
+    "ts": "2017-07-06T13:38:00Z",
+    "surprise": 0.26,
+    "label": "benign"
+   },
+   {
+    "window_idx": 39,
+    "ts": "2017-07-06T13:39:00Z",
+    "surprise": 0.2,
+    "label": "benign"
+   },
+   {
+    "window_idx": 40,
+    "ts": "2017-07-06T13:40:00Z",
+    "surprise": 0.23,
+    "label": "benign"
+   },
+   {
+    "window_idx": 41,
+    "ts": "2017-07-06T13:41:00Z",
+    "surprise": 0.41,
+    "label": "benign"
+   },
+   {
+    "window_idx": 42,
+    "ts": "2017-07-06T13:42:00Z",
+    "surprise": 0.19,
+    "label": "benign"
+   },
+   {
+    "window_idx": 43,
+    "ts": "2017-07-06T13:43:00Z",
+    "surprise": 0.52,
+    "label": "benign"
+   },
+   {
+    "window_idx": 44,
+    "ts": "2017-07-06T13:44:00Z",
+    "surprise": 0.41,
+    "label": "benign"
+   },
+   {
+    "window_idx": 45,
+    "ts": "2017-07-06T13:45:00Z",
+    "surprise": 0.18,
+    "label": "benign"
+   },
+   {
+    "window_idx": 46,
+    "ts": "2017-07-06T13:46:00Z",
+    "surprise": 0.21,
+    "label": "benign"
+   },
+   {
+    "window_idx": 47,
+    "ts": "2017-07-06T13:47:00Z",
+    "surprise": 0.22,
+    "label": "benign"
+   },
+   {
+    "window_idx": 48,
+    "ts": "2017-07-06T13:48:00Z",
+    "surprise": 0.27,
+    "label": "benign"
+   },
+   {
+    "window_idx": 49,
+    "ts": "2017-07-06T13:49:00Z",
+    "surprise": 0.49,
+    "label": "benign"
+   },
+   {
+    "window_idx": 50,
+    "ts": "2017-07-06T13:50:00Z",
+    "surprise": 0.36,
+    "label": "benign"
+   },
+   {
+    "window_idx": 51,
+    "ts": "2017-07-06T13:51:00Z",
+    "surprise": 0.5,
+    "label": "benign"
+   },
+   {
+    "window_idx": 52,
+    "ts": "2017-07-06T13:52:00Z",
+    "surprise": 0.47,
+    "label": "benign"
+   },
+   {
+    "window_idx": 53,
+    "ts": "2017-07-06T13:53:00Z",
+    "surprise": 0.39,
+    "label": "benign"
+   },
+   {
+    "window_idx": 54,
+    "ts": "2017-07-06T13:54:00Z",
+    "surprise": 0.17,
+    "label": "benign"
+   },
+   {
+    "window_idx": 55,
+    "ts": "2017-07-06T13:55:00Z",
+    "surprise": 0.29,
+    "label": "benign"
+   },
+   {
+    "window_idx": 56,
+    "ts": "2017-07-06T13:56:00Z",
+    "surprise": 0.46,
+    "label": "benign"
+   },
+   {
+    "window_idx": 57,
+    "ts": "2017-07-06T13:57:00Z",
+    "surprise": 0.46,
+    "label": "benign"
+   },
+   {
+    "window_idx": 58,
+    "ts": "2017-07-06T13:58:00Z",
+    "surprise": 0.17,
+    "label": "benign"
+   },
+   {
+    "window_idx": 59,
+    "ts": "2017-07-06T13:59:00Z",
+    "surprise": 0.4,
+    "label": "benign"
+   },
+   {
+    "window_idx": 60,
+    "ts": "2017-07-06T14:00:00Z",
+    "surprise": 0.35,
+    "label": "benign"
+   },
+   {
+    "window_idx": 61,
+    "ts": "2017-07-06T14:01:00Z",
+    "surprise": 0.51,
+    "label": "benign"
+   },
+   {
+    "window_idx": 62,
+    "ts": "2017-07-06T14:02:00Z",
+    "surprise": 0.49,
+    "label": "benign"
+   },
+   {
+    "window_idx": 63,
+    "ts": "2017-07-06T14:03:00Z",
+    "surprise": 1.77,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 64,
+    "ts": "2017-07-06T14:04:00Z",
+    "surprise": 1.58,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 65,
+    "ts": "2017-07-06T14:05:00Z",
+    "surprise": 1.6,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 66,
+    "ts": "2017-07-06T14:06:00Z",
+    "surprise": 2.09,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 67,
+    "ts": "2017-07-06T14:07:00Z",
+    "surprise": 1.51,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 68,
+    "ts": "2017-07-06T14:08:00Z",
+    "surprise": 1.41,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 69,
+    "ts": "2017-07-06T14:09:00Z",
+    "surprise": 1.54,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 70,
+    "ts": "2017-07-06T14:10:00Z",
+    "surprise": 2.04,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 71,
+    "ts": "2017-07-06T14:11:00Z",
+    "surprise": 1.7,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 72,
+    "ts": "2017-07-06T14:12:00Z",
+    "surprise": 2.09,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 73,
+    "ts": "2017-07-06T14:13:00Z",
+    "surprise": 1.44,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 74,
+    "ts": "2017-07-06T14:14:00Z",
+    "surprise": 1.72,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 75,
+    "ts": "2017-07-06T14:15:00Z",
+    "surprise": 1.69,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 76,
+    "ts": "2017-07-06T14:16:00Z",
+    "surprise": 1.71,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 77,
+    "ts": "2017-07-06T14:17:00Z",
+    "surprise": 1.55,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 78,
+    "ts": "2017-07-06T14:18:00Z",
+    "surprise": 1.64,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 79,
+    "ts": "2017-07-06T14:19:00Z",
+    "surprise": 1.37,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 80,
+    "ts": "2017-07-06T14:20:00Z",
+    "surprise": 1.77,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 81,
+    "ts": "2017-07-06T14:21:00Z",
+    "surprise": 1.39,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 82,
+    "ts": "2017-07-06T14:22:00Z",
+    "surprise": 1.46,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 83,
+    "ts": "2017-07-06T14:23:00Z",
+    "surprise": 1.53,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 84,
+    "ts": "2017-07-06T14:24:00Z",
+    "surprise": 1.69,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 85,
+    "ts": "2017-07-06T14:25:00Z",
+    "surprise": 1.43,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 86,
+    "ts": "2017-07-06T14:26:00Z",
+    "surprise": 1.99,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 87,
+    "ts": "2017-07-06T14:27:00Z",
+    "surprise": 1.86,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 88,
+    "ts": "2017-07-06T14:28:00Z",
+    "surprise": 1.9,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 89,
+    "ts": "2017-07-06T14:29:00Z",
+    "surprise": 1.8,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 90,
+    "ts": "2017-07-06T14:30:00Z",
+    "surprise": 1.98,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 91,
+    "ts": "2017-07-06T14:31:00Z",
+    "surprise": 1.45,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 92,
+    "ts": "2017-07-06T14:32:00Z",
+    "surprise": 1.74,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 93,
+    "ts": "2017-07-06T14:33:00Z",
+    "surprise": 1.89,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 94,
+    "ts": "2017-07-06T14:34:00Z",
+    "surprise": 1.48,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 95,
+    "ts": "2017-07-06T14:35:00Z",
+    "surprise": 1.49,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 96,
+    "ts": "2017-07-06T14:36:00Z",
+    "surprise": 1.7,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 97,
+    "ts": "2017-07-06T14:37:00Z",
+    "surprise": 2.09,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 98,
+    "ts": "2017-07-06T14:38:00Z",
+    "surprise": 1.53,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 99,
+    "ts": "2017-07-06T14:39:00Z",
+    "surprise": 1.72,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 100,
+    "ts": "2017-07-06T14:40:00Z",
+    "surprise": 2.07,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 101,
+    "ts": "2017-07-06T14:41:00Z",
+    "surprise": 1.39,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 102,
+    "ts": "2017-07-06T14:42:00Z",
+    "surprise": 2.04,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 103,
+    "ts": "2017-07-06T14:43:00Z",
+    "surprise": 1.93,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 104,
+    "ts": "2017-07-06T14:44:00Z",
+    "surprise": 1.92,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 105,
+    "ts": "2017-07-06T14:45:00Z",
+    "surprise": 1.77,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 106,
+    "ts": "2017-07-06T14:46:00Z",
+    "surprise": 1.81,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 107,
+    "ts": "2017-07-06T14:47:00Z",
+    "surprise": 1.67,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 108,
+    "ts": "2017-07-06T14:48:00Z",
+    "surprise": 1.63,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 109,
+    "ts": "2017-07-06T14:49:00Z",
+    "surprise": 1.75,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 110,
+    "ts": "2017-07-06T14:50:00Z",
+    "surprise": 1.37,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 111,
+    "ts": "2017-07-06T14:51:00Z",
+    "surprise": 1.89,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 112,
+    "ts": "2017-07-06T14:52:00Z",
+    "surprise": 1.61,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 113,
+    "ts": "2017-07-06T14:53:00Z",
+    "surprise": 1.52,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 114,
+    "ts": "2017-07-06T14:54:00Z",
+    "surprise": 1.33,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 115,
+    "ts": "2017-07-06T14:55:00Z",
+    "surprise": 1.38,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 116,
+    "ts": "2017-07-06T14:56:00Z",
+    "surprise": 1.88,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 117,
+    "ts": "2017-07-06T14:57:00Z",
+    "surprise": 1.57,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 118,
+    "ts": "2017-07-06T14:58:00Z",
+    "surprise": 2.08,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 119,
+    "ts": "2017-07-06T14:59:00Z",
+    "surprise": 1.67,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 120,
+    "ts": "2017-07-06T15:00:00Z",
+    "surprise": 1.71,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 121,
+    "ts": "2017-07-06T15:01:00Z",
+    "surprise": 1.34,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 122,
+    "ts": "2017-07-06T15:02:00Z",
+    "surprise": 1.36,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 123,
+    "ts": "2017-07-06T15:03:00Z",
+    "surprise": 1.49,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 124,
+    "ts": "2017-07-06T15:04:00Z",
+    "surprise": 1.71,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 125,
+    "ts": "2017-07-06T15:05:00Z",
+    "surprise": 1.56,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 126,
+    "ts": "2017-07-06T15:06:00Z",
+    "surprise": 1.43,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 127,
+    "ts": "2017-07-06T15:07:00Z",
+    "surprise": 1.81,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 128,
+    "ts": "2017-07-06T15:08:00Z",
+    "surprise": 1.79,
+    "label": "Infiltration"
+   },
+   {
+    "window_idx": 129,
+    "ts": "2017-07-06T15:09:00Z",
+    "surprise": 1.6,
+    "label": "Infiltration"
+   }
+  ],
+  "note": "Model trained with every PortScan window removed. Surprise still elevates from window 63, where PortScan begins."
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "schema_version": "v4.0",
+ "hosts": [
+  {
+   "host": "192.168.10.15",
+   "capture": "ids2017-thursday",
+   "scenario": "infiltration",
+   "true_class": "Infiltration",
+   "n_windows": 180,
+   "available_t": [
+    40,
+    52
+   ],
+   "peak_p_frac": 0.74,
+   "has_counterfactual": true
+  },
+  {
+   "host": "192.168.10.50",
+   "capture": "ids2017-friday",
+   "scenario": "botnet",
+   "true_class": "Bot",
+   "n_windows": 210,
+   "available_t": [
+    30
+   ],
+   "peak_p_frac": 0.54,
+   "has_counterfactual": true
+  },
+  {
+   "host": "192.168.10.8",
+   "capture": "ids2017-monday",
+   "scenario": "benign",
+   "true_class": "benign",
+   "n_windows": 300,
+   "available_t": [
+    60
+   ],
+   "peak_p_frac": 0.0,
+   "has_counterfactual": false
+  }
+ ]
+}

@@ -83,12 +83,12 @@ Then:
 
 ### P1 — Frontend
 
-- Streamlit skeleton, page layout, navigation.
+- REACT skeleton, page layout, navigation.
 - Co-author the JSON contract; then build a **mock generator** producing realistic `forecast.json` files (P2 can help, but P1 owns it — you need mocks you can bend to test edge cases).
 - Build the **forecast cone panel**: 50 sample lines translucent, median bold, threshold line, alert marker. This is the centrepiece; build it first.
 - Design decisions locked: colours, typography, layout (`frontend.md`).
 
-**Deliverables:** Streamlit app running with mock data, forecast cone rendering.
+**Deliverables:** react based website running with mock data, forecast cone rendering.
 
 ### Gate 1 — end of Week 1
 
