@@ -52,7 +52,7 @@ export function Sidebar() {
   const s = useStore()
 
   return (
-    <aside className="z-20 flex w-[248px] flex-none flex-col gap-5 overflow-y-auto border-r bg-[rgba(6,7,10,0.6)] p-4 backdrop-blur-xl">
+    <aside className="z-20 flex w-[248px] flex-none flex-col gap-5 overflow-y-auto border-r bg-[var(--surface)] p-4">
       <Field label="Host">
         <Select
           value={`${s.capture}|${s.host}`}
@@ -95,7 +95,7 @@ export function Sidebar() {
           onValueChange={([v]) => s.setThreshold(v)}
         />
         <p className="text-[9px] leading-snug text-[var(--dim)]">
-          Drag it. Lead time and the alert marker move live — the trade-off, not hidden.
+          Drag it. Lead time and the alert marker move live, the trade-off stays visible.
         </p>
       </Field>
 

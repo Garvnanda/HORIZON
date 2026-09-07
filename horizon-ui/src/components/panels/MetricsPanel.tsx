@@ -26,6 +26,7 @@ export function MetricsPanel() {
   return (
     <Panel
       label="Evaluation"
+      id="metrics"
       right={
         mock && (
           <Badge variant="outline" className="border-[var(--threat)] text-[9px] text-[var(--threat)]">
@@ -49,8 +50,8 @@ export function MetricsPanel() {
       />
       <Row k="Beats persistence" v={metrics.reconstruction.persistence_beaten ? 'yes' : 'NO'} tone={metrics.reconstruction.persistence_beaten ? 'safe' : 'threat'} />
       <p className="mt-2 text-[8.5px] leading-snug text-[var(--dim)]">
-        Lead time is reported as a curve against false-alarm rate, every baseline on the same axes —
-        not a single number.
+        Lead time is a curve against false-alarm rate, every baseline on the same axes, not a single
+        number.
       </p>
     </Panel>
   )

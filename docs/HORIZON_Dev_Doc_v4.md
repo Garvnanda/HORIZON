@@ -4,7 +4,9 @@
 
 SIH 2026 · PS 26153 · NTRO · Software · Blockchain & Cybersecurity
 
-Prepared for Har Agam Deep Singh & team. **Supersedes v3** on six points: state representation moved from 5-tuple flow sequences to host-window aggregates (§3.1 — v3's design was structurally incapable of the demo it proposed); dynamics head changed from deterministic MSE to a mixture density network with sampled rollout (§3.3); counterfactual rollout moved from Week-4 stretch to Week-3 core (§3.7); packet-level PCAP features cut entirely (§2, dataset has no raw captures); CTU-13 and UNSW-NB15 replaced by held-out-capture evaluation within the primary dataset (§4.4); team plan rebuilt for 3 people, not 5–6 (§7). Companion documents: `pitch.md`, `idea.md`, `technical.md`, `implementation.md`, `frontend.md`.
+Prepared for Har Agam Deep Singh & team. **Supersedes v3** on six points: state representation moved from 5-tuple flow sequences to host-window aggregates (§3.1 — v3's design was structurally incapable of the demo it proposed); dynamics head changed from deterministic MSE to a mixture density network with sampled rollout (§3.3); counterfactual rollout moved from Week-4 stretch to Week-3 core (§3.7); packet-level PCAP features cut entirely (§2, dataset has no raw captures); CTU-13 and UNSW-NB15 replaced by held-out-capture evaluation within the primary dataset (§4.4); team plan rebuilt for 3 people, not 5–6 (§7). Companion documents: `pitch.md`, `idea.md`, `technical.md`, `implementation.md`, `frontend.md`, `api-contract.md`, `api-endpoints.md`.
+
+**Post-v4 correction (dataset + interface).** The primary dataset changed from `cic-collection.parquet` to **CIC-IDS2017 GeneratedLabelledFlows** (`chethuhn/network-intrusion-dataset`): the collection parquet strips `Source IP` / `Destination IP` / `Timestamp`, which the host-window state design requires. Consequence: one testbed campaign (five weekday capture sessions) instead of four, so §4.4's cross-domain test is a held-out **weekday**, a temporal + attack-mix shift rather than a cross-network one — stated honestly, not as an equivalent. The demo interface changed from Streamlit to a **React frontend (`horizon-ui/`) + FastAPI backend (`horizon-api/`)**; the offline requirement is met by a static JSON bundle, the backend is optional and adds arbitrary-host live inference. `technical.md` and `implementation.md` carry the current detail.
 
 ---
 
@@ -20,8 +22,8 @@ Every line below maps a PS 26153 requirement to where this document resolves it.
 | K-step rollout: infiltration probability + ATT&CK stage + driving features | Sampled autoregressive rollout, 50 futures × 20 steps; probability as fraction of attack-like futures; heuristic stage overlay; attention-based feature attribution | §3.4, §3.6 |
 | Explainability required — black-box not acceptable | Attention weights over timesteps + the predicted trajectory itself, shown as readable feature rows. **SHAP cut** as redundant at 3-person scale | §3.6 |
 | Benchmark vs logistic regression: F1, precision, recall, FPR | Reported as specified, plus two further baselines the PS does not require (§5) | §6.6 |
-| Generalise to unseen attack patterns, not memorise | Group-by-(capture, host) leakage-free split; held-out capture campaign; **held-out attack class** as the headline generalisation experiment | §6.4, §6.5 |
-| Offline demo: Streamlit / Flask / CLI, no cloud API dependency | Streamlit, weights loaded locally, precomputed forecasts, zero external calls at inference | §7, `frontend.md` |
+| Generalise to unseen attack patterns, not memorise | Group-by-(capture, host) leakage-free split; held-out weekday session; **held-out attack class** as the headline generalisation experiment | §6.4, §6.5 |
+| Offline demo: Streamlit / Flask / CLI, no cloud API dependency | React frontend shipping precomputed forecasts as static JSON, zero external calls at inference; optional local FastAPI for live inference | §7, `frontend.md`, `api-endpoints.md` |
 | Interpretable decision support | Response Recommendation Panel (recommend-and-approve, never executes) plus counterfactual intervention comparison | §3.7, §3.8 |
 | Deliverables: code, readme, 2-page architecture doc, 2-min demo video, 5-slide PPT | This document is the internal base; the 2-page doc and 5-slide deck are distilled in Week 4 | §9 |
 
@@ -36,15 +38,15 @@ Every line below maps a PS 26153 requirement to where this document resolves it.
 | **Dynamics head** | Mixture density network, 5 components, mixture NLL loss, sampled rollout (50 futures) | v3's MSE objective mathematically converges on the conditional *mean* of the next state. Where the future is multi-modal (70% idle / 30% scan burst) the mean is a state that never occurs, and feeding it back collapses the rollout toward the global average. MDN represents distinct modes; sampling commits to one per rollout. This is where the system's generative behaviour comes from. |
 | **Scheduled sampling** | Mandatory, linear ramp p: 0.0 → 0.5 across training | The readout head is trained on hidden states from real rows but queried at rollout on states from imagined rows. Untreated, everything past step 1 is smooth-looking noise (exposure bias). Not fixed by "training more" — a specific change to the training loop. |
 | **Counterfactual rollout** | **Core scope, Week 3.** Promoted from v3's Week-4 stretch | The only capability in the system that no classifier can produce at any accuracy, and the only screen that answers *should I act*. Costs one state channel and one extra rollout call. Framed and presented as a structured what-if, never as a validated causal estimate. |
-| **Packet-level PCAP features** | **Cut.** v3 had this as core Week-2 scope | The chosen dataset is a parquet of CICFlowMeter feature rows; CIC's raw captures run to hundreds of GB and are unusable on free Colab. v3 committed to it before the dataset was fixed. Cutting it honestly is better than half-attempting it; it also recovers most of the 6→3 headcount reduction. |
-| **Primary dataset** | `cic-collection.parquet` (Kaggle) — CIC-IDS2017 + CIC-DoS2017 + CSE-CIC-IDS2018 + CIC-DDoS2019, harmonised labels, flawed features already removed | Single harmonised file, one feature-extraction toolchain across all four campaigns, fits in Colab RAM after column subsetting. |
-| **Cross-domain evaluation** | Held-out **capture campaign** within the primary dataset. CTU-13 and UNSW-NB15 both cut | The file already spans four independent capture campaigns; holding one out is a genuine domain-shift test at zero integration cost. Importing a second dataset buys a third data point and costs a week. |
+| **Packet-level PCAP features** | **Cut.** v3 had this as core Week-2 scope | The chosen dataset ships CICFlowMeter feature rows (CSVs); CIC-IDS2017's raw PCAPs run to ~50 GB and are unusable on free Colab/Kaggle. Cutting it honestly is better than half-attempting it; it also recovers most of the 6→3 headcount reduction. |
+| **Primary dataset** | **CIC-IDS2017 GeneratedLabelledFlows** (Kaggle: `chethuhn/network-intrusion-dataset`) — 8 CICFlowMeter CSVs across five weekday capture sessions, with Flow ID, both IPs, both ports, timestamp, and label | `cic-collection.parquet` (four harmonised CIC campaigns) was the v4 pick but drops IPs and timestamp, which the state design needs. `GeneratedLabelledFlows` keeps them. Fits in RAM with chunked reads. |
+| **Cross-domain evaluation** | Held-out **weekday capture session** within CIC-IDS2017 (default `ids2017-friday`). CTU-13 and UNSW-NB15 both cut | With one campaign there is no held-out campaign available. Holding out a weekday is a temporal + attack-mix shift on the same testbed — weaker than cross-network, still an honest generalisation test at zero integration cost. Framed as such, not overstated. |
 | **Headline generalisation experiment** | Held-out **attack class** — remove one class entirely from training, test whether the surprise signal still flags it | The only experiment that could yield a research claim rather than an engineering feature: *detects attack classes absent from training*. One extra training run. Scheduled Week 3 Day 1 so there is time to react to either outcome. |
 | **Explainability** | Attention weights + the predicted trajectory rows. SHAP cut | v3 committed to both. At 3-person scale, SHAP over a 50-sample rollout is expensive and harder to read than showing the model's own predicted numbers. The trajectory table is stronger explainability than a feature-attribution bar chart. |
 | **Second baseline** | Direct multi-horizon classifier — same backbone, predicts P(attack within K) in one pass, no rollout | Carried from v3, and still the sharpest test we run on ourselves. Expected to match or beat the rollout on lead time, since it never compounds error. Framing prepared in advance (§5.4). |
 | **Third baseline** | **Persistence** (ŝ_t+1 = s_t), per-feature | New in v4. v3 had two baselines for the classifier and none for the dynamics model — the actual novel component. If the LSTM cannot beat "next minute looks like this minute", it has collapsed to the mean and the premise is void. Hard gate, Week 2. |
 | **Response layer scope** | Recommendation panel: templated filled-in command per alert, Approve/Dismiss, decision logged, **never executed** | Unchanged from v3. PS asks for decision support, not autonomous response. |
-| **Demo interface** | Streamlit, offline, precomputed forecasts for demo hosts | Unchanged from v3. Live inference on stage is an unnecessary failure mode. |
+| **Demo interface** | React frontend (`horizon-ui/`), offline, precomputed forecasts as static JSON. Optional FastAPI backend (`horizon-api/`) for live arbitrary-host inference | Streamlit replaced for a stronger visual demo (the 3D kill-chain scene, the forecast cone). Static bundle keeps the offline guarantee; the backend never has to run on stage. |
 | **Calibration** | Platt scaling default, isotonic fallback | Unchanged from v3. |
 | **Team size** | **3 people**: one frontend-only, two on data/eval and model | v3 planned for 5–6. Scope in §7 is cut to match, not stretched. |
 
@@ -80,7 +82,7 @@ Every line below maps a PS 26153 requirement to where this document resolves it.
 
 **Host selection.** Internal (RFC1918) sources only; external IPs are peers, not modelled subjects. Drop hosts with under 40 windows.
 
-**Grouping.** Always by **(capture, host)**, never host alone — the four campaigns may reuse address ranges, and stitching across a boundary joins two unrelated machines into one sequence.
+**Grouping.** Always by **(capture, host)**, never host alone — the same host IP recurs across weekday sessions, and stitching across a session boundary joins two runs of one machine under different conditions into one sequence.
 
 ## 3.2 Encoder
 
@@ -148,7 +150,7 @@ Heuristic overlay, stated as such — dataset attack-class labels do not map 1:1
 
 ## 3.9 Demo application
 
-Streamlit, five panels in demo order: forecast cone · counterfactual comparison · trajectory table · surprise timeline · response recommendation. Fully offline, precomputed forecasts, live threshold slider. Full specification in `frontend.md`.
+React frontend (`horizon-ui/`), five panels in demo order: forecast cone · counterfactual comparison · trajectory table · surprise timeline · response recommendation, plus a 3D kill-chain scene driven by the live forecast. Fully offline (forecasts shipped as static JSON), live threshold slider. Optional FastAPI backend (`horizon-api/`) serves the same shapes from the trained model for arbitrary-host inference. Full specification in `frontend.md`; output shapes in `api-contract.md`; backend in `api-endpoints.md`.
 
 ---
 
@@ -156,29 +158,29 @@ Streamlit, five panels in demo order: forecast cone · counterfactual comparison
 
 ## 4.1 Gate 0 — column verification
 
-**Nothing else starts until this passes.** The state design requires source IP, destination IP, destination port, and timestamp. Some cleaned CIC collections deliberately drop IPs and ports because they leak.
+**Nothing else starts until this passes.** The state design requires source IP, destination IP, destination port, and timestamp. The `MachineLearningCVE` variant of this dataset drops IPs and ports; `GeneratedLabelledFlows` keeps them. Verify.
 
 | Outcome | Action |
 | --- | --- |
-| **A** — IPs + timestamp present | Proceed as written |
-| **B** — timestamp present, IPs absent | Global-window fallback: one state row per 60s window across the capture; features 2, 3, 4, 10 become network-wide. Mechanism unchanged; alerts point at a time, not a machine |
-| **C** — no usable timestamp | Abandon the file; pull raw CSE-CIC-IDS2018 CSVs from CIC's distribution page. ~2 days |
+| **A** — IPs + timestamp present (expected) | Proceed as written |
+| **B** — timestamp present, IPs absent | Re-check the dataset variant first. If genuinely absent: global-window fallback, one state row per 60s window per session; features 2, 3, 4, 10 become session-wide. Mechanism unchanged; alerts point at a time, not a machine |
+| **C** — no usable timestamp | Abandon; pull raw CIC-IDS2017 CSVs from CIC's distribution page. ~2 days |
 
-Also derive capture boundaries — four campaigns are collated, timestamps may interleave or restart.
+Capture session = the weekday, from the filename. Thursday/Friday have multiple files, concatenated in time order before windowing.
 
 ## 4.2 Aggregation
 
 Chunked processing, columns subset before load. `new_peer_rate` maintained as a running per-host set of previously-seen destinations in chronological order, reset per (capture, host).
 
-Output: `states.parquet` — `[capture, host, window_idx, ts, f1..f10, is_empty, label]`, sorted.
+Output: `states.parquet` — `[capture, host, window_idx, ts, <10 named features>, is_empty, label]`, sorted. Written by `notebooks/horizon_train.ipynb`, loaded directly by the backend.
 
 ## 4.3 Labels
 
-A window carries an attack class if any flow in it is so labelled. Fine-grained class retained, not just binary — needed for per-class metrics and the held-out-class experiment. Label smoothing applied; the published audit of CIC-IDS-2017/2018 documents roughly 7.5% label error, which is why we validate against a held-out capture rather than trusting label self-consistency.
+A window carries an attack class when at least `LABEL_MIN_MALICIOUS` flows in it are so labelled (default 1), taking the most common malicious class. Fine-grained class retained, not just binary — needed for per-class metrics and the held-out-class experiment. Label smoothing applied; the published audit of CIC-IDS-2017/2018 documents roughly 7.5% label error, which is why we validate against a held-out session rather than trusting label self-consistency.
 
 ## 4.4 Cross-domain evaluation
 
-Train on three capture campaigns, test on the fourth. Expect a 15–30 point macro-F1 drop. **The drop is the finding, not a failure** — an honest domain-shift measurement most published work avoids reporting.
+Train on four weekday sessions, test on the fifth (`HELDOUT_CAPTURE`, default `ids2017-friday`). Expect a macro-F1 drop. **The drop is the finding, not a failure** — an honest generalisation measurement most published work avoids reporting. State what shifts precisely: same testbed and address ranges, different day and attack tooling. A temporal + attack-mix shift, not cross-network. Weaker than a held-out-campaign test; do not present it as equivalent.
 
 ---
 
@@ -220,13 +222,15 @@ Built in Week 1 on synthetic toy sequences with an arithmetically known answer, 
 
 **P1 — frontend only.** **P2 — data & evaluation.** **P3 — model.**
 
-**The contract, frozen Day 2.** P1 cannot wait until Week 3 for real model output — that path ends in a rushed demo, and the demo is what judges see. P2 and P3 define `forecast.json` on Day 2; P1 builds the entire frontend against mock data. Swapping in real output in Week 3 is a one-line change. Schema in `implementation.md`.
+**The contract, frozen.** In `api-contract.md`. P1 built the entire frontend against mocks; the backend too. Swapping in real output is a `VITE_API_BASE` env var or a file drop into `horizon-api/artifacts/`.
+
+**Progress against this plan:** the contract, mock bundle, frontend (all panels + 3D scene), backend (`horizon-api/`, stub + live), and training notebook (`notebooks/horizon_train.ipynb`) are **done**. Not done: running the notebook on real data, the full eval harness (Week 3 P2 column below), the held-out-class experiment, and packaging (Week 4). `implementation.md` "What is left" has the itemised list.
 
 | Week | P1 — Frontend | P2 — Data & eval | P3 — Model |
 | --- | --- | --- | --- |
-| **1** | Streamlit skeleton; mock generator; **forecast cone panel**; design locked | **Gate 0 Day 1**; capture boundaries; host-window aggregator; `states.parquet` v1; **metrics harness on toy data**; persistence baseline | LSTM + MDN on **toy data only**; verify MDN separates a deliberately bimodal toy distribution; rollout loop |
+| **1** | React skeleton; mock generator; **forecast cone panel**; design locked | **Gate 0 Day 1**; session boundaries; host-window aggregator; `states.parquet` v1; **metrics harness on toy data**; persistence baseline | LSTM + MDN on **toy data only**; verify MDN separates a deliberately bimodal toy distribution; rollout loop |
 | **2** | Trajectory table; surprise timeline; host selector; threshold slider | Full `states.parquet`; transforms and splits; logistic regression; **run persistence vs P3's checkpoints** | Train on real data; **Gate 2: beat persistence per-feature**; readout head; joint training; scheduled sampling |
-| **3** | **Counterfactual panel**; response panel; swap mocks for real JSON; rehearse walkthrough | Held-out capture; **lead-time vs FPR curve**; error growth; calibration; surprise and divergence AUC | **Day 1: held-out-class experiment (×2)**; full sampled rollout; counterfactual branch; emit real `forecast.json` |
+| **3** | **Counterfactual panel**; response panel; swap mocks for real backend; rehearse walkthrough | Held-out weekday; **lead-time vs FPR curve**; error growth; calibration; surprise and divergence AUC | **held-out-class experiment (×2)**; full sampled rollout; counterfactual branch; emit real artifacts |
 | **4** | Polish; **record 2-min video**; projector test | Freeze metrics; results table; limitations | Freeze weights; per-class results; sampling-vs-mean ablation if time |
 
 **Hard gates.**
@@ -243,7 +247,8 @@ Built in Week 1 on synthetic toy sequences with an arithmetically known answer, 
 
 | Risk | Probability | Mitigation |
 | --- | --- | --- |
-| IPs/ports absent from the parquet | Medium — cleaned collections often drop them | Gate 0 on Day 1; branch decided immediately, never discovered in Week 2 |
+| IPs/ports absent (wrong dataset variant) | Medium — `MachineLearningCVE` drops them | Gate 0 on Day 1; confirm `GeneratedLabelledFlows`; branch decided immediately |
+| One-campaign data weakens the domain-shift claim | Certain | §4.4 frames the held-out weekday honestly as temporal + attack-mix shift; never called cross-network |
 | LSTM fails to beat persistence | Medium — per-host per-minute traffic is bursty and partly random; "next minute looks like this minute" may be hard to beat | Hard gate mid-Week 2. Likely causes if it fails: transforms not applied, scaler leaking across splits, non-contiguous sequences, learning rate too high. Escalate rather than proceed |
 | MDN training unstable / NaN | Medium | Log-variance clamping, logsumexp, gradient clipping; discretised fallback after two failures |
 | Detection loss swamps dynamics loss | Medium | Log both terms separately; tune λ; persistence gate catches the failure |
@@ -254,7 +259,7 @@ Built in Week 1 on synthetic toy sequences with an arithmetically known answer, 
 | Counterfactual slips to Week 4 | Medium | Then it does not ship, and it is the differentiator. Gate 3 exists for this |
 | Counterfactual challenged as non-causal | **Certain** | Stated first — in this document, on the panel, in the pitch |
 | Graph modelling raised in Q&A | Likely | Named as the architectural ceiling and as future work; scalar degree/novelty features described as the deliberate approximation |
-| Colab session death mid-training | High | Checkpoint every epoch to Drive; subset columns before load |
+| Colab/Kaggle session death mid-training | High | Notebook checkpoints `model.pt` every epoch to `artifacts/`; chunked reads, columns subset before load |
 | Label noise (~7.5% documented) | Known | Label smoothing; validate on held-out capture, not label self-consistency |
 
 ---
@@ -269,7 +274,7 @@ Stated as known limitations. Naming your own ceiling is a strength signal; being
 
 **Live deployment.** Streaming feature extraction, per-host state across millions of hosts, inference latency budgets. Architecturally straightforward, entirely out of scope.
 
-**Deliberately excluded:** automated response (recommend-and-approve only) · packet-level inspection (no raw captures) · additional external datasets (four campaigns already span the domain gap).
+**Deliberately excluded:** automated response (recommend-and-approve only) · packet-level inspection (raw PCAPs too large) · additional external datasets (one dataset chosen for column compatibility; a second is future work, and would strengthen the domain-shift claim §4.4 currently understates).
 
 ---
 
@@ -291,4 +296,4 @@ Source code link with README mirroring §3–4 · 2-page architecture document d
 
 ---
 
-*Document status: v4. State representation corrected, dynamics head made probabilistic, counterfactual promoted to core, packet-level and external datasets cut, plan resized for 3 people. Next gate: Gate 0 — column verification, P2, Day 1. No model code until it passes.*
+*Document status: v4 + post-v4 correction (dataset `cic-collection.parquet` → CIC-IDS2017 GeneratedLabelledFlows; interface Streamlit → React + FastAPI). Scaffolding (contract, mocks, frontend, backend, training notebook) built. Next gate: Gate 0 on a real notebook run. See `implementation.md` "What is left".*

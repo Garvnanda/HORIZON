@@ -143,6 +143,48 @@ export interface MetricsDoc {
   divergence_auc: number
 }
 
+export interface NetNode {
+  host: string
+  subnet: string
+  n_flows: number
+  n_windows: number
+  kind: 'gateway' | 'domain-controller' | 'server' | 'workstation' | 'external'
+  is_demo: boolean
+  is_target?: boolean
+}
+export interface NetEdge {
+  src: string
+  dst: string
+  flows: number
+  internal: boolean
+  attack?: boolean
+  stage?: number
+}
+export interface NetworkDoc {
+  schema_version: string
+  capture: string
+  nodes: NetNode[]
+  edges: NetEdge[]
+  note?: string
+}
+
+export interface FlowRow {
+  window_idx: number
+  ts: string
+  dst_ip: string
+  dst_port: number
+  bytes_out: number
+  bytes_in: number
+  label: string
+  internal: boolean
+}
+export interface FlowsDoc {
+  schema_version: string
+  capture: string
+  host: string
+  flows: FlowRow[]
+}
+
 export type AlertTier = 'monitor' | 'suspicious' | 'elevated' | 'critical'
 
 export interface ComputedAlert {

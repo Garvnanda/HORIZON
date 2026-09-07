@@ -14,7 +14,7 @@ export function MitrePanel() {
     : 0
 
   return (
-    <Panel label="Kill-chain forecast · ATT&CK overlay" live>
+    <Panel label="Kill-chain forecast · ATT&CK overlay" live id="mitre">
       <div className="flex flex-col gap-1">
         {KILL_CHAIN.map((st, i) => {
           const done = curIdx >= 0 && i <= curIdx
@@ -54,7 +54,7 @@ export function MitrePanel() {
             className="h-full rounded transition-[width] duration-500"
             style={{
               width: `${peak * 100}%`,
-              background: 'linear-gradient(90deg,var(--safe),var(--amber),var(--threat))',
+              background: 'linear-gradient(90deg,var(--safe),#e0872e,var(--threat))',
             }}
           />
         </div>
@@ -67,7 +67,7 @@ export function MitrePanel() {
         </div>
       </div>
       <p className="mt-1.5 text-[8px] leading-snug text-[var(--dim)]">
-        Heuristic overlay — trajectory stage estimation, not technique identification.
+        Heuristic overlay. Trajectory stage estimation, not technique identification.
       </p>
     </Panel>
   )

@@ -32,6 +32,7 @@ export function ResponsePanel() {
   return (
     <Panel
       label="Response recommendation"
+      id="response"
       right={<span className="font-mono text-[10px] text-[var(--dim)]">{logCount} logged</span>}
     >
       <div
@@ -44,12 +45,12 @@ export function ResponsePanel() {
         </span>
         <span className="ml-auto font-mono text-[10px] text-[var(--dim)]">
           {alert?.peak != null ? `${(alert.peak * 100).toFixed(0)}% · ` : ''}
-          {current?.true_class ?? '—'}
+          {current?.true_class ?? 'n/a'}
         </span>
       </div>
 
       <pre
-        className="cursor-pointer overflow-x-auto whitespace-pre-wrap break-all rounded-md border bg-[rgba(6,7,10,0.85)] p-2 font-mono text-[8.5px] leading-relaxed text-[rgba(240,185,58,0.85)]"
+        className="cursor-pointer overflow-x-auto whitespace-pre-wrap break-all rounded-md border border-[var(--line-strong)] bg-[var(--surface-2)] p-2 font-mono text-[8.5px] leading-relaxed text-[var(--teal-deep)] dark:text-[var(--teal)]"
         onClick={() => {
           navigator.clipboard?.writeText(cmd)
           toast('Command copied')

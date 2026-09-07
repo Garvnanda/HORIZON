@@ -35,6 +35,8 @@ computeAlert(p_frac, threshold, firstAttackWindow):
 | GET | `/api/hosts` | `hosts.json` | Host picker contents |
 | GET | `/api/forecast?host=&capture=&t=` | `forecast_<capture>_<host>_t<t>.json` | The forecast — cone, counterfactuals, trajectory, explain, MITRE, alert |
 | GET | `/api/surprise?host=&capture=` | `surprise_<capture>_<host>.json` | Surprise timeline over full history + held-out-class overlay |
+| GET | `/api/network?capture=` | `network_<capture>.json` | Internal host-communication graph (macro scene) |
+| GET | `/api/flows?host=&capture=` | `flows_<capture>_<host>.json` | Sampled real flows for one host (micro scene) |
 | GET | `/api/metrics` | `metrics.json` | Eval numbers for the metrics panel (all `MOCK` until Week 3) |
 | POST | `/api/decision` | — (localStorage) | Log an Approve/Dismiss. Never executes anything |
 | GET | `/api/decision-log` | — (localStorage) | The decision log table |
@@ -258,6 +260,52 @@ Demo: append to `localStorage`. **No command is ever executed.** A live backend 
   ] }
 ```
 
+### 3.7 `GET /api/network?capture=`
+
+Internal host-communication graph for the macro scene. `states.parquet` does not
+keep peer identity, so this comes from `network_<capture>.json` (notebook) or the
+mock bundle; live mode without that file returns nodes only.
+
+```json
+{
+  "schema_version": "v4.0",
+  "capture": "ids2017-thursday",
+  "nodes": [
+    { "host": "192.168.10.15", "subnet": "192.168.10", "n_flows": 1300,
+      "n_windows": 180, "kind": "workstation", "is_demo": true, "is_target": false }
+  ],
+  "edges": [
+    { "src": "192.168.10.15", "dst": "192.168.10.5", "flows": 62, "internal": true,
+      "attack": true, "stage": 2 }
+  ],
+  "note": "present only on the nodes-only fallback"
+}
+```
+
+- `kind` — `gateway` / `domain-controller` / `server` / `workstation` / `external`.
+- `is_target` — high-value node (the crown jewel), for the scene.
+- `edge.attack` / `edge.stage` — present on kill-chain edges; `stage` orders the spread (1 = earliest). Absent on normal edges.
+- `ext:internet` is a single aggregated external pseudo-node.
+
+### 3.8 `GET /api/flows?host=&capture=`
+
+A sample of one host's real flows, for the micro view. Notebook writes it for demo
+hosts only; `422` otherwise.
+
+```json
+{
+  "schema_version": "v4.0",
+  "capture": "ids2017-thursday",
+  "host": "192.168.10.15",
+  "flows": [
+    { "window_idx": 40, "ts": "2017-07-06T14:23:00Z", "dst_ip": "192.168.10.3",
+      "dst_port": 445, "bytes_out": 1200, "bytes_in": 30, "label": "benign", "internal": true }
+  ]
+}
+```
+
+Filter `flows` client-side by `window_idx` to match the scene playhead.
+
 ---
 
 ## 4 · Feature keys (fixed order everywhere)
@@ -281,7 +329,11 @@ The model input vector is these 10 **+ `intervention`** (control channel, 0 exce
 
 ---
 
-## 6 · Sync obligations
+## 6 · Sync status
 
-- `implementation.md` — replace its `forecast.json` block with a pointer to this file.
-- Dataset is **CIC-IDS2017 GeneratedLabelledFlows** (`chethuhn/network-intrusion-dataset`), not `cic-collection.parquet`. Captures are the 8 weekday sessions; held-out = one weekday, not one campaign.
+All resolved (2026-09):
+
+- `implementation.md`, `technical.md`, `HORIZON_Dev_Doc_v4.md`, `idea.md`, `pitch.md`, `frontend.md` updated: dataset is **CIC-IDS2017 GeneratedLabelledFlows** (`chethuhn/network-intrusion-dataset`), not `cic-collection.parquet`; interface is React + FastAPI, not Streamlit.
+- Captures are 5 weekday sessions (8 CSV files; Thu/Fri split across files). Held-out = one weekday (`ids2017-friday` by default), a temporal + attack-mix shift, not a cross-campaign one.
+- `implementation.md` `forecast.json` block replaced by a pointer here.
+- Backend that serves these shapes: `docs/api-endpoints.md`, `horizon-api/`.

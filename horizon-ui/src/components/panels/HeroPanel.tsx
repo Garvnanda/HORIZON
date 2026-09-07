@@ -3,6 +3,8 @@ import { Panel } from '@/components/Panel'
 import { ConeChart } from '@/components/charts/ConeChart'
 import { MiniCurves } from '@/components/charts/MiniCurves'
 import { useStore } from '@/store'
+import { activePalette } from '@/lib/palette'
+import { useTheme } from '@/lib/theme'
 import { cn } from 'cn'
 
 const ACTION_LABEL: Record<string, string> = {
@@ -13,9 +15,11 @@ const ACTION_LABEL: Record<string, string> = {
 
 type View = 'forecast' | 'counterfactual'
 
-export function HeroPanel() {
-  const { forecast, threshold, alert, nSamples, demoMode, cfAction, current } = useStore()
-  const [view, setView] = useState<View>('forecast')
+export function HeroPanel({ initialView = 'forecast' }: { initialView?: View }) {
+  const { forecast, threshold, alert, nSamples, demoMode, cfAction, current, playhead } = useStore()
+  const [view, setView] = useState<View>(initialView)
+  useTheme() // re-render on theme change so chart colours refresh
+  const P = activePalette()
   if (!forecast) return null
   const f = forecast.forecast
   const onset = forecast.ground_truth?.first_attack_window ?? null
@@ -32,6 +36,7 @@ export function HeroPanel() {
     <Panel
       label={view === 'forecast' ? 'Forecast · 50 imagined futures' : 'Counterfactual · should I act?'}
       live
+      id={view === 'forecast' ? 'forecast' : 'counterfactual'}
       className="flex h-full flex-col"
       right={
         <div className="flex gap-1">
@@ -66,17 +71,18 @@ export function HeroPanel() {
             historySurprise={forecast.history.map((h) => h.surprise)}
             nSamples={nSamples}
             demoMode={demoMode}
+            playhead={playhead}
           />
         ) : (
           <MiniCurves
             threshold={threshold}
             appliedAtStep={branch.applied_at_step ?? null}
             curves={[
-              { label: 'do nothing', values: doNothing, color: '#c8422e' },
+              { label: 'do nothing', values: doNothing, color: P.threat },
               {
                 label: ACTION_LABEL[cfAction],
                 values: branch.p_frac,
-                color: cfAction === 'do_nothing' ? '#c8422e' : '#5a8fc4',
+                color: cfAction === 'do_nothing' ? P.threat : P.teal,
                 dashed: cfAction !== 'do_nothing',
               },
             ]}
@@ -87,9 +93,9 @@ export function HeroPanel() {
       <div className="mt-2 flex items-center gap-4 text-[10px] text-[var(--cream-dim)]">
         {view === 'forecast' ? (
           <>
-            <Legend color="#4e9964" label="stays quiet" />
-            <Legend color="#f0b93a" label="escalating" />
-            <Legend color="#c8422e" label="attack-like" />
+            <Legend color={P.safe} label="stays quiet" />
+            <Legend color="#e0872e" label="escalating" />
+            <Legend color={P.threat} label="attack-like" />
             <span className="ml-auto font-mono">
               divergence {f.divergence.toFixed(2)} ·{' '}
               {alert?.fired
@@ -101,21 +107,23 @@ export function HeroPanel() {
           </>
         ) : (
           <>
-            <span className="text-[var(--threat)]">do nothing → {(Math.max(...doNothing) * 100).toFixed(0)}%</span>
+            <span className="text-[var(--threat)]">
+              do nothing peaks {(Math.max(...doNothing) * 100).toFixed(0)}%
+            </span>
             {cfAction !== 'do_nothing' && (
-              <span className="text-[var(--info)]">
-                {ACTION_LABEL[cfAction].toLowerCase()} → {(Math.max(...branch.p_frac) * 100).toFixed(0)}%
+              <span className="text-[var(--teal-deep)]">
+                {ACTION_LABEL[cfAction].toLowerCase()} peaks {(Math.max(...branch.p_frac) * 100).toFixed(0)}%
               </span>
             )}
             {cfAction !== 'do_nothing' && (
-              <span className="ml-auto font-mono text-[var(--safe)]">−{drop} pts</span>
+              <span className="ml-auto font-mono text-[var(--safe)]">{drop} pts lower</span>
             )}
           </>
         )}
       </div>
       {view === 'counterfactual' && (
         <p className="mt-1.5 text-[8.5px] leading-snug text-[var(--dim)]">
-          Model-predicted outcome under intervention. Not causally validated — no intervention ground
+          Model-predicted outcome under intervention. Not causally validated, no intervention ground
           truth exists for this data.
         </p>
       )}

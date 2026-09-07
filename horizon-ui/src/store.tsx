@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { getForecast, getHosts, getMetrics, getSurprise } from '@/lib/api'
+import { getForecast, getHosts, getMetrics, getNetwork, getSurprise } from '@/lib/api'
 import { computeAlert } from '@/lib/alert'
 import type {
   ComputedAlert,
@@ -15,6 +15,7 @@ import type {
   ForecastDoc,
   HostEntry,
   MetricsDoc,
+  NetworkDoc,
   SurpriseDoc,
 } from '@/lib/types'
 
@@ -34,9 +35,14 @@ interface StoreValue {
   forecast?: ForecastDoc
   surprise?: SurpriseDoc
   metrics?: MetricsDoc
+  network?: NetworkDoc
   loading: boolean
   // derived
   alert?: ComputedAlert
+  // scene playhead + selection
+  playhead: number
+  playing: boolean
+  selectedNode: string | null
   // setters
   selectHost: (capture: string, host: string) => void
   setT: (t: number) => void
@@ -45,6 +51,9 @@ interface StoreValue {
   setDemoMode: (v: boolean) => void
   setCfAction: (a: CounterfactualAction) => void
   setShowHeldOut: (v: boolean) => void
+  setPlayhead: (k: number) => void
+  setPlaying: (v: boolean) => void
+  setSelectedNode: (h: string | null) => void
 }
 
 const Ctx = createContext<StoreValue | null>(null)
@@ -63,7 +72,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const [forecast, setForecast] = useState<ForecastDoc>()
   const [surprise, setSurprise] = useState<SurpriseDoc>()
+  const [network, setNetwork] = useState<NetworkDoc>()
   const [loading, setLoading] = useState(true)
+
+  const [playhead, setPlayhead] = useState(0)
+  const [playing, setPlaying] = useState(false)
+  const [selectedNode, setSelectedNode] = useState<string | null>(null)
 
   useEffect(() => {
     getHosts().then((d) => setHosts(d.hosts)).catch(console.error)
@@ -73,6 +87,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let alive = true
     setLoading(true)
+    setPlayhead(0)
+    setPlaying(false)
+    setSelectedNode(null)
     Promise.all([getForecast(capture, host, t), getSurprise(capture, host)])
       .then(([f, s]) => {
         if (!alive) return
@@ -85,6 +102,32 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       alive = false
     }
   }, [capture, host, t])
+
+  useEffect(() => {
+    let alive = true
+    getNetwork(capture)
+      .then((n) => alive && setNetwork(n))
+      .catch(() => alive && setNetwork(undefined))
+    return () => {
+      alive = false
+    }
+  }, [capture])
+
+  // playhead animation
+  useEffect(() => {
+    if (!playing) return
+    const horizon = forecast?.forecast.horizon ?? 20
+    const id = setInterval(() => {
+      setPlayhead((k) => {
+        if (k >= horizon - 1) {
+          setPlaying(false)
+          return horizon - 1
+        }
+        return k + 1
+      })
+    }, 420)
+    return () => clearInterval(id)
+  }, [playing, forecast])
 
   const current = useMemo(
     () => hosts.find((h) => h.host === host && h.capture === capture),
@@ -125,8 +168,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     forecast,
     surprise,
     metrics,
+    network,
     loading,
     alert,
+    playhead,
+    playing,
+    selectedNode,
     selectHost,
     setT,
     setThreshold,
@@ -134,6 +181,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setDemoMode,
     setCfAction,
     setShowHeldOut,
+    setPlayhead,
+    setPlaying,
+    setSelectedNode,
   }
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>

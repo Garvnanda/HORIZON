@@ -4,51 +4,105 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────────────────────
-   HORIZON / SENTINEL-WM palette — amber/bronze on near-black.
-   Single committed dark look; no light mode for the demo.
+   HORIZON. Azure theme. Light base, blue primary, teal standout.
+   Red = threat, green = contained. Single committed look.
    ───────────────────────────────────────────────────────────── */
 :root {
-  --bg: #06070a;
-  --surface: #0e0b08cc;
-  --surface-solid: #12100c;
-  --border: #bc82241f;
-  --border-lit: #daa52059;
+  --bg: #f5f9fb;
+  --surface: #ffffff;
+  --surface-2: #eef4f8;
 
-  --amber: #daa520;
-  --amber-hot: #f0b93a;
-  --bronze: #cd7f32;
-  --cream: #eeddc8;
-  --cream-dim: #eeddc873;
-  --dim: #eeddc842;
+  --ink: #10243a;
+  --ink-dim: #5b6b7d;
+  --ink-faint: #9aa8b6;
 
-  --threat: #c8422e;
-  --safe: #4e9964;
-  --info: #5a8fc4;
+  --line: #dbe7ef;
+  --line-strong: #c2d4e0;
+  --line-lit: #1f6feb66;
 
-  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-mono: "SF Mono", "Fira Mono", ui-monospace, Menlo, monospace;
+  --blue: #1f6feb;
+  --blue-deep: #1650b3;
+  --blue-soft: #e8f1fe;
+  --teal: #14b8a6;
+  --teal-deep: #0e9384;
+  --teal-soft: #e2f6f3;
 
-  /* shadcn tokens mapped onto the palette */
-  --radius: 0.75rem;
+  --threat: #e5484d;
+  --threat-soft: #fdecec;
+  --safe: #2c7a4b;
+  --safe-soft: #e7f4ec;
+
+  /* legacy aliases so existing class names keep resolving */
+  --amber: var(--teal);
+  --amber-hot: var(--teal-deep);
+  --bronze: #6b7f92;
+  --cream: var(--ink);
+  --cream-dim: var(--ink-dim);
+  --dim: var(--ink-faint);
+  --info: var(--blue);
+  --border: var(--line);
+  --border-lit: var(--line-lit);
+
+  --font-sans: Calibri, Carlito, "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font-mono: Consolas, "Cascadia Mono", "Roboto Mono", ui-monospace, monospace;
+
+  --radius: 0.7rem;
+  color-scheme: light;
   --background: var(--bg);
-  --foreground: var(--cream);
-  --card: var(--surface-solid);
-  --card-foreground: var(--cream);
-  --popover: var(--surface-solid);
-  --popover-foreground: var(--cream);
-  --primary: var(--amber);
-  --primary-foreground: #0e0b08;
-  --secondary: #1c1712;
-  --secondary-foreground: var(--cream);
-  --muted: #1c1712;
-  --muted-foreground: var(--cream-dim);
-  --accent: #241a0c;
-  --accent-foreground: var(--amber-hot);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--ink-dim);
+  --accent: var(--blue-soft);
+  --accent-foreground: var(--blue-deep);
   --destructive: var(--threat);
-  --destructive-foreground: #f6e9d8;
-  --border-token: var(--border);
-  --input: #2a2118;
-  --ring: var(--amber);
+  --destructive-foreground: #ffffff;
+  --border-token: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--blue);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Tactical dark. Near-black base, gold primary, green standout.
+   Only the base tokens are redefined; the derived tokens above
+   are var()-chained so they follow automatically.
+   ───────────────────────────────────────────────────────────── */
+.dark {
+  color-scheme: dark;
+  --bg: #0a0b0e;
+  --surface: #15171c;
+  --surface-2: #1e2128;
+
+  --ink: #ece3ce;
+  --ink-dim: #a49a80;
+  --ink-faint: #6f6858;
+
+  --line: #2b2f37;
+  --line-strong: #3c414b;
+  --line-lit: #e0a53a55;
+
+  --blue: #e0a53a;
+  --blue-deep: #b5822a;
+  --blue-soft: #241e12;
+  --teal: #57c98a;
+  --teal-deep: #3f9e69;
+  --teal-soft: #15251d;
+
+  --threat: #f0594e;
+  --threat-soft: #2a1512;
+  --safe: #4ea86b;
+  --safe-soft: #16241c;
+
+  --bronze: #8a9384;
+  --primary-foreground: #14110a;
+  --destructive-foreground: #14110a;
 }
 
 @theme inline {
@@ -72,14 +126,11 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-amber: var(--amber);
-  --color-amber-hot: var(--amber-hot);
-  --color-bronze: var(--bronze);
-  --color-cream: var(--cream);
-  --color-cream-dim: var(--cream-dim);
+  --color-blue: var(--blue);
+  --color-teal: var(--teal);
+  --color-ink: var(--ink);
   --color-threat: var(--threat);
   --color-safe: var(--safe);
-  --color-info: var(--info);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -103,7 +154,7 @@ body,
 body {
   margin: 0;
   background: var(--bg);
-  color: var(--cream);
+  color: var(--ink);
   font-family: var(--font-sans);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
@@ -111,5 +162,5 @@ body {
 
 @keyframes pip {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.4); }
+  50% { opacity: 0.35; transform: scale(1.35); }
 }
