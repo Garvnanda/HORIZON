@@ -12,7 +12,7 @@ export function TrajectoryPanel() {
   const steps = forecast.forecast.trajectory_mean.slice(0, STEPS)
 
   return (
-    <Panel label="Predicted trajectory · what the model wrote down" live>
+    <Panel label="Predicted trajectory · what the model wrote down" live id="trajectory">
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-[9.5px]">
           <thead>

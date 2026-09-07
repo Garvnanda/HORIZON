@@ -19,7 +19,7 @@ export type FeatureVec = Record<FeatureKey, number>
 export interface HostEntry {
   host: string
   capture: string
-  scenario: 'infiltration' | 'botnet' | 'benign'
+  scenario: 'infiltration' | 'botnet' | 'portscan' | 'benign' | 'adhoc'
   true_class: string
   n_windows: number
   available_t: number[]
@@ -127,20 +127,67 @@ export interface MetricsDoc {
   schema_version: string
   status: string // "MOCK" or ISO timestamp
   lead_time_vs_fpr: { fpr: number; lead_windows: Record<string, number> }[]
-  reconstruction: {
+  reconstruction?: {
     persistence_beaten: boolean
     per_feature_mse: Record<string, Record<string, number>>
   }
-  rollout_error_growth: { step: number; nll: number; mse: number }[]
+  rollout_error_growth: { step: number; nll: number | null; mse: number }[]
   generalisation: {
-    held_out_capture: { macro_f1_in: number; macro_f1_out: number; lead_time_drop_windows: number }
+    held_out_capture: { macro_f1_in?: number | null; macro_f1_out?: number | null; lead_time_drop_windows?: number | null }
     held_out_class: Record<string, { surprise_auc: number }>
   }
-  standard: Record<string, Record<string, number>> & {
-    per_class_f1: Record<string, number>
+  standard: {
+    per_class_f1?: Record<string, number>
+    per_class_lead_windows?: Record<string, number>
+    HORIZON?: { macro_f1?: number; precision?: number; recall?: number; fpr?: number }
+    direct_classifier?: { macro_f1?: number }
+    logreg?: { macro_f1?: number; precision?: number; recall?: number; fpr?: number }
   }
-  calibration: { platt_slope: number; reliability: { p_pred: number; p_obs: number }[] }
-  divergence_auc: number
+  calibration: { platt_slope?: number; platt?: { a: number; b: number }; reliability: { p_pred: number; p_obs: number }[] }
+  divergence_auc?: number | null
+  surprise_auc?: number | null
+}
+
+export interface NetNode {
+  host: string
+  subnet: string
+  n_flows: number
+  n_windows: number
+  kind: 'gateway' | 'domain-controller' | 'server' | 'workstation' | 'external'
+  is_demo: boolean
+  is_target?: boolean
+}
+export interface NetEdge {
+  src: string
+  dst: string
+  flows: number
+  internal: boolean
+  attack?: boolean
+  stage?: number
+}
+export interface NetworkDoc {
+  schema_version: string
+  capture: string
+  nodes: NetNode[]
+  edges: NetEdge[]
+  note?: string
+}
+
+export interface FlowRow {
+  window_idx: number
+  ts: string
+  dst_ip: string
+  dst_port: number
+  bytes_out: number
+  bytes_in: number
+  label: string
+  internal: boolean
+}
+export interface FlowsDoc {
+  schema_version: string
+  capture: string
+  host: string
+  flows: FlowRow[]
 }
 
 export type AlertTier = 'monitor' | 'suspicious' | 'elevated' | 'critical'

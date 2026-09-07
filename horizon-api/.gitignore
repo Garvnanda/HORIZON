@@ -1,0 +1,15 @@
+# trained artifacts land here at runtime; do not commit them
+artifacts/*
+!artifacts/.gitkeep
+horizon_artifacts/
+horizon_artifacts.zip
+
+# generated test fixtures
+fixtures/states.parquet
+fixtures/scaler.json
+fixtures/model.pt
+
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

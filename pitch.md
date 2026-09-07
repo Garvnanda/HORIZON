@@ -83,11 +83,11 @@ Switching to host-windows puts the whole chain inside **one sequence for one mac
 
 **Rejected alternative — graph neural network.** The most expressive option, and the problem statement explicitly permits it: model the network as a graph where machines are nodes and communication is edges, then predict the next graph. Lateral movement literally *is* a change in graph structure, so a GNN would see it directly.
 
-We rejected it on **cost, not merit**. Dynamic graph networks are difficult to train, the intrusion-detection literature on them is thin, and debugging one on free Colab with three people in four weeks is a reliable way to have nothing working at the end. Our features are a deliberate hand-built approximation of the graph signal: `n_distinct_dst_ip` is node degree, `new_peer_rate` is edge novelty. We keep *how many and how new*; we lose *exactly who*.
+We rejected it on **cost, not merit**. Dynamic graph networks are difficult to train, the intrusion-detection literature on them is thin, and debugging one on free compute with three people in four weeks is a reliable way to have nothing working at the end. Our features are a deliberate hand-built approximation of the graph signal: `n_distinct_dst_ip` is node degree, `new_peer_rate` is edge novelty. We keep *how many and how new*; we lose *exactly who*.
 
 **Say this out loud if asked.** "We approximated graph structure with degree and novelty features because a dynamic GNN was not buildable in our timeline" is a strong answer that shows you considered it. "We did not think of a graph" is not.
 
-**Rejected alternative — packet-level inspection.** Would give richer features (TTL patterns, TCP window sizes, payload characteristics). Requires raw packet captures, which for this dataset run to hundreds of gigabytes and are unusable on free Colab. Cut cleanly rather than half-attempted.
+**Rejected alternative — packet-level inspection.** Would give richer features (TTL patterns, TCP window sizes, payload characteristics). Requires the raw packet captures, tens of gigabytes for CIC-IDS2017 and unusable on free compute. We use the flow-feature CSVs instead. Cut cleanly rather than half-attempted.
 
 ---
 
@@ -95,7 +95,9 @@ We rejected it on **cost, not merit**. Dynamic graph networks are difficult to t
 
 **What it does.** An LSTM neural network that takes the last 20 rows for a machine and predicts what the 21st row will be. Trained on *all* traffic, including — especially — the normal traffic.
 
-**Why the training objective matters so much.** We train it to predict the **next state**, scored on how close the predicted numbers are to the real ones. We do **not** train it to predict a label.
+This is the **M model** from Ha & Schmidhuber's "World Models" almost exactly: their M is an MDN-RNN — a recurrent net with a mixture-density output that predicts the distribution over the next state. Ours is the same construction (LSTM + 5-component MDN), applied to network host state instead of a game environment. We are not loosely borrowing the term; the architecture is the reference one.
+
+**Why the training objective matters so much.** We train it to predict the **next state**, scored on the likelihood of the real next state under the predicted mixture. We do **not** train it to predict a label.
 
 This single choice is what makes it a world model rather than a classifier, and it has a consequence people miss: it makes the boring 99% of the data *useful*. Under a classification objective, 99% benign traffic just teaches the model to say "benign." Under a next-state objective, that same 99% teaches it what normal machine behaviour looks like in fine detail — which is exactly the knowledge we need.
 
@@ -225,7 +227,7 @@ State these as *known* limitations. Naming your own ceiling is a strength signal
 ### What we cannot reach in this timeline
 
 **Graph-structured dynamics — the real architectural ceiling.**
-We model each machine as an independent time series. That throws away relational information: we can see that machine A suddenly contacted 40 new peers, but not that A's new peers are *exactly the machines B contacted last week* — which is the actual fingerprint of coordinated lateral movement. A dynamic graph neural network over the host communication graph would capture this, and it is the architecturally correct answer to this problem. It is not buildable by three people in four weeks on free Colab. **Named as future work.**
+We model each machine as an independent time series. That throws away relational information: we can see that machine A suddenly contacted 40 new peers, but not that A's new peers are *exactly the machines B contacted last week* — which is the actual fingerprint of coordinated lateral movement. A dynamic graph neural network over the host communication graph would capture this, and it is the architecturally correct answer to this problem. It is not buildable by three people in four weeks on free compute. **Named as future work.**
 
 **Causally validated counterfactuals.**
 Our intervention forecasts are structured what-ifs. Validating them properly requires a network where you can actually isolate a host and observe the result — a live testbed with ground truth on intervention outcomes. Nobody has published this dataset for intrusion scenarios. **Named as future work; the honest framing is used in the demo.**
@@ -236,8 +238,8 @@ We work on captured datasets. A live deployment needs streaming feature extracti
 ### Deliberately excluded from scope
 
 - **Automated response.** The system recommends and an analyst approves; it never executes. The problem statement asks for decision support, not autonomous action, and automated network changes need infrastructure and safety guarantees we do not have.
-- **Packet-level inspection.** No raw captures available.
-- **Multiple external datasets.** Our data already spans four separate capture campaigns, so holding one out gives us the cross-domain test without importing another dataset.
+- **Packet-level inspection.** The raw PCAPs are too large to process on free compute; we use the flow-feature CSVs.
+- **A second dataset.** We use CIC-IDS2017 (the release that retains IPs and timestamps). Holding out one weekday session gives a temporal and attack-mix domain-shift test without importing another dataset. Adding a second dataset would give a genuine cross-network test and is the honest next step; named as future work, not claimed.
 
 ---
 
@@ -248,6 +250,9 @@ Anomaly detection tells you something is odd *now*. We forecast several minutes 
 
 **"How do we know it is detecting early rather than just detecting late and you calling it early?"**
 Our warning-time-versus-false-alarm curve, with the direct classifier baseline plotted on the same axes. It shows the earliness is real and not bought by lowering the threshold.
+
+**"Does the early warning hold for every attack?"**
+No, and we are precise about this. Lead time needs the attack to build up in the observable features. For a multi-stage campaign - a scan escalating to denial of service - the forecast climbs from 5% to 70% before it peaks; that is real warning time. For a payload-drop attack like the infiltration, the victim machine looks completely normal until the payload fires, so there is no precursor to forecast from - we detect it at onset with a calibrated probability, and the value there is the predicted trajectory, the surprise signal, and the counterfactual. We report lead time per attack class, never as one blended number.
 
 **"Is it not just an LSTM classifier with extra steps?"**
 The training objective is different in a way that matters: we train on next-state prediction with no labels, so the model learns normal dynamics from the 99% benign traffic that a classifier learns nothing from. That gives us three capabilities a classifier structurally cannot have — the forward simulation, the surprise signal, and counterfactuals.

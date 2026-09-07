@@ -9,7 +9,7 @@ export function tierFor(peak: number): AlertTier {
 
 /**
  * Alert state is a pure function of (p_frac, threshold, first attack window).
- * Recomputed on every threshold-slider move — never fetched. See api-contract.md §1.
+ * Recomputed on every threshold-slider move, never fetched. See api-contract.md section 1.
  */
 export function computeAlert(
   pFrac: number[],
@@ -33,8 +33,8 @@ export const TIER_META: Record<
   AlertTier,
   { label: string; color: string; action: string }
 > = {
-  monitor: { label: 'Monitor', color: 'var(--safe)', action: 'log only' },
-  suspicious: { label: 'Suspicious', color: 'var(--amber)', action: 'verbose logging' },
-  elevated: { label: 'Elevated', color: 'var(--bronze)', action: 'rate-limit source' },
-  critical: { label: 'Critical', color: 'var(--threat)', action: 'isolate host' },
+  monitor: { label: 'Monitor', color: '#2c7a4b', action: 'log only' },
+  suspicious: { label: 'Suspicious', color: '#d1932b', action: 'verbose logging' },
+  elevated: { label: 'Elevated', color: '#e0742e', action: 'rate-limit source' },
+  critical: { label: 'Critical', color: '#e5484d', action: 'isolate host' },
 }

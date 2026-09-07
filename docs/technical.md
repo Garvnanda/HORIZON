@@ -1,8 +1,10 @@
 # technical.md — HORIZON technical specification
 
-SIH 2026 · PS 26153. Dataset: `cic-collection.parquet` (Kaggle, 1.03 GB). Compute: Colab free. Team: 3.
+SIH 2026 · PS 26153. Dataset: **CIC-IDS2017 GeneratedLabelledFlows** (Kaggle: `pshikk/cicids2017-untampered`, backup `rayenbal/cicids2017`) — 8 CICFlowMeter CSVs, one per capture session, spanning five weekdays (Mon–Fri) of a single testbed campaign. **Must be the "untampered" / GeneratedLabelledFlows variant that keeps `Flow ID`, `Source IP`, `Destination IP`, `Timestamp`.** `chethuhn/network-intrusion-dataset`, `kk0105/cicids2017` and most other Kaggle uploads are the MachineLearningCVE variant (78 features + Label, IPs and timestamp stripped) and fail Gate 0. Compute: Colab / Kaggle free. Team: 3.
 
-This is the reference spec. `implementation.md` says who builds what and when. `pitch.md` explains why.
+This is the reference spec. `implementation.md` says who builds what and when. `pitch.md` explains why. `api-contract.md` freezes the model→frontend output; `api-endpoints.md` documents the backend that serves it.
+
+**Why this dataset, not `cic-collection.parquet`.** The earlier plan named `cic-collection.parquet` (four harmonised CIC campaigns). That file drops `Source IP` / `Destination IP` / `Timestamp` — the columns the host-window state design is built on — so it is unusable here. `GeneratedLabelledFlows` keeps Flow ID, both IPs, both ports, and the timestamp. The cost: one testbed campaign instead of four, so the cross-domain test is a held-out **weekday session** rather than a held-out campaign (§6.5) — a weaker shift, stated honestly.
 
 ---
 
@@ -11,24 +13,25 @@ This is the reference spec. `implementation.md` says who builds what and when. `
 **Nothing else starts until this passes.** Our state design requires source IP, destination IP, destination port, and timestamp. Some "cleaned" CIC collections deliberately drop IPs and ports because they leak — a model can memorise the attacker's address instead of learning behaviour.
 
 ```python
-import pandas as pd
-df = pd.read_parquet('cic-collection.parquet')
-print(len(df))
+import pandas as pd, glob
+files = sorted(glob.glob('<data>/**/*.csv', recursive=True))
+df = pd.read_csv(files[0], nrows=300)
+df.columns = df.columns.str.strip()          # CIC headers carry leading spaces
+print(files)
 print(df.columns.tolist())
-print(df.dtypes)
 print(df.head(3).T)
-print(df.iloc[:, -1].value_counts())
+print(df['Label'].value_counts())
 ```
 
-Look for columns resembling: `Src IP`/`Source IP`, `Dst IP`, `Dst Port`, `Timestamp`/`Flow Start`, and a `Dataset`/`Source` column identifying which of the four campaigns each row came from.
+Look for: `Source IP`, `Destination IP`, `Destination Port`, `Timestamp`, `Label`. The capture session is identified by the **filename** (`Monday-WorkingHours...`, `Friday-WorkingHours-Afternoon-PortScan...`), not a column.
 
 | Outcome | Action |
 | --- | --- |
-| **A** — IPs + timestamp present | Proceed as written. |
-| **B** — timestamp present, IPs absent | **Global-window fallback:** one state row per 60s window over the whole capture, aggregating all flows. Features 2, 3, 4, 10 become network-wide counts. Mechanism unchanged; alerts point at a time rather than a machine. Everything downstream works with `host` replaced by `capture`. |
-| **C** — no usable timestamp | Abandon this file. Pull raw CSE-CIC-IDS2018 CSVs from CIC's distribution page, which retain IPs and timestamps. Costs ~2 days. |
+| **A** — IPs + timestamp present (expected for `GeneratedLabelledFlows`) | Proceed as written. |
+| **B** — timestamp present, IPs absent | First re-check you pulled `GeneratedLabelledFlows`, not the `MachineLearningCVE` variant. If genuinely absent: global-window fallback, one state row per 60s window over the whole session, features 2, 3, 4, 10 become session-wide. Mechanism unchanged; alerts point at a time rather than a machine. Downstream works with `host` replaced by `capture`. |
+| **C** — no usable timestamp | Abandon this file. Pull the raw CIC-IDS2017 CSVs from CIC's distribution page. Costs ~2 days. |
 
-**Capture boundaries.** Four campaigns are collated here; timestamps may interleave or restart. If no campaign identifier column exists, derive one from large timestamp gaps. Every grouping downstream is by **(capture, host)** — never host alone. Grouping across a boundary stitches two unrelated machines into one sequence, produces excellent-looking numbers, and collapses under one question in Q&A.
+**Capture sessions.** The eight CSVs map to five weekday captures (`ids2017-monday` ... `ids2017-friday`); Thursday and Friday have two/three files each, concatenated in time order before windowing. Every grouping downstream is by **(capture, host)**, never host alone. The same host IP recurs across weekdays; stitching across a session boundary joins two runs of one machine under different attack conditions into one sequence, produces excellent-looking numbers, and collapses under one question in Q&A.
 
 ---
 
@@ -56,21 +59,21 @@ Forecast horizon K = **20 windows**.
 | 10 | `external_ratio` | flows to non-RFC1918 destinations ÷ `n_flows` | standardise |
 | 11 | `intervention` | **0 during all training.** Set to 1 only in counterfactual rollout (§5.3). | none |
 
-**Transforms are mandatory.** Counts and byte totals span orders of magnitude with heavy tails. Untransformed, the reconstruction loss is dominated entirely by `bytes_in` and the model learns nothing else. Fit the scaler on the **train split only**; persist it (`joblib`) and apply the same one everywhere.
+**Transforms are mandatory.** Counts and byte totals span orders of magnitude with heavy tails. Untransformed, the reconstruction loss is dominated entirely by `bytes_in` and the model learns nothing else. The transform lives in `horizon_api.features.FeatureScaler` (log1p on the heavy-tailed subset, then standardise), imported by both the training notebook and the serving backend so they cannot drift. Fit on the **train split only**; persist as `scaler.json` and apply the same one everywhere.
 
 **Empty windows.** A host with no flows still gets a row — zeros post-transform, plus an `is_empty` flag. Silence is signal; skipping the window shifts the timeline and corrupts every lead-time measurement.
 
 **Host selection.** Internal (RFC1918) source addresses only. External IPs are peers, not modelled subjects. Drop hosts with fewer than 40 total windows.
 
-**`new_peer_rate` implementation note.** Maintain a per-host set of previously-seen destination IPs, updated window by window in chronological order. It is a running state, not a groupby. Reset per (capture, host).
+**`new_peer_rate` implementation note.** Maintain a per-host set of previously-seen destination IPs, updated window by window in chronological order. It is a running state, not a groupby. Reset per (capture, host). The first few windows per host are biased high (every peer is "new"); skip the first `WARMUP_WINDOWS` (default 5) windows per host when **fitting the scaler**, keep them in the sequences.
 
 ### 1.3 Window labels
 
-A window carries the attack class if **any** flow in it is so labelled; otherwise `benign`. Keep the fine-grained class name, not just binary — needed for per-class metrics and the held-out-class experiment.
+A window carries an attack class when at least `LABEL_MIN_MALICIOUS` flows in it are so labelled (default 1; raise it to suppress single-flow noise), taking the most common malicious class; otherwise `benign`. Keep the fine-grained class name, not just binary — needed for per-class metrics and the held-out-class experiment.
 
 ### 1.4 Output artifact
 
-`states.parquet` — columns `[capture, host, window_idx, ts, f1..f10, is_empty, label]`, sorted by `(capture, host, window_idx)`.
+`states.parquet` — columns `[capture, host, window_idx, ts, <10 named features>, is_empty, label]`, sorted by `(capture, host, window_idx)`. Written by the training notebook, loaded directly by the backend for history slicing, the host list, and the surprise timeline.
 
 ---
 
@@ -151,7 +154,7 @@ scheduler      ReduceLROnPlateau(patience=3, factor=0.5)
 batch_size     256
 epochs         40, early stopping on val loss, patience=7
 grad clipping  clip_grad_norm_(1.0)      # required with MDN
-checkpoint     every epoch to Google Drive (Colab sessions die)
+checkpoint     every epoch to artifacts/ (Colab/Kaggle sessions die)
 ```
 
 ---
@@ -162,7 +165,9 @@ Build all three. Each answers a different question.
 
 **3.1 Persistence — `ŝ_{t+1} = s_t`.** The dynamics baseline. Report per-feature MSE. **If the LSTM does not beat this per-feature, the model learned nothing and the premise is wrong.** Hard gate, Week 2. Build it before the LSTM.
 
-**3.2 Class-conditional mean.** Predict the mean next state per attack class. Second sanity floor.
+*Strengthen the gate* (agreed, still to apply): also report persistence MSE restricted to **pre-transition windows** — the 3–5 windows immediately before an attack onset, where "next minute looks like this minute" is exactly the assumption that should break. Beating persistence on quiet windows is easy; beating it there is the real test.
+
+**3.2 Class-conditional mean.** Predict the mean next state per attack class. Second sanity floor. Report alongside persistence, not instead of it.
 
 **3.3 Logistic regression.** Flat current-window features → attack/benign. Named explicitly in the problem statement. Report F1, precision, recall, FPR.
 
@@ -202,9 +207,16 @@ def rollout(model, x_hist, K=20, n_samples=50, intervention_at=None):
 
 ### 5.1 Lead time
 
-`lead_time = (first window index where alert fires) − (first true attack window index)`, in windows. Positive = early warning.
+`lead_time = (first true attack window index) − (first window index where alert fires)`, in windows. Positive = early warning.
 
 **Never report a single number.** The threshold determines it. Report as a curve against false-alarm rate (§6.1).
+
+**Where lead time actually exists (measured, 2026-09).** Lead time requires the attack to have a build-up phase visible in the 10 features.
+
+- **Multi-stage campaigns** (`172.16.0.1`: port scan escalating to DDoS): real lead time. The scan ramps the distinct-port and fail-ratio features over tens of windows; the forecast climbs `0.05 → 0.35 → 0.70` before the attack peaks. This is the headline demo host.
+- **Payload-drop attacks** (Infiltration on `192.168.10.8`, Bot on `192.168.10.15`): the victim host is behaviourally silent until the payload fires. There is no precursor in the features, so the model detects **at onset**, not before, with a calibrated forward probability. State this plainly. For these hosts the value is the calibrated trajectory + surprise + counterfactual, not a warning-time number.
+
+Do not average the two together into one lead-time figure - report per-class (§6.6).
 
 ### 5.2 Surprise
 
@@ -216,11 +228,14 @@ Using the MDN likelihood directly, which is more principled than an L2 distance.
 
 ### 5.3 Counterfactual
 
-Roll out twice from the same history:
+Roll out three times from the same history (the contract fixes these keys: `do_nothing`, `isolate_host`, `rate_limit`):
 - **Do nothing** — standard.
 - **Isolate at step 1** — `intervention = 1` from step 1, and `apply_intervention` forces `n_distinct_dst_ip`, `n_distinct_dst_port`, `bytes_out`, `external_ratio` toward their per-host minima.
+- **Rate-limit at step 1** — `intervention = 1`, milder clamp on `n_flows` and `bytes_out` (halfway to the per-host floor).
 
-Report both probability curves. **State the caveat in the doc, the demo, and the pitch:** the model has never seen real intervention data, so this is a structured what-if grounded in learned dynamics, not a validated causal estimate.
+Report all curves. **State the caveat in the doc, the demo, and the pitch:** the model has never seen real intervention data, so this is a structured what-if grounded in learned dynamics, not a validated causal estimate.
+
+`apply_intervention` clamps the fed-back state toward a quiet baseline: `min(0, per-host history minimum)` in standardised space (0 == the training mean == roughly benign). The **`intervention` control channel is left at 0** during the counterfactual rollout after all - the model never saw it non-zero in training, so driving it is out-of-distribution noise; the clamp on the observable features is the mechanism the model actually understands. Tuning the clamp against real post-isolation behaviour is still open.
 
 ---
 
@@ -242,19 +257,19 @@ Reliability diagram over `p_frac`. Platt scaling as the default correction, isot
 
 ### 6.4 Held-out attack class — the headline experiment
 
-Remove one attack class **entirely** from training data (all windows containing it). Train fully. Test whether the surprise signal (§5.2) flags it on held-out data.
+Remove one attack class **entirely** from training data (all windows containing it, and in this single-campaign dataset, every host that ever shows it). Train fully. Test whether the surprise signal (§5.2) flags it on held-out data.
 
-Run for at least two different held-out classes — one high-volume (e.g. port scan), one distinct in character (e.g. botnet C2). Report surprise AUC on the held-out class versus benign.
+Run for at least two different held-out classes — one high-volume (e.g. PortScan), one distinct in character (e.g. Bot / botnet C2). Report surprise AUC on the held-out class versus benign. The notebook does this when `RUN_HELDOUT_CLASS = True` and saves `model_heldout_<class>.pt`, which the backend loads for the surprise-overlay panel.
 
 Scheduled first thing in Week 3 so there is time to react to the result. If it works, it is the headline. If not, report it as a negative result with numbers.
 
-### 6.5 Held-out capture
+### 6.5 Held-out capture (weekday)
 
-Train on three campaigns, test on the fourth. Expect 15–30 point macro-F1 drop. **The drop is the finding, not a failure** — it is an honest domain-shift measurement most papers avoid reporting.
+Train on four weekday sessions, test on the fifth (`HELDOUT_CAPTURE`, default `ids2017-friday`). Expect a macro-F1 drop. **The drop is the finding, not a failure.** Be precise about what shifts: same testbed and address ranges, different day and different attack tooling — a temporal and attack-mix shift, not a cross-network shift. Weaker than the held-out-campaign test the four-dataset plan would have given; still an honest generalisation measurement most submissions skip.
 
 ### 6.6 Standard metrics
 
-Macro-F1, per-class F1 (never average away weak classes), precision, recall, FPR versus logistic regression.
+Macro-F1, per-class F1 (never average away weak classes), precision, recall, FPR versus logistic regression. Report **per-class lead time** too, not just aggregate — a class that fires 8 windows early and one that fires 1 window early should not be blended into one number.
 
 ### 6.7 Splits
 
@@ -262,11 +277,14 @@ Primary: group by **(capture, host)** — every window from one host on one side
 
 ---
 
-## 7 · Demo application (Streamlit)
+## 7 · Demo application (React + FastAPI)
 
-Runs fully offline — weights loaded from disk, no external calls at inference (hard requirement in the problem statement). See `frontend.md` for the full specification.
+Runs fully offline — the frontend ships the forecasts as static JSON, no external calls at inference (hard requirement in the problem statement). Full specification in `frontend.md`; the frozen output shapes in `api-contract.md`; the backend in `api-endpoints.md`.
 
-Five panels: forecast cone with probability curve; counterfactual comparison; trajectory table (predicted rows versus actual); surprise timeline; response recommendation (templated command, Approve/Dismiss, logged, never executed).
+- **`horizon-ui/`** — React + Vite. Five panels: forecast cone, counterfactual comparison, trajectory table, surprise timeline, response recommendation (templated command, Approve/Dismiss, logged, never executed). Plus a 3D kill-chain scene driven by the live forecast + counterfactual choice.
+- **`horizon-api/`** — FastAPI. Serves the same shapes from the trained model. **stub** mode (no artifacts) serves the 3 demo hosts from the static bundle; **live** mode (drop `model.pt` + `scaler.json` + `states.parquet` into `artifacts/`) does a real rollout for any host in the dataset. Optional at the demo, but it is what lets a judge pick an arbitrary host.
+
+The offline requirement is met by the static bundle alone; the backend never has to run on stage.
 
 ---
 
@@ -274,15 +292,16 @@ Five panels: forecast cone with probability curve; counterfactual comparison; tr
 
 | Risk | Mitigation |
 | --- | --- |
-| IPs/ports absent from parquet | Gate 0, Day 1. Branch decided immediately, not discovered in Week 2. |
+| IPs/ports absent (wrong dataset variant) | Gate 0, Day 1. Confirm `GeneratedLabelledFlows`, not `MachineLearningCVE`. Branch decided immediately. |
+| Single-campaign data weakens the domain-shift claim | Acknowledged in §6.5. Frame the held-out weekday honestly as temporal + attack-mix shift. Do not call it cross-network. |
 | MDN training unstable / NaN | Clamp log-variances, logsumexp, gradient clipping. Discretised fallback (§2.2) if it fails twice. |
 | LSTM fails to beat persistence | Hard gate mid-Week 2. Escalate rather than proceed. |
 | Detection loss swamps dynamics loss | Log both separately; tune lambda. |
 | Rollout collapses (lead time = 0) | Scheduled sampling + toy validation before real data. |
 | Direct classifier beats the rollout | Expected. Framing prepared in §3.4. |
 | Label noise (~7.5% documented) | Label smoothing; validate on held-out capture, not label self-consistency. |
-| Colab session death | Checkpoint every epoch to Drive. Subset columns before loading. |
-| Frontend blocked waiting on ML | Frozen JSON contract in Week 1 (see `implementation.md`). |
+| Colab/Kaggle session death | Notebook checkpoints `model.pt` every epoch to `artifacts/`. Chunked CSV reads, columns subset before load. |
+| Frontend blocked waiting on ML | Frozen contract (`api-contract.md`); frontend + backend both built against mocks and done. |
 | Counterfactual challenged as non-causal | Stated first, in the doc, the demo, and the pitch. |
 
 ---
@@ -290,3 +309,13 @@ Five panels: forecast cone with probability curve; counterfactual comparison; tr
 ## 9 · Deliverables
 
 Source code and README · 2-page architecture document · 2-minute demo video · 5-slide technical presentation. All distilled from these documents, not copied wholesale.
+
+## 10 · Repo map
+
+| Path | What |
+| --- | --- |
+| `horizon-ui/` | React frontend. Static-JSON demo (`public/mock/`) + `VITE_API_BASE` switch to the live backend. |
+| `horizon-api/` | FastAPI inference backend. `horizon_api/model.py` + `features.py` are the shared architecture/transform contract. |
+| `notebooks/horizon_train.ipynb` | Trains the model, writes `states.parquet` / `scaler.json` / `model.pt` / `metrics.json` / `scenarios.json`. Runs on Kaggle or Colab. |
+| `docs/api-contract.md` | Frozen model→frontend output shapes. |
+| `docs/api-endpoints.md` | Backend HTTP surface + how the notebook output plugs in. |

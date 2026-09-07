@@ -1,4 +1,7 @@
 import { useEffect, useRef } from 'react'
+import { activePalette } from '@/lib/palette'
+import { drawCrosshair, gridColor, withAlpha } from '@/lib/chartkit'
+import { useTheme } from '@/lib/theme'
 
 interface Props {
   samples: number[][]
@@ -10,20 +13,17 @@ interface Props {
   historySurprise?: number[]
   nSamples: number
   demoMode: boolean
+  /** shared scene playhead, forecast-step index; draws a marker */
+  playhead?: number | null
 }
 
-const AMBER = '#f0b93a'
-const THREAT = '#c8422e'
-const SAFE = '#4e9964'
-const DIM = 'rgba(238,221,200,0.26)'
-
-function laneColor(v: number): string {
-  if (v > 0.66) return THREAT
-  if (v > 0.33) return AMBER
-  return SAFE
+function laneColor(v: number, P: ReturnType<typeof activePalette>): string {
+  if (v > 0.66) return P.threat
+  if (v > 0.33) return '#e0872e'
+  return P.safe
 }
 
-/** The forecast cone — the centrepiece. History (left) → now → 50 imagined futures (right). */
+/** The forecast cone: the centrepiece. History (left), now, 50 imagined futures (right). */
 export function ConeChart({
   samples,
   pFrac,
@@ -34,8 +34,12 @@ export function ConeChart({
   historySurprise = [],
   nSamples,
   demoMode,
+  playhead,
 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
+  const hoverK = useRef<number | null>(null)
+  const drawRef = useRef<() => void>(() => {})
+  const theme = useTheme()
 
   useEffect(() => {
     const cv = ref.current
@@ -44,6 +48,10 @@ export function ConeChart({
     if (!ctx) return
 
     const draw = () => {
+      const P = activePalette()
+      const CURVE = P.blue
+      const ACCENT = P.teal
+      const DIM = P.inkFaint
       const dpr = window.devicePixelRatio || 1
       const rect = cv.getBoundingClientRect()
       cv.width = rect.width * dpr
@@ -64,13 +72,12 @@ export function ConeChart({
       const yOf = (p: number) => padT + plotH - Math.max(0, Math.min(1, p)) * plotH
       const xOf = (k: number) => nowX + (k / (K - 1)) * fW
 
-      // y grid + labels
       ctx.font = `${9 * dpr}px ui-monospace, monospace`
       ctx.fillStyle = DIM
       ctx.textAlign = 'right'
       for (const p of [0, 0.25, 0.5, 0.75, 1]) {
         const y = yOf(p)
-        ctx.strokeStyle = 'rgba(188,130,36,0.09)'
+        ctx.strokeStyle = gridColor()
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.moveTo(padL, y)
@@ -80,10 +87,10 @@ export function ConeChart({
       }
 
       // forecast region tint
-      ctx.fillStyle = 'rgba(218,165,32,0.04)'
+      ctx.fillStyle = withAlpha(CURVE, 0.04)
       ctx.fillRect(nowX, padT, fW, plotH)
 
-      // history surprise context (left of now), normalised & dimmed
+      // history surprise context (left of now)
       if (historySurprise.length > 1) {
         const mx = Math.max(...historySurprise, 1)
         ctx.strokeStyle = DIM
@@ -105,16 +112,16 @@ export function ConeChart({
       for (let k = 0; k < K; k++) ctx[k ? 'lineTo' : 'moveTo'](xOf(k), yOf(pFrac[k] + (spread[k] ?? 0)))
       for (let k = K - 1; k >= 0; k--) ctx.lineTo(xOf(k), yOf(pFrac[k] - (spread[k] ?? 0)))
       ctx.closePath()
-      ctx.fillStyle = 'rgba(240,185,58,0.10)'
+      ctx.fillStyle = withAlpha(CURVE, 0.12)
       ctx.fill()
 
       // sample trajectories
       const shown = samples.slice(0, nSamples)
-      const op = Math.max(0.05, Math.min(0.16, 6 / shown.length))
+      const op = Math.max(0.04, Math.min(0.12, 4.5 / shown.length))
       for (const traj of shown) {
         ctx.beginPath()
         traj.forEach((v, k) => ctx[k ? 'lineTo' : 'moveTo'](xOf(k), yOf(v)))
-        ctx.strokeStyle = laneColor(traj[traj.length - 1])
+        ctx.strokeStyle = laneColor(traj[traj.length - 1], P)
         ctx.globalAlpha = op
         ctx.lineWidth = 1 * dpr
         ctx.stroke()
@@ -124,17 +131,14 @@ export function ConeChart({
       // p_frac headline curve
       ctx.beginPath()
       pFrac.forEach((v, k) => ctx[k ? 'lineTo' : 'moveTo'](xOf(k), yOf(v)))
-      ctx.strokeStyle = AMBER
-      ctx.lineWidth = 2.6 * dpr
+      ctx.strokeStyle = CURVE
+      ctx.lineWidth = 2.8 * dpr
       ctx.lineJoin = 'round'
-      ctx.shadowColor = AMBER
-      ctx.shadowBlur = 8 * dpr
       ctx.stroke()
-      ctx.shadowBlur = 0
 
       // threshold
       const ty = yOf(threshold)
-      ctx.strokeStyle = 'rgba(238,221,200,0.4)'
+      ctx.strokeStyle = withAlpha(P.ink, 0.35)
       ctx.setLineDash([5 * dpr, 4 * dpr])
       ctx.lineWidth = 1 * dpr
       ctx.beginPath()
@@ -142,59 +146,77 @@ export function ConeChart({
       ctx.lineTo(W - padR, ty)
       ctx.stroke()
       ctx.setLineDash([])
-      ctx.fillStyle = 'rgba(238,221,200,0.5)'
+      ctx.fillStyle = P.inkDim
       ctx.textAlign = 'left'
       ctx.fillText(`threshold ${(threshold * 100).toFixed(0)}%`, nowX + 4 * dpr, ty - 4 * dpr)
 
       // now divider
-      ctx.strokeStyle = 'rgba(240,185,58,0.9)'
+      ctx.strokeStyle = P.ink
       ctx.lineWidth = 1.5 * dpr
       ctx.beginPath()
       ctx.moveTo(nowX, padT)
       ctx.lineTo(nowX, padT + plotH)
       ctx.stroke()
-      ctx.fillStyle = AMBER
+      ctx.fillStyle = P.ink
       ctx.textAlign = 'center'
       ctx.fillText('NOW', nowX, padT + plotH + 14 * dpr)
 
       // attack onset marker (demo)
       if (demoMode && attackOnset != null && attackOnset < K) {
         const ax = xOf(attackOnset)
-        ctx.strokeStyle = 'rgba(200,66,46,0.55)'
+        ctx.strokeStyle = withAlpha(P.threat, 0.55)
         ctx.setLineDash([3 * dpr, 3 * dpr])
         ctx.beginPath()
         ctx.moveTo(ax, padT)
         ctx.lineTo(ax, padT + plotH)
         ctx.stroke()
         ctx.setLineDash([])
-        ctx.fillStyle = 'rgba(200,66,46,0.85)'
+        ctx.fillStyle = withAlpha(P.threat, 0.85)
         ctx.fillText('attack begins', ax, padT + plotH + 14 * dpr)
       }
 
       // alert marker + lead-time annotation
       if (firedAtStep != null) {
         const fx = xOf(firedAtStep)
-        ctx.fillStyle = AMBER
-        ctx.beginPath()
-        ctx.arc(fx, yOf(pFrac[firedAtStep]), 4 * dpr, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.strokeStyle = 'rgba(240,185,58,0.5)'
-        ctx.lineWidth = 1 * dpr
+        ctx.strokeStyle = ACCENT
+        ctx.lineWidth = 1.5 * dpr
         ctx.beginPath()
         ctx.moveTo(fx, padT)
         ctx.lineTo(fx, padT + plotH)
         ctx.stroke()
+        ctx.fillStyle = ACCENT
+        ctx.beginPath()
+        ctx.arc(fx, yOf(pFrac[firedAtStep]), 4.5 * dpr, 0, Math.PI * 2)
+        ctx.fill()
         if (demoMode && attackOnset != null) {
           const lead = attackOnset - firedAtStep
-          ctx.fillStyle = AMBER
+          ctx.fillStyle = ACCENT
           ctx.textAlign = 'center'
-          ctx.font = `700 ${10 * dpr}px var(--font-sans, sans-serif)`
+          ctx.font = `700 ${10 * dpr}px Calibri, sans-serif`
           ctx.fillText(
             lead > 0 ? `alert fired ${lead} min early` : 'alert fired',
-            (fx + (attackOnset != null ? xOf(attackOnset) : fx)) / 2,
+            (fx + xOf(attackOnset)) / 2,
             padT + 10 * dpr,
           )
         }
+      }
+
+      // shared playhead marker
+      if (playhead != null && playhead >= 0 && playhead < K) {
+        const px = xOf(playhead)
+        ctx.strokeStyle = withAlpha(P.ink, 0.55)
+        ctx.lineWidth = 1 * dpr
+        ctx.beginPath()
+        ctx.moveTo(px, padT)
+        ctx.lineTo(px, padT + plotH)
+        ctx.stroke()
+        ctx.fillStyle = P.ink
+        ctx.beginPath()
+        ctx.moveTo(px - 4 * dpr, padT)
+        ctx.lineTo(px + 4 * dpr, padT)
+        ctx.lineTo(px, padT + 5 * dpr)
+        ctx.closePath()
+        ctx.fill()
       }
 
       // x ticks
@@ -202,13 +224,68 @@ export function ConeChart({
       ctx.font = `${9 * dpr}px ui-monospace, monospace`
       ctx.textAlign = 'center'
       for (let k = 0; k < K; k += 5) ctx.fillText(`+${k}`, xOf(k), padT + plotH + 14 * dpr)
+
+      // hover crosshair
+      const hk = hoverK.current
+      if (hk != null && hk >= 0 && hk < K) {
+        const entries = [
+          { label: `+${hk} min`, value: '', color: P.ink },
+          { label: 'p_frac', value: `${(pFrac[hk] * 100).toFixed(0)}%`, color: CURVE },
+          { label: 'spread', value: `±${((spread[hk] ?? 0) * 100).toFixed(0)}%`, color: DIM },
+          { label: 'threshold', value: `${(threshold * 100).toFixed(0)}%`, color: withAlpha(P.ink, 0.5) },
+        ]
+        ctx.fillStyle = CURVE
+        ctx.beginPath()
+        ctx.arc(xOf(hk), yOf(pFrac[hk]), 3.5 * dpr, 0, Math.PI * 2)
+        ctx.fill()
+        drawCrosshair(ctx, xOf(hk), padT, padT + plotH, entries, dpr, W)
+      }
     }
 
+    drawRef.current = draw
     draw()
     const ro = new ResizeObserver(draw)
     ro.observe(cv)
     return () => ro.disconnect()
-  }, [samples, pFrac, spread, threshold, firedAtStep, attackOnset, historySurprise, nSamples, demoMode])
+  }, [samples, pFrac, spread, threshold, firedAtStep, attackOnset, historySurprise, nSamples, demoMode, playhead, theme])
 
-  return <canvas ref={ref} className="h-full w-full" />
+  const onMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    const cv = ref.current
+    if (!cv) return
+    const rect = cv.getBoundingClientRect()
+    const fracX = (e.clientX - rect.left) / rect.width
+    const K = pFrac.length
+    // forecast region starts at 0.3 of the plot (matches nowX)
+    const padLfrac = 44 / rect.width
+    const nowFrac = padLfrac + (1 - padLfrac - 14 / rect.width) * 0.3
+    if (fracX < nowFrac) {
+      if (hoverK.current !== null) {
+        hoverK.current = null
+        drawRef.current()
+      }
+      return
+    }
+    const k = Math.round(((fracX - nowFrac) / (1 - nowFrac - 14 / rect.width)) * (K - 1))
+    const clamped = Math.max(0, Math.min(K - 1, k))
+    if (clamped !== hoverK.current) {
+      hoverK.current = clamped
+      drawRef.current()
+    }
+  }
+
+  const onLeave = () => {
+    if (hoverK.current !== null) {
+      hoverK.current = null
+      drawRef.current()
+    }
+  }
+
+  return (
+    <canvas
+      ref={ref}
+      className="h-full w-full touch-none"
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+    />
+  )
 }

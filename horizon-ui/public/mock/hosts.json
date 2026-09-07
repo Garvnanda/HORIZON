@@ -2,7 +2,7 @@
  "schema_version": "v4.0",
  "hosts": [
   {
-   "host": "192.168.10.15",
+   "host": "192.168.10.8",
    "capture": "ids2017-thursday",
    "scenario": "infiltration",
    "true_class": "Infiltration",
@@ -15,7 +15,7 @@
    "has_counterfactual": true
   },
   {
-   "host": "192.168.10.50",
+   "host": "192.168.10.15",
    "capture": "ids2017-friday",
    "scenario": "botnet",
    "true_class": "Bot",
@@ -27,7 +27,19 @@
    "has_counterfactual": true
   },
   {
-   "host": "192.168.10.8",
+   "host": "172.16.0.1",
+   "capture": "ids2017-friday",
+   "scenario": "portscan",
+   "true_class": "PortScan",
+   "n_windows": 260,
+   "available_t": [
+    30
+   ],
+   "peak_p_frac": 0.92,
+   "has_counterfactual": true
+  },
+  {
+   "host": "192.168.10.9",
    "capture": "ids2017-monday",
    "scenario": "benign",
    "true_class": "benign",

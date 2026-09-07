@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react'
 import type { SurpriseSeriesPoint } from '@/lib/types'
+import { activePalette } from '@/lib/palette'
+import { drawCrosshair, withAlpha } from '@/lib/chartkit'
+import { useTheme } from '@/lib/theme'
 
 interface Props {
   series: SurpriseSeriesPoint[]
@@ -11,6 +14,9 @@ interface Props {
 /** Surprise (prediction error) over observed history. Attack region shaded; held-out overlay optional. */
 export function SurpriseTrack({ series, heldOut, showHeldOut, height = 130 }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
+  const hoverI = useRef<number | null>(null)
+  const drawRef = useRef<() => void>(() => {})
+  const theme = useTheme()
 
   useEffect(() => {
     const cv = ref.current
@@ -19,6 +25,7 @@ export function SurpriseTrack({ series, heldOut, showHeldOut, height = 130 }: Pr
     if (!ctx) return
 
     const draw = () => {
+      const P = activePalette()
       const dpr = window.devicePixelRatio || 1
       const rect = cv.getBoundingClientRect()
       cv.width = rect.width * dpr
@@ -39,13 +46,13 @@ export function SurpriseTrack({ series, heldOut, showHeldOut, height = 130 }: Pr
       const n = active.length
       const xOf = (i: number) => padL + (i / (n - 1)) * plotW
       const yOf = (s: number) => padT + plotH - (s / mx) * plotH
+      const lineColor = showHeldOut ? P.teal : P.blue
 
-      // attack region shading
       const firstAtk = active.findIndex((p) => p.label !== 'benign')
       if (firstAtk >= 0) {
-        ctx.fillStyle = 'rgba(200,66,46,0.08)'
+        ctx.fillStyle = withAlpha(P.threat, 0.08)
         ctx.fillRect(xOf(firstAtk), padT, W - padR - xOf(firstAtk), plotH)
-        ctx.strokeStyle = 'rgba(200,66,46,0.4)'
+        ctx.strokeStyle = withAlpha(P.threat, 0.4)
         ctx.setLineDash([3 * dpr, 3 * dpr])
         ctx.beginPath()
         ctx.moveTo(xOf(firstAtk), padT)
@@ -54,9 +61,8 @@ export function SurpriseTrack({ series, heldOut, showHeldOut, height = 130 }: Pr
         ctx.setLineDash([])
       }
 
-      // faint baseline series when overlay is on
       if (showHeldOut && heldOut) {
-        ctx.strokeStyle = 'rgba(238,221,200,0.18)'
+        ctx.strokeStyle = withAlpha(P.ink, 0.18)
         ctx.lineWidth = 1 * dpr
         ctx.beginPath()
         series.forEach((p, i) => {
@@ -66,25 +72,23 @@ export function SurpriseTrack({ series, heldOut, showHeldOut, height = 130 }: Pr
         ctx.stroke()
       }
 
-      // main series (area + line)
       ctx.beginPath()
       active.forEach((p, i) => ctx[i ? 'lineTo' : 'moveTo'](xOf(i), yOf(p.surprise)))
       ctx.lineTo(xOf(n - 1), padT + plotH)
       ctx.lineTo(xOf(0), padT + plotH)
       ctx.closePath()
-      ctx.fillStyle = 'rgba(240,185,58,0.08)'
+      ctx.fillStyle = withAlpha(lineColor, 0.1)
       ctx.fill()
 
       ctx.beginPath()
       active.forEach((p, i) => ctx[i ? 'lineTo' : 'moveTo'](xOf(i), yOf(p.surprise)))
-      ctx.strokeStyle = showHeldOut ? '#5a8fc4' : '#f0b93a'
+      ctx.strokeStyle = lineColor
       ctx.lineWidth = 1.8 * dpr
       ctx.lineJoin = 'round'
       ctx.stroke()
 
-      // spike dots
       const thr = mx * 0.6
-      ctx.fillStyle = '#c8422e'
+      ctx.fillStyle = P.threat
       active.forEach((p, i) => {
         if (p.surprise >= thr) {
           ctx.beginPath()
@@ -92,13 +96,64 @@ export function SurpriseTrack({ series, heldOut, showHeldOut, height = 130 }: Pr
           ctx.fill()
         }
       })
+
+      const hi = hoverI.current
+      if (hi != null && hi >= 0 && hi < n) {
+        const p = active[hi]
+        ctx.fillStyle = lineColor
+        ctx.beginPath()
+        ctx.arc(xOf(hi), yOf(p.surprise), 3 * dpr, 0, Math.PI * 2)
+        ctx.fill()
+        drawCrosshair(
+          ctx,
+          xOf(hi),
+          padT,
+          padT + plotH,
+          [
+            { label: `window ${p.window_idx}`, value: '', color: P.ink },
+            { label: 'surprise', value: p.surprise.toFixed(2), color: lineColor },
+            { label: 'label', value: p.label, color: p.label === 'benign' ? P.safe : P.threat },
+          ],
+          dpr,
+          W,
+        )
+      }
     }
 
+    drawRef.current = draw
     draw()
     const ro = new ResizeObserver(draw)
     ro.observe(cv)
     return () => ro.disconnect()
-  }, [series, heldOut, showHeldOut])
+  }, [series, heldOut, showHeldOut, theme])
 
-  return <canvas ref={ref} style={{ height, width: '100%', display: 'block' }} />
+  const onMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    const cv = ref.current
+    if (!cv) return
+    const rect = cv.getBoundingClientRect()
+    const active = showHeldOut && heldOut ? heldOut.series : series
+    const frac = (e.clientX - rect.left - 8) / (rect.width - 16)
+    const i = Math.round(frac * (active.length - 1))
+    const clamped = Math.max(0, Math.min(active.length - 1, i))
+    if (clamped !== hoverI.current) {
+      hoverI.current = clamped
+      drawRef.current()
+    }
+  }
+  const onLeave = () => {
+    if (hoverI.current !== null) {
+      hoverI.current = null
+      drawRef.current()
+    }
+  }
+
+  return (
+    <canvas
+      ref={ref}
+      style={{ height, width: '100%', display: 'block' }}
+      className="touch-none"
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+    />
+  )
 }

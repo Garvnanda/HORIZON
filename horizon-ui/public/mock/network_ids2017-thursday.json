@@ -1,0 +1,426 @@
+{
+ "schema_version": "v4.0",
+ "capture": "ids2017-thursday",
+ "nodes": [
+  {
+   "host": "192.168.10.1",
+   "subnet": "192.168.10",
+   "n_flows": 5150,
+   "n_windows": 177,
+   "kind": "gateway",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.3",
+   "subnet": "192.168.10",
+   "n_flows": 4902,
+   "n_windows": 169,
+   "kind": "domain-controller",
+   "is_demo": false,
+   "is_target": true
+  },
+  {
+   "host": "192.168.10.5",
+   "subnet": "192.168.10",
+   "n_flows": 3356,
+   "n_windows": 130,
+   "kind": "server",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.16",
+   "subnet": "192.168.10",
+   "n_flows": 3056,
+   "n_windows": 145,
+   "kind": "server",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.19",
+   "subnet": "192.168.10",
+   "n_flows": 1985,
+   "n_windows": 154,
+   "kind": "server",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.8",
+   "subnet": "192.168.10",
+   "n_flows": 871,
+   "n_windows": 180,
+   "kind": "workstation",
+   "is_demo": true,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.9",
+   "subnet": "192.168.10",
+   "n_flows": 1161,
+   "n_windows": 164,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.12",
+   "subnet": "192.168.10",
+   "n_flows": 1525,
+   "n_windows": 150,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.14",
+   "subnet": "192.168.10",
+   "n_flows": 817,
+   "n_windows": 176,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.15",
+   "subnet": "192.168.10",
+   "n_flows": 1141,
+   "n_windows": 150,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.17",
+   "subnet": "192.168.10",
+   "n_flows": 908,
+   "n_windows": 175,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.25",
+   "subnet": "192.168.10",
+   "n_flows": 1092,
+   "n_windows": 152,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.50",
+   "subnet": "192.168.10",
+   "n_flows": 1318,
+   "n_windows": 133,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "192.168.10.51",
+   "subnet": "192.168.10",
+   "n_flows": 789,
+   "n_windows": 177,
+   "kind": "workstation",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "172.16.0.1",
+   "subnet": "external",
+   "n_flows": 4550,
+   "n_windows": 165,
+   "kind": "external",
+   "is_demo": false,
+   "is_target": false
+  },
+  {
+   "host": "ext:internet",
+   "subnet": "external",
+   "n_flows": 6710,
+   "n_windows": 136,
+   "kind": "external",
+   "is_demo": false,
+   "is_target": false
+  }
+ ],
+ "edges": [
+  {
+   "src": "192.168.10.3",
+   "dst": "192.168.10.1",
+   "flows": 254,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.5",
+   "dst": "192.168.10.1",
+   "flows": 277,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.5",
+   "dst": "192.168.10.3",
+   "flows": 153,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.16",
+   "dst": "192.168.10.1",
+   "flows": 186,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.16",
+   "dst": "192.168.10.3",
+   "flows": 142,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.19",
+   "dst": "192.168.10.1",
+   "flows": 133,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.19",
+   "dst": "192.168.10.3",
+   "flows": 128,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.1",
+   "flows": 308,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.3",
+   "flows": 46,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.5",
+   "flows": 72,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.9",
+   "dst": "192.168.10.1",
+   "flows": 338,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.9",
+   "dst": "192.168.10.3",
+   "flows": 65,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.9",
+   "dst": "192.168.10.5",
+   "flows": 87,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.12",
+   "dst": "192.168.10.1",
+   "flows": 231,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.12",
+   "dst": "192.168.10.3",
+   "flows": 128,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.12",
+   "dst": "192.168.10.5",
+   "flows": 62,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.14",
+   "dst": "192.168.10.1",
+   "flows": 327,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.14",
+   "dst": "192.168.10.3",
+   "flows": 44,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.14",
+   "dst": "192.168.10.5",
+   "flows": 104,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.15",
+   "dst": "192.168.10.1",
+   "flows": 226,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.15",
+   "dst": "192.168.10.3",
+   "flows": 108,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.15",
+   "dst": "192.168.10.5",
+   "flows": 55,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.17",
+   "dst": "192.168.10.1",
+   "flows": 332,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.17",
+   "dst": "192.168.10.3",
+   "flows": 50,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.17",
+   "dst": "192.168.10.5",
+   "flows": 46,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.25",
+   "dst": "192.168.10.1",
+   "flows": 282,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.25",
+   "dst": "192.168.10.3",
+   "flows": 121,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.25",
+   "dst": "192.168.10.5",
+   "flows": 99,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.50",
+   "dst": "192.168.10.1",
+   "flows": 275,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.50",
+   "dst": "192.168.10.3",
+   "flows": 122,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.50",
+   "dst": "192.168.10.5",
+   "flows": 47,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.51",
+   "dst": "192.168.10.1",
+   "flows": 391,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.51",
+   "dst": "192.168.10.3",
+   "flows": 41,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.51",
+   "dst": "192.168.10.5",
+   "flows": 99,
+   "internal": true
+  },
+  {
+   "src": "192.168.10.1",
+   "dst": "ext:internet",
+   "flows": 572,
+   "internal": false
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "ext:internet",
+   "flows": 37,
+   "internal": false,
+   "attack": true,
+   "stage": 1
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.5",
+   "flows": 38,
+   "internal": true,
+   "attack": true,
+   "stage": 2
+  },
+  {
+   "src": "192.168.10.5",
+   "dst": "192.168.10.16",
+   "flows": 40,
+   "internal": true,
+   "attack": true,
+   "stage": 3
+  },
+  {
+   "src": "192.168.10.16",
+   "dst": "192.168.10.3",
+   "flows": 65,
+   "internal": true,
+   "attack": true,
+   "stage": 4
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.9",
+   "flows": 19,
+   "internal": true,
+   "attack": true,
+   "stage": 3
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.12",
+   "flows": 15,
+   "internal": true,
+   "attack": true,
+   "stage": 3
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.17",
+   "flows": 16,
+   "internal": true,
+   "attack": true,
+   "stage": 3
+  },
+  {
+   "src": "192.168.10.8",
+   "dst": "192.168.10.19",
+   "flows": 25,
+   "internal": true,
+   "attack": true,
+   "stage": 3
+  }
+ ]
+}

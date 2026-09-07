@@ -1,56 +1,33 @@
 # implementation.md — HORIZON build plan
 
-3 people, 4 weeks, Colab free.
+3 people, 4 weeks, Colab / Kaggle free.
 
-- **P1 — Frontend.** Streamlit application, all panels, demo flow, visual design. Does not touch model code.
-- **P2 — Data & evaluation.** Pipeline from parquet to `states.parquet`, splits, all metrics, all baselines.
-- **P3 — Model.** LSTM, mixture density head, readout head, scheduled sampling, rollout.
+- **P1 — Frontend.** React + Vite app (`horizon-ui/`), all panels, 3D scene, demo flow, visual design. Does not touch model code.
+- **P2 — Data & evaluation.** Pipeline from the CIC-IDS2017 CSVs to `states.parquet`, splits, all metrics, all baselines.
+- **P3 — Model.** LSTM, mixture density head, readout head, scheduled sampling, rollout. Plus `horizon-api/` (FastAPI backend) and `notebooks/horizon_train.ipynb`.
 
-P2 and P3 pair on the ML side; P1 works independently against a frozen data contract.
+P2 and P3 pair on the ML side; P1 works independently against a frozen output contract.
+
+## Status (updated)
+
+| Piece | State |
+| --- | --- |
+| Output contract (`api-contract.md`) | frozen |
+| Mock bundle (`horizon-ui/gen_mock.py` → `public/mock/`) | done |
+| Frontend (`horizon-ui/`) | done, v1, offline against mocks; `VITE_API_BASE` switch to live backend |
+| Backend (`horizon-api/`, `api-endpoints.md`) | done; stub mode + live mode, 17 tests |
+| Training notebook (`notebooks/horizon_train.ipynb`) | done, v1; **not yet run on real data** |
+| Everything below in Weeks 1–4 that is ML/eval | **open** — see "What is left" at the end |
 
 ---
 
-## The contract — freeze this on Day 2
+## The contract — frozen
 
-P1 cannot wait until Week 3 for real model output. That path ends in a rushed demo, and the demo is what judges see. So P2 and P3 define the output format on Day 2, P2 writes a mock generator, and **P1 builds the entire frontend against mock data.** Swapping in real outputs in Week 3 is then a one-line change.
+P1 cannot wait for real model output. P2/P3 froze the output format, P1 built the entire frontend (and the backend was built against the same mocks). Swapping in real output is a `VITE_API_BASE` env var or a file drop into `horizon-api/artifacts/`.
 
-`forecast.json`:
+**The schema now lives in `docs/api-contract.md` §3** (it grew past the sketch that was here: added `explain`, `mitre`, three `counterfactuals` keys, `trajectory_mean[].actual`). That file is the single source. The backend HTTP surface is `docs/api-endpoints.md`.
 
-```json
-{
-  "host": "192.168.10.15",
-  "capture": "ids2018",
-  "window_start_ts": "2018-02-15T10:23:00Z",
-  "window_seconds": 60,
-  "history": [{"window_idx": 0, "features": {"n_flows": 12.0, "n_distinct_dst_ip": 3.0, "n_distinct_dst_port": 4.0, "new_peer_rate": 0.0, "fail_ratio": 0.02, "bytes_out": 4200.0, "bytes_in": 88000.0, "io_ratio": 0.05, "mean_duration": 1.8, "external_ratio": 0.9}, "label": "benign", "surprise": 0.4}],
-  "forecast": {
-    "horizon": 20,
-    "n_samples": 50,
-    "p_frac":  [0.02, 0.03, 0.07, 0.15, 0.31, 0.58, 0.74, 0.81],
-    "p_mean":  [0.03, 0.04, 0.08, 0.16, 0.29, 0.55, 0.71, 0.79],
-    "spread":  [0.01, 0.02, 0.05, 0.11, 0.18, 0.22, 0.19, 0.15],
-    "divergence": 0.42,
-    "samples": [[0.01, 0.02, 0.04, 0.09, 0.22, 0.61, 0.88, 0.94]],
-    "trajectory_mean": [{"step": 1, "features": {"n_flows": 14.0, "n_distinct_dst_ip": 4.0, "n_distinct_dst_port": 5.0, "new_peer_rate": 0.05, "fail_ratio": 0.03, "bytes_out": 4500.0, "bytes_in": 91000.0, "io_ratio": 0.05, "mean_duration": 1.7, "external_ratio": 0.88}}]
-  },
-  "counterfactual": {
-    "action": "isolate_host",
-    "applied_at_step": 1,
-    "p_frac": [0.02, 0.02, 0.03, 0.03, 0.04, 0.04, 0.03, 0.03]
-  },
-  "alert": {
-    "fired": true,
-    "fired_at_step": 5,
-    "threshold": 0.30,
-    "tier": "elevated",
-    "lead_time_windows": 6,
-    "recommended_command": "iptables -A FORWARD -s 192.168.10.15 -j DROP"
-  },
-  "ground_truth": {"attack_class": "Infiltration", "first_attack_window": 11}
-}
-```
-
-**Rules.** `samples` is truncated to 50 rows of length `horizon`. `history` is 20 entries. All features are in **original units, not standardised** — the frontend shows human-readable numbers. `ground_truth` is present in demo mode only. Any change to this schema after Day 2 requires all three to agree.
+Rules unchanged: `samples` is 50 rows of length `horizon`; `history` is 20 entries; all feature values in **original units**; `ground_truth` in demo mode only; any schema change needs P1 + P2 + P3.
 
 ---
 
@@ -100,8 +77,8 @@ Column branch decided · toy-data harness validated · MDN fits a bimodal toy di
 
 ### P2
 
-- Full `states.parquet` across all four campaigns, transforms and scaler fitted on train split only, persisted.
-- Split logic: group by (capture, host), plus time-based, plus random-for-reference.
+- Full `states.parquet` across all weekday captures, transforms and scaler fitted on train split only, persisted as `scaler.json`.
+- Split logic: group by (capture, host); hold out one weekday (`HELDOUT_CAPTURE`); plus time-based; plus random-for-reference.
 - Label assignment and per-class counts. Report the class balance to P3 — it sets `pos_weight`.
 - Logistic regression baseline; full metric suite on it.
 - **Run persistence versus P3's first checkpoints, per feature.** This is the Week 2 gate.
@@ -113,7 +90,7 @@ Column branch decided · toy-data harness validated · MDN fits a bimodal toy di
 - **Mid-week gate: does the LSTM beat persistence per-feature?** If not, stop and report. Do not tune your way past this — investigate. Likely causes: transforms not applied, scaler leaking across splits, sequences not actually contiguous, learning rate too high.
 - Add the readout head; joint training; tune lambda so neither loss swamps the other.
 - Implement scheduled sampling with the linear ramp.
-- Checkpoint to Drive every epoch.
+- Checkpoint `model.pt` to `artifacts/` every epoch.
 
 ### P1
 
@@ -137,9 +114,9 @@ This is the week that decides how good the submission is. Order matters.
 **Day 1 priority — the held-out-class experiment.** Retrain from scratch with one attack class removed entirely, then measure whether the surprise signal still flags it. Run for two held-out classes. This is scheduled first because it is our potential headline and we need time to react to whatever it produces. If it works, everything downstream is framed around it. If it does not, we report it honestly and move on.
 
 Then:
-- Full K-step sampled rollout, 50 samples, producing `p_frac`, `p_mean`, `spread`, `divergence`.
-- Counterfactual branch: `intervention` channel, `apply_intervention` function, dual rollout.
-- Emit real `forecast.json` files matching the contract.
+- Full K-step sampled rollout, 50 samples, producing `p_frac`, `p_mean`, `spread`, `divergence`. *(implemented in `horizon_api.rollout`)*
+- Counterfactual branch: `intervention` channel, `apply_intervention`, triple rollout (`do_nothing` / `isolate_host` / `rate_limit`). *(implemented)*
+- Emit real artifacts (`model.pt`, `scaler.json`, `states.parquet`, `metrics.json`, `scenarios.json`) from the notebook; the backend turns them into contract JSON. *(notebook written; needs a real run)*
 
 ### P2
 
@@ -193,7 +170,41 @@ Polish the demo. **Record the 2-minute video** — script it around one host: hi
 
 ## Working rules
 
-- **Colab free dies.** Checkpoint every epoch to Drive. Never rely on a session surviving a training run.
-- **P1 is never blocked.** If real data is late, mocks carry the frontend. Never let the demo be built in the final week.
-- **Every number in the deck comes from P2's harness.** No metrics computed ad hoc in a notebook cell and pasted into a slide.
+- **Colab/Kaggle free dies.** The notebook checkpoints `model.pt` every epoch to `artifacts/`. Never rely on a session surviving a training run.
+- **P1 is never blocked.** Mocks carry the frontend; it is done.
+- **Every number in the deck comes from the eval harness.** No metrics computed ad hoc in a notebook cell and pasted into a slide.
 - **Gates are hard.** A gate that fails means stop and report, not tune quietly and hope.
+
+---
+
+## What is left
+
+The scaffolding is done and the model has trained on real data twice.
+
+**Done (2026-09):** contract, mocks, frontend (v2), backend (stub + live), notebook. Two Kaggle runs. **Gate 0 passed** (after switching to `pshikk/cicids2017-untampered`). **Persistence gate passed 10/10**, strong margins. Platt calibration honest. `feature_surprise` sane and points at the right features. Onset detection clean on all four demo scenarios. **Lead time confirmed on the `172.16.0.1` scan→DDoS campaign**; payload-drop attacks (infiltration, botnet) detect at onset with no precursor - documented as a dataset limit, not a bug (see `technical.md` §5.1).
+
+**Blocking — do first:**
+
+1. **Push `horizon-api/model.py`** (the `logvar_min = -3` change is not in the runs yet) and re-run the notebook once more with all current fixes.
+2. **Drop artifacts into `horizon-api/artifacts/`** (not `horizon_artifacts/`), run backend + frontend live, sanity-check the four demo hosts and one arbitrary host.
+
+**Eval harness (P2, submission-grade) — the biggest remaining gap.** The notebook writes `metrics.json` with the persistence table + calibration reliability only; every other field is empty and the frontend shows the MOCK bundle. Build as a `metrics.py` cell / second notebook:
+- lead-time-vs-FPR curve (HORIZON / direct classifier / logistic regression, shared axes) — **never cut**
+- held-out-weekday (`ids2017-wednesday`) macro-F1 and lead-time drop
+- rollout error growth at steps 1 / 5 / 10 / 20
+- per-class F1 and **per-class lead time**
+- surprise AUC standalone and on held-out classes; divergence AUC
+- calibration reliability + Platt slope
+- logistic-regression and direct-multi-horizon-classifier baselines
+
+**Model refinements (P3):**
+- `p_frac` is still fairly binary within a rollout even after Platt - samples agree too much; more mixture spread or a temperature on sampling
+- multi-step scheduled-sampling unroll (the notebook does a 1-step version)
+- MDN discretised fallback if training goes unstable
+- verify `apply_intervention` on the campaign host - counterfactual quality untested there
+
+**Held-out-class experiment (P3, the headline):** `RUN_HELDOUT_CLASS=True` in the notebook does one class. Run it for a second class, wire both `model_heldout_*.pt` into the backend, report surprise AUC.
+
+**PS-compliance gap:** the problem statement asks for an interface that "accepts a PCAP or CSV file as input". The current demo picks a host from precomputed state. A `POST /api/ingest` (flow CSV → aggregator → forecast) closes this. ~2 days. Treat as required, not stretch.
+
+**Docs & packaging (Week 4):** 2-page architecture doc, 5-slide deck, 2-minute video, README, Q&A rehearsal. `pitch.md` Part 5.

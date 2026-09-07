@@ -51,7 +51,7 @@ The output is not a number. It is a **spread of possible futures** — a forecas
 
 ## What this makes possible that detection cannot
 
-**Early warning with a real time budget.** The alert fires when the *forecast* crosses the threshold, not when the attack lands. Warning time is a number we measure and report.
+**Early warning with a real time budget.** The alert fires when the *forecast* crosses the threshold, not when the attack lands. Warning time is a number we measure and report per attack class. Where the attack builds up in the traffic - a scan escalating to denial of service - the forecast climbs well before the peak. Where the attack drops with no precursor - a malicious download that sits quiet until it fires - the model detects at onset with a calibrated probability rather than a warning-time claim, and the trajectory, surprise, and counterfactual carry the value there.
 
 **Detection of unseen attack types.** The model learns normal behaviour, not a catalogue of attacks. When reality diverges from what the model predicted, that divergence — surprise — flags behaviour the model of normality cannot account for, whether or not it has ever been labelled. We test this directly by removing an attack type entirely from training and checking whether it still gets caught.
 
@@ -83,9 +83,9 @@ We are careful about this, because overclaiming is the fastest way to lose a tec
 
 ## Data
 
-Four collated public intrusion-detection capture campaigns (CIC-IDS2017, CIC-DoS2017, CSE-CIC-IDS2018, CIC-DDoS2019) with harmonised labels, covering reconnaissance, brute force, web attacks, infiltration, botnet command-and-control, and denial of service.
+CIC-IDS2017 (the `GeneratedLabelledFlows` release), a public intrusion-detection testbed capture: eight CICFlowMeter CSVs across five weekday sessions, covering reconnaissance, brute force, web attacks, infiltration, botnet command-and-control, and denial of service. This release keeps source and destination IPs and per-flow timestamps, which the host-level state model needs; the harmonised multi-dataset collections drop them.
 
-Holding out one entire capture campaign as a test set gives us a genuine domain-shift evaluation without importing external data — a stronger generalisation claim than testing on a random split of one campaign.
+Holding out one entire weekday session as the test set gives a domain-shift evaluation without importing external data — a temporal and attack-mix shift on the same testbed. Weaker than a cross-network test, still stronger than a random split, and we state it as exactly that.
 
 ---
 
@@ -100,3 +100,9 @@ Three properties, each testable, none available to a classifier:
 | "Should I act?" | unanswerable | two forecasts, intervention versus not |
 
 The problem statement asks for a learned dynamics model rather than a static classifier. Most submissions will build a classifier and describe it as a dynamics model. The difference is visible in the training objective, and ours is next-state prediction with no labels.
+
+---
+
+## Build state
+
+Contract, mock data, React frontend (all panels + a 3D kill-chain scene), FastAPI backend (`horizon-api/`, offline static bundle plus optional live inference), and the training notebook (`notebooks/horizon_train.ipynb`) are built. What remains is running the notebook on the real data and the evaluation harness. See `implementation.md`.

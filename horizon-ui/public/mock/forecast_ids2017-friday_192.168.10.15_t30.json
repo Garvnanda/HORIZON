@@ -1,6 +1,6 @@
 {
  "schema_version": "v4.0",
- "host": "192.168.10.50",
+ "host": "192.168.10.15",
  "capture": "ids2017-friday",
  "demo_mode": true,
  "window_seconds": 60,
@@ -2338,7 +2338,7 @@
    "fired_at_step": 11,
    "tier": "suspicious",
    "lead_time_windows": 1,
-   "recommended_command": "iptables -A INPUT -s 192.168.10.50 -m limit --limit 5/min -j ACCEPT\niptables -A INPUT -s 192.168.10.50 -j DROP"
+   "recommended_command": "iptables -A INPUT -s 192.168.10.15 -m limit --limit 5/min -j ACCEPT\niptables -A INPUT -s 192.168.10.15 -j DROP"
   }
  },
  "ground_truth": {

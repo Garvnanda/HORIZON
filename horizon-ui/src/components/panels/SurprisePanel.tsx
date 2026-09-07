@@ -11,6 +11,7 @@ export function SurprisePanel() {
     <Panel
       label="Surprise timeline · deviation from learned normal"
       live
+      id="surprise"
       right={
         ho && (
           <span className="font-mono text-[10px] text-[var(--info)]">
@@ -28,7 +29,7 @@ export function SurprisePanel() {
       <p className="mt-1.5 border-t pt-1.5 text-[8.5px] leading-snug text-[var(--dim)]">
         {showHeldOut && ho
           ? ho.note
-          : 'Spikes = behaviour the model of normal cannot account for — labelled or not.'}
+          : 'Spikes flag behaviour the model of normal cannot account for, labelled or not.'}
       </p>
     </Panel>
   )

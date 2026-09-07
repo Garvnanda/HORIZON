@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { getForecast, getHosts, getMetrics, getSurprise } from '@/lib/api'
+import { getForecast, getHosts, getMetrics, getNetwork, getSurprise } from '@/lib/api'
 import { computeAlert } from '@/lib/alert'
 import type {
   ComputedAlert,
@@ -15,6 +15,7 @@ import type {
   ForecastDoc,
   HostEntry,
   MetricsDoc,
+  NetworkDoc,
   SurpriseDoc,
 } from '@/lib/types'
 
@@ -34,9 +35,14 @@ interface StoreValue {
   forecast?: ForecastDoc
   surprise?: SurpriseDoc
   metrics?: MetricsDoc
+  network?: NetworkDoc
   loading: boolean
   // derived
   alert?: ComputedAlert
+  // scene playhead + selection
+  playhead: number
+  playing: boolean
+  selectedNode: string | null
   // setters
   selectHost: (capture: string, host: string) => void
   setT: (t: number) => void
@@ -45,6 +51,9 @@ interface StoreValue {
   setDemoMode: (v: boolean) => void
   setCfAction: (a: CounterfactualAction) => void
   setShowHeldOut: (v: boolean) => void
+  setPlayhead: (k: number) => void
+  setPlaying: (v: boolean) => void
+  setSelectedNode: (h: string | null) => void
 }
 
 const Ctx = createContext<StoreValue | null>(null)
@@ -52,9 +61,9 @@ const Ctx = createContext<StoreValue | null>(null)
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [hosts, setHosts] = useState<HostEntry[]>([])
   const [metrics, setMetrics] = useState<MetricsDoc>()
-  const [capture, setCapture] = useState('ids2017-thursday')
-  const [host, setHost] = useState('192.168.10.15')
-  const [t, setT] = useState(40)
+  const [capture, setCapture] = useState('ids2017-friday')
+  const [host, setHost] = useState('172.16.0.1')
+  const [t, setT] = useState(30)
   const [threshold, setThreshold] = useState(0.3)
   const [nSamples, setNSamples] = useState(50)
   const [demoMode, setDemoMode] = useState(true)
@@ -63,16 +72,40 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const [forecast, setForecast] = useState<ForecastDoc>()
   const [surprise, setSurprise] = useState<SurpriseDoc>()
+  const [network, setNetwork] = useState<NetworkDoc>()
   const [loading, setLoading] = useState(true)
 
+  const [playhead, setPlayhead] = useState(0)
+  const [playing, setPlaying] = useState(false)
+  const [selectedNode, setSelectedNode] = useState<string | null>(null)
+
   useEffect(() => {
-    getHosts().then((d) => setHosts(d.hosts)).catch(console.error)
+    getHosts()
+      .then((d) => {
+        setHosts(d.hosts)
+        // snap to a real host if the compiled-in default is absent in this backend
+        const present = d.hosts.some((h) => h.host === host && h.capture === capture)
+        if (!present && d.hosts.length) {
+          const known = ['portscan', 'infiltration', 'botnet']
+          const pick =
+            known.map((s) => d.hosts.find((h) => h.scenario === s)).find(Boolean) ?? d.hosts[0]
+          setCapture(pick.capture)
+          setHost(pick.host)
+          // land on the last available frame (past onset for the attack scenarios)
+          setT(pick.available_t[pick.available_t.length - 1] ?? pick.available_t[0] ?? 30)
+        }
+      })
+      .catch(console.error)
     getMetrics().then(setMetrics).catch(console.error)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     let alive = true
     setLoading(true)
+    setPlayhead(0)
+    setPlaying(false)
+    setSelectedNode(null)
     Promise.all([getForecast(capture, host, t), getSurprise(capture, host)])
       .then(([f, s]) => {
         if (!alive) return
@@ -85,6 +118,32 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       alive = false
     }
   }, [capture, host, t])
+
+  useEffect(() => {
+    let alive = true
+    getNetwork(capture)
+      .then((n) => alive && setNetwork(n))
+      .catch(() => alive && setNetwork(undefined))
+    return () => {
+      alive = false
+    }
+  }, [capture])
+
+  // playhead animation
+  useEffect(() => {
+    if (!playing) return
+    const horizon = forecast?.forecast.horizon ?? 20
+    const id = setInterval(() => {
+      setPlayhead((k) => {
+        if (k >= horizon - 1) {
+          setPlaying(false)
+          return horizon - 1
+        }
+        return k + 1
+      })
+    }, 420)
+    return () => clearInterval(id)
+  }, [playing, forecast])
 
   const current = useMemo(
     () => hosts.find((h) => h.host === host && h.capture === capture),
@@ -125,8 +184,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     forecast,
     surprise,
     metrics,
+    network,
     loading,
     alert,
+    playhead,
+    playing,
+    selectedNode,
     selectHost,
     setT,
     setThreshold,
@@ -134,6 +197,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setDemoMode,
     setCfAction,
     setShowHeldOut,
+    setPlayhead,
+    setPlaying,
+    setSelectedNode,
   }
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
