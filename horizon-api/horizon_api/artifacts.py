@@ -79,5 +79,13 @@ def load_scenarios() -> dict | None:
     return json.loads(p.read_text())
 
 
+def load_platt() -> tuple[float, float] | None:
+    """(a, b) for sigmoid(a*logit + b); fitted on the val split by the notebook."""
+    d = load_json("platt.json")
+    if not d:
+        return None
+    return float(d["a"]), float(d["b"])
+
+
 def reset_cache() -> None:
     _load_bundle.cache_clear()

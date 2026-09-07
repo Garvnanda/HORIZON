@@ -22,7 +22,7 @@ def test_health_live(monkeypatch, tmp_path, fixtures_dir):
 
 def test_forecast_endpoint_live(monkeypatch, tmp_path, fixtures_dir):
     c = _client(monkeypatch, tmp_path, fixtures_dir)
-    r = c.get("/api/forecast", params={"capture": "ids2017-thursday", "host": "192.168.10.15", "t": 40})
+    r = c.get("/api/forecast", params={"capture": "ids2017-thursday", "host": "192.168.10.8", "t": 40})
     assert r.status_code == 200
     assert_forecast_shape(r.json())
 
@@ -35,7 +35,7 @@ def test_forecast_adhoc_live(monkeypatch, tmp_path, fixtures_dir):
 
 def test_forecast_bad_t_rejected(monkeypatch, tmp_path, fixtures_dir):
     c = _client(monkeypatch, tmp_path, fixtures_dir)
-    r = c.get("/api/forecast", params={"capture": "ids2017-thursday", "host": "192.168.10.15", "t": 5})
+    r = c.get("/api/forecast", params={"capture": "ids2017-thursday", "host": "192.168.10.8", "t": 5})
     assert r.status_code == 422
 
 
@@ -47,7 +47,7 @@ def test_hosts_endpoint_live(monkeypatch, tmp_path, fixtures_dir):
 
 def test_surprise_endpoint_live(monkeypatch, tmp_path, fixtures_dir):
     c = _client(monkeypatch, tmp_path, fixtures_dir)
-    r = c.get("/api/surprise", params={"capture": "ids2017-monday", "host": "192.168.10.8"})
+    r = c.get("/api/surprise", params={"capture": "ids2017-monday", "host": "192.168.10.9"})
     assert r.status_code == 200 and r.json()["series"]
 
 
@@ -77,7 +77,7 @@ def test_network_fallback_nodes_only(monkeypatch, tmp_path, fixtures_dir):
 
 def test_flows_endpoint_live(monkeypatch, tmp_path, fixtures_dir):
     c = _client(monkeypatch, tmp_path, fixtures_dir)
-    r = c.get("/api/flows", params={"capture": "ids2017-thursday", "host": "192.168.10.15"})
+    r = c.get("/api/flows", params={"capture": "ids2017-thursday", "host": "192.168.10.8"})
     assert r.status_code == 200
     assert r.json()["flows"] and {"dst_ip", "dst_port", "label"} <= set(r.json()["flows"][0])
 
@@ -99,7 +99,7 @@ def test_network_stub(monkeypatch, tmp_path):
 def test_decision_roundtrip(monkeypatch, tmp_path, fixtures_dir):
     c = _client(monkeypatch, tmp_path, fixtures_dir)
     payload = {
-        "host": "192.168.10.15", "capture": "ids2017-thursday", "t": 40,
+        "host": "192.168.10.8", "capture": "ids2017-thursday", "t": 40,
         "decision": "approve", "tier": "elevated", "command": "iptables ...",
     }
     r = c.post("/api/decision", json=payload)

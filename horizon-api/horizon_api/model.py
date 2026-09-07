@@ -25,7 +25,7 @@ class ModelConfig:
     layers: int = 2
     dropout: float = 0.2
     k_mix: int = 5
-    logvar_min: float = -7.0
+    logvar_min: float = -3.0  # was -7; -7 let variances collapse to the floor -> exploded per-feature NLL
     logvar_max: float = 3.0
 
 

@@ -137,14 +137,23 @@ def _forecast_live(capture: str, host: str, t: int) -> dict:
 
     demo = _scen.meta(capture, host)
     demo_mode = demo is not None
-    attack_class = demo["true_class"] if demo_mode else None
     first_attack_window = demo["first_attack_window"] if demo_mode else None
+    # attack class: scripted for demo hosts; otherwise the host's own majority
+    # malicious label in states, so the MITRE overlay works for any host.
+    if demo_mode:
+        attack_class = demo["true_class"]
+    else:
+        mal = states[(states["capture"] == capture) & (states["host"] == host)]
+        mal = mal[mal["label"].astype(str) != "benign"]["label"].astype(str)
+        attack_class = mal.value_counts().index[0] if len(mal) else None
+
+    platt = _art.load_platt()
 
     # -- 3 rollouts: do_nothing / isolate_host / rate_limit --------------
     results = {}
     for i, name in enumerate(_CF_KEYS):
         iv = make_intervention(name, z_hist)
-        results[name] = rollout(model, z_hist, intervention=iv, seed=1000 + i)
+        results[name] = rollout(model, z_hist, intervention=iv, seed=1000 + i, platt=platt)
     base = results["do_nothing"]
     p_frac = base.p_frac.tolist()
 

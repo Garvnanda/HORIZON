@@ -29,11 +29,12 @@ from horizon_api.model import save as save_model
 HERE = Path(__file__).resolve().parent
 RNG = np.random.default_rng(42)
 
-# (capture, host, n_windows, attack_onset or None)
+# (capture, host, n_windows, attack_onset or None) - demo hosts match the real victims
 HOSTS = [
-    ("ids2017-thursday", "192.168.10.15", 130, 63),
-    ("ids2017-friday", "192.168.10.50", 130, 70),
-    ("ids2017-monday", "192.168.10.8", 130, None),
+    ("ids2017-thursday", "192.168.10.8", 130, 63),
+    ("ids2017-friday", "192.168.10.15", 130, 70),
+    ("ids2017-friday", "172.16.0.1", 130, 40),
+    ("ids2017-monday", "192.168.10.9", 130, None),
     ("ids2017-tuesday", "10.0.0.7", 90, 40),
     ("ids2017-wednesday", "10.0.0.9", 90, None),
 ]
@@ -98,8 +99,8 @@ def _flows(capture: str, host: str) -> dict:
     return {"schema_version": "v4.0", "capture": capture, "host": host, "flows": rows}
 
 
-DEMO = [("ids2017-thursday", "192.168.10.15"), ("ids2017-friday", "192.168.10.50"),
-        ("ids2017-monday", "192.168.10.8")]
+DEMO = [("ids2017-thursday", "192.168.10.8"), ("ids2017-friday", "192.168.10.15"),
+        ("ids2017-friday", "172.16.0.1"), ("ids2017-monday", "192.168.10.9")]
 
 
 def main() -> None:

@@ -45,7 +45,7 @@ def assert_forecast_shape(d: dict):
 def test_live_forecast_matches_contract(live):
     from horizon_api import predict
 
-    d = predict.forecast("ids2017-thursday", "192.168.10.15", 40)
+    d = predict.forecast("ids2017-thursday", "192.168.10.8", 40)
     assert_forecast_shape(d)
     assert d["demo_mode"] is True
     assert d["ground_truth"]["attack_class"] == "Infiltration"
@@ -65,14 +65,14 @@ def test_live_hosts_lists_all(live):
 
     doc = predict.hosts_doc()
     keys = {(h["capture"], h["host"]) for h in doc["hosts"]}
-    assert ("ids2017-thursday", "192.168.10.15") in keys
+    assert ("ids2017-thursday", "192.168.10.8") in keys
     assert ("ids2017-tuesday", "10.0.0.7") in keys
 
 
 def test_live_surprise_shape(live):
     from horizon_api import predict
 
-    doc = predict.surprise_doc("ids2017-thursday", "192.168.10.15")
+    doc = predict.surprise_doc("ids2017-thursday", "192.168.10.8")
     assert doc["series"]
     assert {"window_idx", "surprise", "label"} <= set(doc["series"][0])
 
@@ -80,7 +80,7 @@ def test_live_surprise_shape(live):
 def test_stub_serves_demo_hosts(stub):
     from horizon_api import predict
 
-    d = predict.forecast("ids2017-thursday", "192.168.10.15", 40)
+    d = predict.forecast("ids2017-thursday", "192.168.10.8", 40)
     assert_forecast_shape(d)
 
 
@@ -95,4 +95,4 @@ def test_stub_output_equals_live_shape(stub):
     """The two modes cannot diverge in shape - guard against drift."""
     from horizon_api import predict
 
-    assert_forecast_shape(predict.forecast("ids2017-friday", "192.168.10.50", 30))
+    assert_forecast_shape(predict.forecast("ids2017-friday", "192.168.10.15", 30))

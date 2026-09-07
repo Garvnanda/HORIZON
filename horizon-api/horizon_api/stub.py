@@ -12,22 +12,33 @@ from pathlib import Path
 _MOCK_DIR = Path(__file__).resolve().parent.parent.parent / "horizon-ui" / "public" / "mock"
 
 # host -> demo metadata. Mirrors gen_mock.SCENARIOS / api-contract 5.
+# Hosts match the real CIC-IDS2017 attack victims: Infiltration is on 192.168.10.8
+# (Thursday), the botnet beacons on 192.168.10.15 (Friday). `scenarios.json` from
+# the notebook overrides first_attack_window / available_t with the real values.
 DEMO_SCENARIOS = {
-    ("ids2017-thursday", "192.168.10.15"): {
+    ("ids2017-thursday", "192.168.10.8"): {
         "scenario": "infiltration",
         "true_class": "Infiltration",
         "first_attack_window": 13,
         "available_t": [40, 52],
         "held_out": "PortScan",
     },
-    ("ids2017-friday", "192.168.10.50"): {
+    ("ids2017-friday", "192.168.10.15"): {
         "scenario": "botnet",
         "true_class": "Bot",
         "first_attack_window": 12,
         "available_t": [30],
         "held_out": "Botnet",
     },
-    ("ids2017-monday", "192.168.10.8"): {
+    ("ids2017-friday", "172.16.0.1"): {
+        # the campaign that actually has lead time: scan escalating to DDoS
+        "scenario": "portscan",
+        "true_class": "PortScan",
+        "first_attack_window": 12,
+        "available_t": [30],
+        "held_out": None,
+    },
+    ("ids2017-monday", "192.168.10.9"): {
         "scenario": "benign",
         "true_class": "benign",
         "first_attack_window": None,
