@@ -21,12 +21,22 @@ from . import stub as _stub
 
 app = FastAPI(title="HORIZON inference API", version=__version__)
 
-_origins = os.environ.get("HORIZON_CORS_ORIGINS", "").split(",")
+# Exact allowed origins for a deployment (comma-separated), e.g.
+#   HORIZON_CORS_ORIGINS=https://horizon.vercel.app,https://api.example.com
+_origins = [o.strip() for o in os.environ.get("HORIZON_CORS_ORIGINS", "").split(",") if o.strip()]
+
+# Dev default: localhost only, any port (vite hops ports). Opt in to the wildcard
+# *.vercel.app / *.trycloudflare.com namespaces with HORIZON_ALLOW_TUNNEL_ORIGINS=1
+# (convenient for a laptop + quick-tunnel demo; must stay OFF for a real deployment,
+# where HORIZON_CORS_ORIGINS pins the exact hostname instead).
+_origin_regex = r"https?://(localhost|127\.0\.0\.1)(:\d+)?"
+if os.environ.get("HORIZON_ALLOW_TUNNEL_ORIGINS") == "1":
+    _origin_regex += r"|https://([a-z0-9-]+\.)*vercel\.app|https://[a-z0-9-]+\.trycloudflare\.com"
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[o.strip() for o in _origins if o.strip()],
-    # any localhost port in dev (vite hops ports); set HORIZON_CORS_ORIGINS in prod
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_origins=_origins,
+    allow_origin_regex=_origin_regex,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )

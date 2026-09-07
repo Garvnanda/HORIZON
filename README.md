@@ -51,43 +51,80 @@ notebook imports them, so training and serving cannot drift.
 
 ---
 
-## Run
+## Run locally
 
-### Frontend (offline demo — no backend needed)
+### Option A — offline demo, no backend
 
 ```bash
 cd horizon-ui
 npm install
-npm run dev            # http://localhost:5173
-# or: npm run build    # -> dist/, a self-contained offline site
+npm run dev                    # opens on http://localhost:5173 (or next free port)
+# or: npm run build            # -> dist/, a self-contained offline site
 ```
 
-Serves the mock bundle in `public/mock/`. Regenerate it with `python gen_mock.py`.
+Serves the mock bundle in `public/mock/` (4 scripted hosts). Regenerate with
+`python gen_mock.py`. This is the build to deploy to Vercel/Pages for a
+zero-dependency demo.
 
-### Backend
+### Option B — live model, two terminals
+
+**Terminal 1 — backend** (needs `model.pt` + `scaler.json` + `states.parquet` in
+`horizon-api/artifacts/`; also loads `metrics.json`, `scenarios.json`, `platt.json`,
+`network_*.json`, `flows_*.json` if present):
 
 ```bash
 cd horizon-api
 pip install -r requirements.txt
-python fixtures/make_fixtures.py    # synthetic artifacts, so tests + live mode run without Kaggle
-python -m pytest -q
-uvicorn horizon_api.server:app --port 8000
+python -m uvicorn horizon_api.server:app --port 8000
 ```
 
-- **stub mode** (default) — the 4 demo hosts from the mock bundle, everything else `503`.
-- **live mode** — drop `model.pt` + `scaler.json` + `states.parquet` into
-  `horizon-api/artifacts/`, restart. Real rollout for any host in the dataset.
-  `GET /api/health` reports the mode.
+Check it: open `http://localhost:8000/api/health` — `"mode":"live"` means the
+artifacts loaded (`"mode":"stub"` = artifacts missing, only the 4 demo hosts,
+everything else returns `503`). First `/api/forecast` after startup takes ~3-5 s
+while torch loads the model, fast after.
 
-### Point the frontend at the live backend
+No Kaggle run? Generate synthetic artifacts so live mode + tests work:
+`python fixtures/make_fixtures.py` then `python -m pytest -q`.
+
+**Terminal 2 — frontend**, pointed at the backend via `horizon-ui/.env.local`:
 
 ```bash
 cd horizon-ui
-echo 'VITE_API_BASE=http://localhost:8000/api' > .env.local
+npm install
+# create horizon-ui/.env.local with exactly this line, UTF-8, no BOM:
+#   VITE_API_BASE=http://localhost:8000/api
 npm run dev
 ```
 
-Delete `.env.local` to go back to the offline mock bundle.
+The host dropdown now lists every `(capture, host)` in the dataset — see
+`docs/available-hosts.md` for the full list. Delete `.env.local` to fall back to
+the offline mock bundle.
+
+> **Windows / PowerShell:** `echo "..." > .env.local` writes UTF-16 and Vite will
+> silently ignore it (you get the 4-host mock instead). Use:
+> `[IO.File]::WriteAllText("$PWD\.env.local", "VITE_API_BASE=http://localhost:8000/api`n")`
+> or create the file in an editor set to UTF-8.
+
+Vite picks any free port; the backend's CORS default allows any `localhost:*`, so
+a port other than 5173 is fine.
+
+**Public demo (Vercel + Cloudflare tunnel).** Frontend: `npm run build` and deploy
+`horizon-ui/dist/` to Vercel (set `VITE_API_BASE` there, or use the `?api=` link
+below). Backend: run it locally and expose with `cloudflared tunnel --url
+http://localhost:8000`, started with the tunnel-origins flag:
+
+```bash
+HORIZON_ALLOW_TUNNEL_ORIGINS=1 python -m uvicorn horizon_api.server:app --port 8000
+```
+
+That opts the CORS allowlist into `*.vercel.app` and `*.trycloudflare.com` for the
+demo. For a stable deployment, leave that flag off and pin the exact hostname:
+`HORIZON_CORS_ORIGINS=https://<your-app>.vercel.app`.
+
+A deployed frontend can be pointed at a fresh quick-tunnel URL without a rebuild:
+open `https://<app>.vercel.app/?api=https://xxxx.trycloudflare.com/api` once
+(persisted in localStorage). The `?api=` value is only accepted for `localhost` or
+`https://*.trycloudflare.com` hosts.
 
 ### Train
 

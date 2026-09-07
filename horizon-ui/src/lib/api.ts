@@ -10,12 +10,52 @@ import type {
 /**
  * Two transports, same shapes (see api-contract.md §1, docs/api-endpoints.md):
  *
- *   VITE_API_BASE unset  -> static JSON under public/mock/ (offline demo).
- *   VITE_API_BASE set     -> live FastAPI (e.g. http://localhost:8000/api),
- *                            real model inference for any host in the dataset.
+ *   no base set  -> static JSON under public/mock/ (offline demo).
+ *   base set     -> live FastAPI (e.g. http://localhost:8000/api),
+ *                   real model inference for any host in the dataset.
+ *
+ * Base resolution order: ?api=<url> query param (persisted) > localStorage
+ * > VITE_API_BASE build env. The query param lets a deployed build point at a
+ * fresh Cloudflare quick-tunnel URL without a rebuild:
+ * https://<app>.vercel.app/?api=https://xxxx.trycloudflare.com/api
+ *
+ * The param is only honoured for hosts we actually deploy backends on — localhost
+ * or *.trycloudflare.com over https — so a crafted ?api= link cannot redirect a
+ * user's dashboard to an arbitrary server.
  */
 
-const LIVE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '')
+function allowedApiHost(raw: string): string | null {
+  let u: URL
+  try {
+    u = new URL(raw)
+  } catch {
+    return null
+  }
+  const localhost = u.hostname === 'localhost' || u.hostname === '127.0.0.1'
+  const tunnel = u.protocol === 'https:' && u.hostname.endsWith('.trycloudflare.com')
+  if (!localhost && !tunnel) return null
+  if (!localhost && u.protocol !== 'https:') return null
+  return u.origin + u.pathname.replace(/\/$/, '')
+}
+
+function resolveBase(): string {
+  try {
+    const q = new URLSearchParams(location.search).get('api')
+    if (q !== null) {
+      const ok = q ? allowedApiHost(q) : ''
+      if (q && ok === null) console.warn('[horizon] ignoring disallowed ?api= host:', q)
+      else if (ok) localStorage.setItem('horizon.apiBase', ok)
+      else localStorage.removeItem('horizon.apiBase')
+    }
+    const stored = localStorage.getItem('horizon.apiBase')
+    if (stored && allowedApiHost(stored)) return stored
+  } catch {
+    /* SSR / storage disabled */
+  }
+  return import.meta.env.VITE_API_BASE ?? ''
+}
+
+const LIVE = resolveBase().replace(/\/$/, '')
 const MOCK = `${import.meta.env.BASE_URL}mock`
 
 async function fetchJSON<T>(url: string): Promise<T> {
