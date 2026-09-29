@@ -1,0 +1,35 @@
+{
+ "ids2017-thursday/192.168.10.8": {
+  "scenario": "infiltration",
+  "true_class": "Infiltration",
+  "first_attack_window": 79,
+  "available_t": [
+   67,
+   75,
+   94
+  ],
+  "held_out": null
+ },
+ "ids2017-friday/192.168.10.15": {
+  "scenario": "botnet",
+  "true_class": "Bot",
+  "first_attack_window": 546,
+  "available_t": [
+   534,
+   542,
+   561
+  ],
+  "held_out": "Bot"
+ },
+ "ids2017-monday/192.168.10.9": {
+  "scenario": "benign",
+  "true_class": "benign",
+  "first_attack_window": null,
+  "available_t": [
+   25,
+   360,
+   700
+  ],
+  "held_out": null
+ }
+}
