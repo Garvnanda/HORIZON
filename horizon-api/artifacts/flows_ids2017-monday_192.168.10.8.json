@@ -1,0 +1,4007 @@
+{
+ "schema_version": "v4.0",
+ "capture": "ids2017-monday",
+ "host": "192.168.10.8",
+ "flows": [
+  {
+   "window_idx": 497,
+   "ts": "2017-07-03T09:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 88,
+   "bytes_out": 2874,
+   "bytes_in": 2884,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 500,
+   "ts": "2017-07-03T09:20:01Z",
+   "dst_ip": "23.61.187.27",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 514,
+   "ts": "2017-07-03T09:34:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 123,
+   "bytes_out": 96,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 523,
+   "ts": "2017-07-03T09:43:01Z",
+   "dst_ip": "172.217.12.174",
+   "dst_port": 443,
+   "bytes_out": 135,
+   "bytes_in": 46,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 531,
+   "ts": "2017-07-03T09:51:01Z",
+   "dst_ip": "54.192.39.67",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "23.208.107.108",
+   "dst_port": 80,
+   "bytes_out": 368,
+   "bytes_in": 5075,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 534,
+   "ts": "2017-07-03T09:54:01Z",
+   "dst_ip": "54.192.37.202",
+   "dst_port": 443,
+   "bytes_out": 394,
+   "bytes_in": 3716,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "172.217.12.132",
+   "dst_port": 443,
+   "bytes_out": 1006,
+   "bytes_in": 4943,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "172.217.3.99",
+   "dst_port": 443,
+   "bytes_out": 1039,
+   "bytes_in": 5655,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 563,
+   "ts": "2017-07-03T10:23:01Z",
+   "dst_ip": "72.21.91.29",
+   "dst_port": 80,
+   "bytes_out": 519,
+   "bytes_in": 802,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "212.180.241.221",
+   "dst_port": 443,
+   "bytes_out": 683,
+   "bytes_in": 4575,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "212.180.241.221",
+   "dst_port": 443,
+   "bytes_out": 680,
+   "bytes_in": 4401,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 222,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "185.167.164.37",
+   "dst_port": 443,
+   "bytes_out": 877,
+   "bytes_in": 4303,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 570,
+   "ts": "2017-07-03T10:30:01Z",
+   "dst_ip": "192.132.33.27",
+   "dst_port": 443,
+   "bytes_out": 59,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "74.121.138.97",
+   "dst_port": 443,
+   "bytes_out": 1808,
+   "bytes_in": 4193,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "8.43.72.21",
+   "dst_port": 443,
+   "bytes_out": 7324,
+   "bytes_in": 25064,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 572,
+   "ts": "2017-07-03T10:32:01Z",
+   "dst_ip": "74.121.138.97",
+   "dst_port": 443,
+   "bytes_out": 72,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 582,
+   "ts": "2017-07-03T10:42:01Z",
+   "dst_ip": "34.192.187.63",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 586,
+   "ts": "2017-07-03T10:46:01Z",
+   "dst_ip": "23.52.155.27",
+   "dst_port": 80,
+   "bytes_out": 1798,
+   "bytes_in": 7861,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 586,
+   "ts": "2017-07-03T10:46:01Z",
+   "dst_ip": "72.21.91.29",
+   "dst_port": 80,
+   "bytes_out": 3588,
+   "bytes_in": 6374,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 592,
+   "ts": "2017-07-03T10:52:01Z",
+   "dst_ip": "192.168.10.50",
+   "dst_port": 22,
+   "bytes_out": 2622,
+   "bytes_in": 7038,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 595,
+   "ts": "2017-07-03T10:55:01Z",
+   "dst_ip": "104.16.27.216",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 597,
+   "ts": "2017-07-03T10:57:01Z",
+   "dst_ip": "104.17.129.32",
+   "dst_port": 443,
+   "bytes_out": 187,
+   "bytes_in": 92,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 180,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "69.172.216.55",
+   "dst_port": 80,
+   "bytes_out": 1915,
+   "bytes_in": 55565,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 80,
+   "bytes_in": 112,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "156.154.202.36",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 278,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 198,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 531,
+   "ts": "2017-07-03T09:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 226,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "8.43.72.72",
+   "dst_port": 80,
+   "bytes_out": 10352,
+   "bytes_in": 10373,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "172.217.6.226",
+   "dst_port": 443,
+   "bytes_out": 534,
+   "bytes_in": 4439,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "63.251.98.12",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "52.90.248.81",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "54.245.247.55",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "54.245.247.55",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "199.166.0.200",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "52.203.123.156",
+   "dst_port": 443,
+   "bytes_out": 829,
+   "bytes_in": 6768,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 180,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "69.172.216.111",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "199.166.0.200",
+   "dst_port": 80,
+   "bytes_out": 442,
+   "bytes_in": 361,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "54.175.45.34",
+   "dst_port": 443,
+   "bytes_out": 1498,
+   "bytes_in": 5008,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 606,
+   "ts": "2017-07-03T11:06:01Z",
+   "dst_ip": "52.72.224.189",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "38.71.5.33",
+   "dst_port": 443,
+   "bytes_out": 49,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 406,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "52.201.35.92",
+   "dst_port": 80,
+   "bytes_out": 471,
+   "bytes_in": 460,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 254,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 608,
+   "ts": "2017-07-03T11:08:01Z",
+   "dst_ip": "34.251.246.251",
+   "dst_port": 443,
+   "bytes_out": 329,
+   "bytes_in": 157,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 608,
+   "ts": "2017-07-03T11:08:01Z",
+   "dst_ip": "68.67.178.199",
+   "dst_port": 80,
+   "bytes_out": 6794,
+   "bytes_in": 9004,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "152.163.50.3",
+   "dst_port": 80,
+   "bytes_out": 653,
+   "bytes_in": 624,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "8.43.72.21",
+   "dst_port": 80,
+   "bytes_out": 4684,
+   "bytes_in": 2296,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 609,
+   "ts": "2017-07-03T11:09:01Z",
+   "dst_ip": "125.212.216.123",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 609,
+   "ts": "2017-07-03T11:09:01Z",
+   "dst_ip": "125.212.216.123",
+   "dst_port": 443,
+   "bytes_out": 18,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 609,
+   "ts": "2017-07-03T11:09:01Z",
+   "dst_ip": "125.212.216.123",
+   "dst_port": 443,
+   "bytes_out": 953,
+   "bytes_in": 3544,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 609,
+   "ts": "2017-07-03T11:09:01Z",
+   "dst_ip": "151.101.129.108",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 611,
+   "ts": "2017-07-03T11:11:01Z",
+   "dst_ip": "104.20.15.243",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 611,
+   "ts": "2017-07-03T11:11:01Z",
+   "dst_ip": "192.243.250.36",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 610,
+   "ts": "2017-07-03T11:10:01Z",
+   "dst_ip": "104.88.89.14",
+   "dst_port": 80,
+   "bytes_out": 689,
+   "bytes_in": 1575,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 134,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 620,
+   "ts": "2017-07-03T11:20:01Z",
+   "dst_ip": "52.4.91.106",
+   "dst_port": 443,
+   "bytes_out": 955,
+   "bytes_in": 3534,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 620,
+   "ts": "2017-07-03T11:20:01Z",
+   "dst_ip": "52.84.64.212",
+   "dst_port": 443,
+   "bytes_out": 394,
+   "bytes_in": 3716,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 620,
+   "ts": "2017-07-03T11:20:01Z",
+   "dst_ip": "52.200.162.142",
+   "dst_port": 443,
+   "bytes_out": 375,
+   "bytes_in": 3174,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 100,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 166,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "52.22.88.20",
+   "dst_port": 80,
+   "bytes_out": 1335,
+   "bytes_in": 776,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "23.21.233.59",
+   "dst_port": 443,
+   "bytes_out": 1593,
+   "bytes_in": 5254,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "23.208.165.24",
+   "dst_port": 80,
+   "bytes_out": 518,
+   "bytes_in": 2507,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 634,
+   "ts": "2017-07-03T11:34:01Z",
+   "dst_ip": "172.217.9.226",
+   "dst_port": 443,
+   "bytes_out": 135,
+   "bytes_in": 46,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 637,
+   "ts": "2017-07-03T11:37:01Z",
+   "dst_ip": "104.27.181.148",
+   "dst_port": 443,
+   "bytes_out": 859,
+   "bytes_in": 5279,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "216.58.219.228",
+   "dst_port": 443,
+   "bytes_out": 552,
+   "bytes_in": 3939,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "74.208.255.172",
+   "dst_port": 443,
+   "bytes_out": 931,
+   "bytes_in": 108146,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "74.208.255.171",
+   "dst_port": 443,
+   "bytes_out": 1120,
+   "bytes_in": 18782,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 645,
+   "ts": "2017-07-03T11:45:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 1434,
+   "bytes_in": 1162,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 645,
+   "ts": "2017-07-03T11:45:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 646,
+   "ts": "2017-07-03T11:46:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 647,
+   "ts": "2017-07-03T11:47:01Z",
+   "dst_ip": "172.217.10.129",
+   "dst_port": 443,
+   "bytes_out": 135,
+   "bytes_in": 46,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 106,
+   "bytes_in": 202,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 648,
+   "ts": "2017-07-03T11:48:01Z",
+   "dst_ip": "64.210.147.104",
+   "dst_port": 80,
+   "bytes_out": 799,
+   "bytes_in": 40008,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 649,
+   "ts": "2017-07-03T11:49:01Z",
+   "dst_ip": "64.210.147.102",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 650,
+   "ts": "2017-07-03T11:50:01Z",
+   "dst_ip": "192.168.10.50",
+   "dst_port": 25976,
+   "bytes_out": 19927,
+   "bytes_in": 24,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 665,
+   "ts": "2017-07-03T12:05:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 611,
+   "ts": "2017-07-03T11:11:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 326,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 611,
+   "ts": "2017-07-03T11:11:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 102,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 714,
+   "ts": "2017-07-03T12:54:01Z",
+   "dst_ip": "93.184.216.180",
+   "dst_port": 443,
+   "bytes_out": 1529,
+   "bytes_in": 26829,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 7,
+   "ts": "2017-07-03T01:07:01Z",
+   "dst_ip": "72.167.239.239",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 7,
+   "ts": "2017-07-03T01:07:01Z",
+   "dst_ip": "23.50.75.27",
+   "dst_port": 80,
+   "bytes_out": 878,
+   "bytes_in": 3911,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 8,
+   "ts": "2017-07-03T01:08:01Z",
+   "dst_ip": "68.67.178.170",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 7,
+   "ts": "2017-07-03T01:07:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "54.192.37.124",
+   "dst_port": 443,
+   "bytes_out": 394,
+   "bytes_in": 3716,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "23.50.75.27",
+   "dst_port": 80,
+   "bytes_out": 2216,
+   "bytes_in": 8881,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 26,
+   "ts": "2017-07-03T01:26:01Z",
+   "dst_ip": "172.217.10.110",
+   "dst_port": 443,
+   "bytes_out": 135,
+   "bytes_in": 46,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 29,
+   "ts": "2017-07-03T01:29:01Z",
+   "dst_ip": "13.108.234.7",
+   "dst_port": 443,
+   "bytes_out": 870,
+   "bytes_in": 620,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 36,
+   "ts": "2017-07-03T01:36:01Z",
+   "dst_ip": "72.21.91.29",
+   "dst_port": 80,
+   "bytes_out": 36,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "72.167.239.239",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "72.21.91.29",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 344,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "23.194.141.179",
+   "dst_port": 443,
+   "bytes_out": 790,
+   "bytes_in": 20751,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 41,
+   "ts": "2017-07-03T01:41:01Z",
+   "dst_ip": "151.101.20.193",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "72.167.239.239",
+   "dst_port": 80,
+   "bytes_out": 439,
+   "bytes_in": 2351,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 102,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "104.88.99.236",
+   "dst_port": 443,
+   "bytes_out": 2669,
+   "bytes_in": 39413,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 520,
+   "ts": "2017-07-03T09:40:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 144,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "178.255.83.1",
+   "dst_port": 80,
+   "bytes_out": 441,
+   "bytes_in": 871,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "93.184.216.172",
+   "dst_port": 443,
+   "bytes_out": 2057,
+   "bytes_in": 21784,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 148,
+   "bytes_in": 384,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 146,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "172.217.12.174",
+   "dst_port": 443,
+   "bytes_out": 1301,
+   "bytes_in": 5177,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "23.194.140.172",
+   "dst_port": 443,
+   "bytes_out": 377,
+   "bytes_in": 3486,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 386,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "204.154.111.105",
+   "dst_port": 443,
+   "bytes_out": 1237,
+   "bytes_in": 6085,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "68.67.180.12",
+   "dst_port": 80,
+   "bytes_out": 2091,
+   "bytes_in": 1746,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "52.4.78.167",
+   "dst_port": 80,
+   "bytes_out": 1031,
+   "bytes_in": 1552,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "38.69.238.18",
+   "dst_port": 80,
+   "bytes_out": 2339,
+   "bytes_in": 2664,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 53,
+   "ts": "2017-07-03T01:53:01Z",
+   "dst_ip": "204.154.111.116",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 190,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 55,
+   "ts": "2017-07-03T01:55:01Z",
+   "dst_ip": "98.138.49.44",
+   "dst_port": 443,
+   "bytes_out": 824,
+   "bytes_in": 3956,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 55,
+   "ts": "2017-07-03T01:55:01Z",
+   "dst_ip": "172.217.9.232",
+   "dst_port": 443,
+   "bytes_out": 944,
+   "bytes_in": 38050,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 202,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 34,
+   "ts": "2017-07-03T01:34:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 200,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 61,
+   "ts": "2017-07-03T02:01:01Z",
+   "dst_ip": "23.194.108.111",
+   "dst_port": 443,
+   "bytes_out": 611,
+   "bytes_in": 164,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 156,
+   "bytes_in": 368,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 68,
+   "ts": "2017-07-03T02:08:01Z",
+   "dst_ip": "172.217.9.232",
+   "dst_port": 443,
+   "bytes_out": 135,
+   "bytes_in": 46,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 160,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 67,
+   "ts": "2017-07-03T02:07:01Z",
+   "dst_ip": "52.212.69.233",
+   "dst_port": 443,
+   "bytes_out": 1112,
+   "bytes_in": 3606,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-03T02:09:01Z",
+   "dst_ip": "172.217.10.14",
+   "dst_port": 80,
+   "bytes_out": 1822,
+   "bytes_in": 2990,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-03T02:09:01Z",
+   "dst_ip": "157.240.11.35",
+   "dst_port": 443,
+   "bytes_out": 4162,
+   "bytes_in": 266981,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 128,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "23.50.75.27",
+   "dst_port": 80,
+   "bytes_out": 460,
+   "bytes_in": 1975,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "52.86.21.54",
+   "dst_port": 80,
+   "bytes_out": 2589,
+   "bytes_in": 2101,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 140,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 74,
+   "ts": "2017-07-03T02:14:01Z",
+   "dst_ip": "34.252.191.245",
+   "dst_port": 443,
+   "bytes_out": 1124,
+   "bytes_in": 3665,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 154,
+   "bytes_in": 318,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 609,
+   "ts": "2017-07-03T11:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 62,
+   "bytes_in": 94,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 614,
+   "ts": "2017-07-03T11:14:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 104,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 112,
+   "bytes_in": 234,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 386,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "54.192.37.17",
+   "dst_port": 443,
+   "bytes_out": 385,
+   "bytes_in": 4414,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "72.21.91.29",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "23.50.75.27",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 75,
+   "ts": "2017-07-03T02:15:01Z",
+   "dst_ip": "216.200.232.172",
+   "dst_port": 80,
+   "bytes_out": 72,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 78,
+   "ts": "2017-07-03T02:18:01Z",
+   "dst_ip": "54.225.156.154",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 94,
+   "bytes_in": 256,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 80,
+   "ts": "2017-07-03T02:20:01Z",
+   "dst_ip": "23.61.187.27",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 80,
+   "ts": "2017-07-03T02:20:01Z",
+   "dst_ip": "23.61.187.27",
+   "dst_port": 80,
+   "bytes_out": 910,
+   "bytes_in": 3550,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 80,
+   "ts": "2017-07-03T02:20:01Z",
+   "dst_ip": "172.217.12.200",
+   "dst_port": 443,
+   "bytes_out": 1064,
+   "bytes_in": 98064,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 83,
+   "ts": "2017-07-03T02:23:01Z",
+   "dst_ip": "173.194.175.108",
+   "dst_port": 465,
+   "bytes_out": 49,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 200,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 102,
+   "bytes_in": 242,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 380,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-03T02:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 92,
+   "ts": "2017-07-03T02:32:01Z",
+   "dst_ip": "104.88.89.135",
+   "dst_port": 443,
+   "bytes_out": 386,
+   "bytes_in": 5174,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 92,
+   "bytes_in": 296,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 92,
+   "ts": "2017-07-03T02:32:01Z",
+   "dst_ip": "172.217.9.238",
+   "dst_port": 80,
+   "bytes_out": 956,
+   "bytes_in": 1498,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 567,
+   "ts": "2017-07-03T10:27:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 48,
+   "bytes_in": 178,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 96,
+   "ts": "2017-07-03T02:36:01Z",
+   "dst_ip": "180.153.132.57",
+   "dst_port": 443,
+   "bytes_out": 378,
+   "bytes_in": 5469,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 97,
+   "ts": "2017-07-03T02:37:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 49666,
+   "bytes_out": 6,
+   "bytes_in": 18,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 100,
+   "ts": "2017-07-03T02:40:01Z",
+   "dst_ip": "72.30.3.43",
+   "dst_port": 443,
+   "bytes_out": 754,
+   "bytes_in": 4187,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 100,
+   "ts": "2017-07-03T02:40:01Z",
+   "dst_ip": "104.88.70.158",
+   "dst_port": 443,
+   "bytes_out": 798,
+   "bytes_in": 25435,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 103,
+   "ts": "2017-07-03T02:43:01Z",
+   "dst_ip": "93.184.216.116",
+   "dst_port": 443,
+   "bytes_out": 98,
+   "bytes_in": 147,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 210,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 286,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 200,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "172.217.10.227",
+   "dst_port": 443,
+   "bytes_out": 1142,
+   "bytes_in": 5042,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 100,
+   "ts": "2017-07-03T02:40:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 132,
+   "ts": "2017-07-03T03:12:01Z",
+   "dst_ip": "31.13.69.203",
+   "dst_port": 443,
+   "bytes_out": 1095,
+   "bytes_in": 72432,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 649,
+   "ts": "2017-07-03T11:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 110,
+   "bytes_in": 206,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 132,
+   "ts": "2017-07-03T03:12:01Z",
+   "dst_ip": "54.230.36.186",
+   "dst_port": 443,
+   "bytes_out": 1676,
+   "bytes_in": 5819,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 59,
+   "ts": "2017-07-03T01:59:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 160,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 182,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 200,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 39,
+   "ts": "2017-07-03T01:39:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 256,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 138,
+   "ts": "2017-07-03T03:18:01Z",
+   "dst_ip": "104.16.27.216",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 138,
+   "ts": "2017-07-03T03:18:01Z",
+   "dst_ip": "152.163.56.2",
+   "dst_port": 443,
+   "bytes_out": 375,
+   "bytes_in": 166,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 138,
+   "ts": "2017-07-03T03:18:01Z",
+   "dst_ip": "172.217.12.202",
+   "dst_port": 443,
+   "bytes_out": 895,
+   "bytes_in": 4841,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 141,
+   "ts": "2017-07-03T03:21:01Z",
+   "dst_ip": "23.59.231.146",
+   "dst_port": 443,
+   "bytes_out": 135,
+   "bytes_in": 46,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 138,
+   "ts": "2017-07-03T03:18:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 202,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 595,
+   "ts": "2017-07-03T10:55:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 118,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 144,
+   "ts": "2017-07-03T03:24:01Z",
+   "dst_ip": "204.13.192.211",
+   "dst_port": 443,
+   "bytes_out": 5193,
+   "bytes_in": 10514,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 56,
+   "bytes_in": 88,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 144,
+   "ts": "2017-07-03T03:24:01Z",
+   "dst_ip": "23.208.217.175",
+   "dst_port": 443,
+   "bytes_out": 5118,
+   "bytes_in": 9213,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 144,
+   "ts": "2017-07-03T03:24:01Z",
+   "dst_ip": "37.157.2.43",
+   "dst_port": 443,
+   "bytes_out": 5820,
+   "bytes_in": 23092,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 147,
+   "ts": "2017-07-03T03:27:01Z",
+   "dst_ip": "54.217.232.93",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 92,
+   "ts": "2017-07-03T02:32:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 80,
+   "ts": "2017-07-03T02:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 222,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 104,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 150,
+   "ts": "2017-07-03T03:30:01Z",
+   "dst_ip": "178.248.235.123",
+   "dst_port": 443,
+   "bytes_out": 7040,
+   "bytes_in": 96736,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 152,
+   "ts": "2017-07-03T03:32:01Z",
+   "dst_ip": "104.96.0.25",
+   "dst_port": 80,
+   "bytes_out": 42,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 147,
+   "ts": "2017-07-03T03:27:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 190,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 169,
+   "ts": "2017-07-03T03:49:01Z",
+   "dst_ip": "200.221.2.196",
+   "dst_port": 443,
+   "bytes_out": 64,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 169,
+   "ts": "2017-07-03T03:49:01Z",
+   "dst_ip": "186.234.36.14",
+   "dst_port": 443,
+   "bytes_out": 855,
+   "bytes_in": 4896,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 170,
+   "ts": "2017-07-03T03:50:01Z",
+   "dst_ip": "23.50.75.27",
+   "dst_port": 80,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 177,
+   "ts": "2017-07-03T03:57:01Z",
+   "dst_ip": "178.255.83.1",
+   "dst_port": 80,
+   "bytes_out": 442,
+   "bytes_in": 871,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 168,
+   "ts": "2017-07-03T03:48:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 174,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 177,
+   "ts": "2017-07-03T03:57:01Z",
+   "dst_ip": "80.82.201.94",
+   "dst_port": 443,
+   "bytes_out": 1156,
+   "bytes_in": 4684,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 177,
+   "ts": "2017-07-03T03:57:01Z",
+   "dst_ip": "137.74.125.58",
+   "dst_port": 443,
+   "bytes_out": 18,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 177,
+   "ts": "2017-07-03T03:57:01Z",
+   "dst_ip": "195.54.48.9",
+   "dst_port": 443,
+   "bytes_out": 1574,
+   "bytes_in": 7093,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 714,
+   "ts": "2017-07-03T12:54:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 138,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 177,
+   "ts": "2017-07-03T03:57:01Z",
+   "dst_ip": "72.21.206.141",
+   "dst_port": 443,
+   "bytes_out": 802,
+   "bytes_in": 5376,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 177,
+   "ts": "2017-07-03T03:57:01Z",
+   "dst_ip": "8.43.72.67",
+   "dst_port": 443,
+   "bytes_out": 4785,
+   "bytes_in": 3573,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 181,
+   "ts": "2017-07-03T04:01:01Z",
+   "dst_ip": "172.217.12.134",
+   "dst_port": 443,
+   "bytes_out": 1091,
+   "bytes_in": 9193,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 181,
+   "ts": "2017-07-03T04:01:01Z",
+   "dst_ip": "52.4.247.45",
+   "dst_port": 443,
+   "bytes_out": 380,
+   "bytes_in": 3039,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 181,
+   "ts": "2017-07-03T04:01:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 611,
+   "bytes_in": 164,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 182,
+   "ts": "2017-07-03T04:02:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 1424,
+   "bytes_in": 796,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 183,
+   "ts": "2017-07-03T04:03:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 1425,
+   "bytes_in": 1161,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 184,
+   "ts": "2017-07-03T04:04:01Z",
+   "dst_ip": "216.58.217.164",
+   "dst_port": 443,
+   "bytes_out": 187,
+   "bytes_in": 92,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 185,
+   "ts": "2017-07-03T04:05:01Z",
+   "dst_ip": "87.106.49.27",
+   "dst_port": 443,
+   "bytes_out": 1425,
+   "bytes_in": 781,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 81,
+   "ts": "2017-07-03T02:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 210,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 162,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 195,
+   "ts": "2017-07-03T04:15:01Z",
+   "dst_ip": "23.210.202.42",
+   "dst_port": 80,
+   "bytes_out": 376,
+   "bytes_in": 390,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 81,
+   "ts": "2017-07-03T02:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 172,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 208,
+   "ts": "2017-07-03T04:28:01Z",
+   "dst_ip": "132.247.70.37",
+   "dst_port": 443,
+   "bytes_out": 3288,
+   "bytes_in": 249384,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 208,
+   "ts": "2017-07-03T04:28:01Z",
+   "dst_ip": "52.39.237.157",
+   "dst_port": 443,
+   "bytes_out": 2395,
+   "bytes_in": 10142,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 210,
+   "ts": "2017-07-03T04:30:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 135,
+   "bytes_out": 6,
+   "bytes_in": 18,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 211,
+   "ts": "2017-07-03T04:31:01Z",
+   "dst_ip": "172.217.10.110",
+   "dst_port": 443,
+   "bytes_out": 335,
+   "bytes_in": 693,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 92,
+   "bytes_in": 262,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 210,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 268,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 620,
+   "ts": "2017-07-03T11:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 126,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 138,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 236,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 229,
+   "ts": "2017-07-03T04:49:01Z",
+   "dst_ip": "178.255.83.1",
+   "dst_port": 80,
+   "bytes_out": 442,
+   "bytes_in": 872,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 229,
+   "ts": "2017-07-03T04:49:01Z",
+   "dst_ip": "104.88.42.35",
+   "dst_port": 443,
+   "bytes_out": 1314,
+   "bytes_in": 7771,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 181,
+   "ts": "2017-07-03T04:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 154,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "172.82.206.2",
+   "dst_port": 137,
+   "bytes_out": 150,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 612,
+   "ts": "2017-07-03T11:12:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 61,
+   "ts": "2017-07-03T02:01:01Z",
+   "dst_ip": "172.217.6.232",
+   "dst_port": 443,
+   "bytes_out": 1110,
+   "bytes_in": 28245,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 215,
+   "ts": "2017-07-03T04:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 652,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 34,
+   "ts": "2017-07-03T01:34:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 200,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 55,
+   "ts": "2017-07-03T01:55:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 62,
+   "bytes_in": 186,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 216,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 102,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 81,
+   "ts": "2017-07-03T02:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 188,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 615,
+   "ts": "2017-07-03T11:15:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 160,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 615,
+   "ts": "2017-07-03T11:15:01Z",
+   "dst_ip": "31.13.80.36",
+   "dst_port": 443,
+   "bytes_out": 6,
+   "bytes_in": 6,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "31.13.80.36",
+   "dst_port": 443,
+   "bytes_out": 6,
+   "bytes_in": 6,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 614,
+   "ts": "2017-07-03T11:14:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 92,
+   "bytes_in": 296,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 608,
+   "ts": "2017-07-03T11:08:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 80,
+   "bytes_in": 144,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 422,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 108,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 90,
+   "ts": "2017-07-03T02:30:01Z",
+   "dst_ip": "79.142.16.38",
+   "dst_port": 443,
+   "bytes_out": 12,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 268,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 132,
+   "ts": "2017-07-03T03:12:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 62,
+   "bytes_in": 168,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 208,
+   "ts": "2017-07-03T04:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 208,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 166,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 215,
+   "ts": "2017-07-03T04:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 58,
+   "bytes_in": 176,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 229,
+   "ts": "2017-07-03T04:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 81,
+   "ts": "2017-07-03T02:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 80,
+   "bytes_in": 876,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 172,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 100,
+   "ts": "2017-07-03T02:40:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 57,
+   "ts": "2017-07-03T01:57:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 202,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 115,
+   "ts": "2017-07-03T02:55:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 172,
+   "ts": "2017-07-03T03:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 328,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 100,
+   "bytes_in": 132,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 500,
+   "ts": "2017-07-03T09:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 286,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 200,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "38.72.130.139",
+   "dst_port": 80,
+   "bytes_out": 580,
+   "bytes_in": 952,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 116,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 100,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 61,
+   "ts": "2017-07-03T02:01:01Z",
+   "dst_ip": "172.217.3.36",
+   "dst_port": 443,
+   "bytes_out": 2279,
+   "bytes_in": 4050,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 500,
+   "ts": "2017-07-03T09:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 102,
+   "bytes_in": 206,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 138,
+   "ts": "2017-07-03T03:18:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 194,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 599,
+   "ts": "2017-07-03T10:59:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 620,
+   "ts": "2017-07-03T11:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 236,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 168,
+   "ts": "2017-07-03T03:48:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 102,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 61,
+   "ts": "2017-07-03T02:01:01Z",
+   "dst_ip": "184.73.165.162",
+   "dst_port": 443,
+   "bytes_out": 1068,
+   "bytes_in": 2148,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 102,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 80,
+   "ts": "2017-07-03T02:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 150,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 172,
+   "ts": "2017-07-03T03:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 194,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 620,
+   "ts": "2017-07-03T11:20:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 635,
+   "ts": "2017-07-03T11:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 126,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 222,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 34,
+   "ts": "2017-07-03T01:34:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 130,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 532,
+   "ts": "2017-07-03T09:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 80,
+   "bytes_in": 136,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 215,
+   "ts": "2017-07-03T04:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 58,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 41,
+   "ts": "2017-07-03T01:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 146,
+   "ts": "2017-07-03T03:26:01Z",
+   "dst_ip": "46.137.85.119",
+   "dst_port": 443,
+   "bytes_out": 1527,
+   "bytes_in": 318,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 108,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-03T02:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 154,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 229,
+   "ts": "2017-07-03T04:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 172,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 132,
+   "ts": "2017-07-03T03:12:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 150,
+   "ts": "2017-07-03T03:30:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 108,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 118,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 216,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 81,
+   "ts": "2017-07-03T02:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 178,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 168,
+   "ts": "2017-07-03T03:48:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 160,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 215,
+   "ts": "2017-07-03T04:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-03T02:09:01Z",
+   "dst_ip": "172.217.12.162",
+   "dst_port": 443,
+   "bytes_out": 563,
+   "bytes_in": 4205,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 559,
+   "ts": "2017-07-03T10:19:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 156,
+   "bytes_in": 412,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 102,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 607,
+   "ts": "2017-07-03T11:07:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 326,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 230,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 593,
+   "ts": "2017-07-03T10:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 389,
+   "bytes_out": 328,
+   "bytes_in": 326,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 38,
+   "ts": "2017-07-03T01:38:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 652,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 637,
+   "ts": "2017-07-03T11:37:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 134,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 150,
+   "ts": "2017-07-03T03:30:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 100,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 92,
+   "ts": "2017-07-03T02:32:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 102,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 182,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 176,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 7,
+   "ts": "2017-07-03T01:07:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 80,
+   "bytes_in": 112,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 48,
+   "ts": "2017-07-03T01:48:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 328,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 230,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 215,
+   "ts": "2017-07-03T04:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 98,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 208,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 92,
+   "bytes_in": 348,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 192,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 126,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 643,
+   "ts": "2017-07-03T11:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 94,
+   "bytes_in": 196,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 180,
+   "bytes_in": 318,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 168,
+   "ts": "2017-07-03T03:48:01Z",
+   "dst_ip": "200.147.100.27",
+   "dst_port": 443,
+   "bytes_out": 0,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 615,
+   "ts": "2017-07-03T11:15:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 132,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 232,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 150,
+   "ts": "2017-07-03T03:30:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 102,
+   "bytes_in": 134,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 268,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 73,
+   "ts": "2017-07-03T02:13:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 110,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 54,
+   "bytes_in": 86,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 611,
+   "ts": "2017-07-03T11:11:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 194,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 119,
+   "ts": "2017-07-03T02:59:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 92,
+   "bytes_in": 254,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 62,
+   "bytes_in": 318,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 531,
+   "ts": "2017-07-03T09:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 108,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 147,
+   "ts": "2017-07-03T03:27:01Z",
+   "dst_ip": "172.217.11.45",
+   "dst_port": 443,
+   "bytes_out": 1212,
+   "bytes_in": 4938,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 150,
+   "ts": "2017-07-03T03:30:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 83,
+   "ts": "2017-07-03T02:23:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 166,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 250,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 126,
+   "ts": "2017-07-03T03:06:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 56,
+   "bytes_in": 88,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 58,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 172,
+   "ts": "2017-07-03T03:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 192,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 714,
+   "ts": "2017-07-03T12:54:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 98,
+   "bytes_in": 386,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 126,
+   "ts": "2017-07-03T03:06:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 92,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 338,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 202,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 608,
+   "ts": "2017-07-03T11:08:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 286,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 74,
+   "ts": "2017-07-03T02:14:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 328,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 210,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 49,
+   "ts": "2017-07-03T01:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 60,
+   "bytes_in": 264,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 599,
+   "ts": "2017-07-03T10:59:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 98,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 195,
+   "ts": "2017-07-03T04:15:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 104,
+   "bytes_in": 136,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 147,
+   "ts": "2017-07-03T03:27:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 110,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 192,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 94,
+   "bytes_in": 256,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 653,
+   "ts": "2017-07-03T11:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 144,
+   "ts": "2017-07-03T03:24:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 132,
+   "ts": "2017-07-03T03:12:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 130,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 88,
+   "bytes_in": 120,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 216,
+   "ts": "2017-07-03T04:36:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 98,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 644,
+   "ts": "2017-07-03T11:44:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 605,
+   "ts": "2017-07-03T11:05:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 122,
+   "bytes_in": 314,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 138,
+   "ts": "2017-07-03T03:18:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 138,
+   "bytes_in": 394,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 147,
+   "ts": "2017-07-03T03:27:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 196,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 190,
+   "bytes_in": 254,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 611,
+   "ts": "2017-07-03T11:11:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 116,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 215,
+   "ts": "2017-07-03T04:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 74,
+   "bytes_in": 154,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 590,
+   "ts": "2017-07-03T10:50:01Z",
+   "dst_ip": "125.212.247.229",
+   "dst_port": 443,
+   "bytes_out": 0,
+   "bytes_in": 18,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 581,
+   "ts": "2017-07-03T10:41:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 172,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 229,
+   "ts": "2017-07-03T04:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 76,
+   "bytes_in": 108,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 590,
+   "ts": "2017-07-03T10:50:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 94,
+   "bytes_in": 350,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 550,
+   "ts": "2017-07-03T10:10:01Z",
+   "dst_ip": "185.49.84.72",
+   "dst_port": 443,
+   "bytes_out": 0,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 635,
+   "ts": "2017-07-03T11:35:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 66,
+   "bytes_in": 172,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 69,
+   "ts": "2017-07-03T02:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 84,
+   "bytes_in": 116,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 154,
+   "ts": "2017-07-03T03:34:01Z",
+   "dst_ip": "40.84.199.233",
+   "dst_port": 443,
+   "bytes_out": 0,
+   "bytes_in": 0,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 168,
+   "ts": "2017-07-03T03:48:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 78,
+   "bytes_in": 134,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 169,
+   "ts": "2017-07-03T03:49:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 86,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 157,
+   "ts": "2017-07-03T03:37:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 204,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 568,
+   "ts": "2017-07-03T10:28:01Z",
+   "dst_ip": "212.180.241.221",
+   "dst_port": 443,
+   "bytes_out": 6,
+   "bytes_in": 6,
+   "label": "BENIGN",
+   "internal": false
+  },
+  {
+   "window_idx": 77,
+   "ts": "2017-07-03T02:17:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 62,
+   "bytes_in": 246,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 53,
+   "ts": "2017-07-03T01:53:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 138,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 129,
+   "ts": "2017-07-03T03:09:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 320,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 172,
+   "ts": "2017-07-03T03:52:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 70,
+   "bytes_in": 102,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 132,
+   "ts": "2017-07-03T03:12:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 94,
+   "bytes_in": 126,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 59,
+   "ts": "2017-07-03T01:59:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 82,
+   "bytes_in": 152,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 72,
+   "bytes_in": 104,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 21,
+   "ts": "2017-07-03T01:21:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 158,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 51,
+   "ts": "2017-07-03T01:51:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 80,
+   "bytes_in": 234,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 541,
+   "ts": "2017-07-03T10:01:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 64,
+   "bytes_in": 96,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 631,
+   "ts": "2017-07-03T11:31:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 68,
+   "bytes_in": 422,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 43,
+   "ts": "2017-07-03T01:43:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 90,
+   "bytes_in": 122,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 22,
+   "ts": "2017-07-03T01:22:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 108,
+   "bytes_in": 294,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 604,
+   "ts": "2017-07-03T11:04:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 120,
+   "bytes_in": 256,
+   "label": "BENIGN",
+   "internal": true
+  },
+  {
+   "window_idx": 144,
+   "ts": "2017-07-03T03:24:01Z",
+   "dst_ip": "192.168.10.3",
+   "dst_port": 53,
+   "bytes_out": 178,
+   "bytes_in": 274,
+   "label": "BENIGN",
+   "internal": true
+  }
+ ]
+}
